@@ -1,6 +1,6 @@
 "use client"
 
-import { Zap, Link2, Camera, GitBranch, MessageSquare, Mail, Globe } from "lucide-react"
+import { Zap, Camera, Mail, Globe } from "lucide-react"
 
 const NAV_LINKS = [
   { label: "Soluções", href: "#solucoes" },
@@ -12,10 +12,7 @@ const NAV_LINKS = [
 ]
 
 const SOCIAL = [
-  { icon: Link2, label: "LinkedIn", href: "#" },
-  { icon: Camera, label: "Instagram", href: "#" },
-  { icon: GitBranch, label: "GitHub", href: "#" },
-  { icon: MessageSquare, label: "Twitter/X", href: "#" },
+  { icon: Camera, label: "Instagram", href: "https://www.instagram.com/garbatosolution/" },
 ]
 
 export default function Footer() {
@@ -106,6 +103,8 @@ export default function Footer() {
                 <a
                   key={s.label}
                   href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label={s.label}
                   className="w-9 h-9 rounded-lg flex items-center justify-center transition-all hover:-translate-y-0.5"
                   style={{
