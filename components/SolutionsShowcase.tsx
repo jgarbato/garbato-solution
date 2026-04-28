@@ -1,6 +1,7 @@
 "use client"
 
 import { useRef } from "react"
+import Link from "next/link"
 import { motion, useInView } from "framer-motion"
 import {
   Building2,
@@ -12,6 +13,10 @@ import {
   Package,
   FileText,
   ArrowRight,
+  Stethoscope,
+  Calendar,
+  Clock,
+  CheckCircle2,
 } from "lucide-react"
 
 function ERPMockup() {
@@ -55,40 +60,39 @@ function ERPMockup() {
   )
 }
 
-function CRMMockup() {
-  const stages = [
-    { name: "Leads", count: 24, color: "#3B82F6" },
-    { name: "Qualificados", count: 12, color: "#7C3AED" },
-    { name: "Proposta", count: 7, color: "#F59E0B" },
-    { name: "Fechados", count: 4, color: "#10B981" },
+function ClinicMockup() {
+  const appointments = [
+    { time: "08:30", patient: "Maria Silva", type: "Consulta", status: "Confirmado", color: "#10B981" },
+    { time: "09:15", patient: "João Pereira", type: "Retorno", status: "Aguardando", color: "#F59E0B" },
+    { time: "10:00", patient: "Ana Souza", type: "Exame", status: "Confirmado", color: "#10B981" },
+    { time: "11:30", patient: "Carlos Lima", type: "Cirurgia", status: "Em andamento", color: "#3B82F6" },
   ]
   return (
-    <div className="w-full h-[180px] bg-[#0C0D18] rounded-xl border border-white/[0.08] overflow-hidden p-3">
-      <div className="flex items-center justify-between mb-3">
-        <div className="text-[9px] font-semibold text-[#ECF0FF]">Funil Comercial</div>
-        <div className="text-[8px] text-[#10B981]">+12% este mês</div>
+    <div className="w-full h-[180px] bg-[#0C0D18] rounded-xl border border-white/[0.08] overflow-hidden p-3 flex flex-col gap-2">
+      <div className="flex items-center justify-between mb-1">
+        <div className="flex items-center gap-1.5">
+          <Calendar className="w-3 h-3 text-[#3B82F6]" />
+          <div className="text-[9px] font-semibold text-[#ECF0FF]">Agenda do dia</div>
+        </div>
+        <div className="flex items-center gap-1">
+          <div className="w-1.5 h-1.5 rounded-full bg-[#10B981] animate-pulse" />
+          <div className="text-[8px] text-[#10B981]">4 agendamentos</div>
+        </div>
       </div>
-      <div className="flex gap-2 mb-3">
-        {stages.map((s) => (
-          <div key={s.name} className="flex-1 bg-[#161929] rounded-lg p-2 text-center">
-            <div className="text-[12px] font-bold" style={{ color: s.color }}>{s.count}</div>
-            <div className="text-[7px] text-[#4A5580] mt-0.5">{s.name}</div>
-          </div>
-        ))}
-      </div>
-      <div className="space-y-1.5">
-        {[
-          { name: "Empresa Alfa Ltda", stage: "Proposta", value: "R$28k", color: "#F59E0B" },
-          { name: "Beta Serviços", stage: "Qualificado", value: "R$14k", color: "#7C3AED" },
-          { name: "Gama Construções", stage: "Fechado", value: "R$52k", color: "#10B981" },
-        ].map((c) => (
-          <div key={c.name} className="flex items-center gap-2 bg-[#161929] rounded px-2 py-1.5">
-            <div className="w-5 h-5 rounded bg-white/[0.05] flex items-center justify-center flex-shrink-0">
-              <Users2 className="w-2.5 h-2.5 text-[#8B9BC0]" />
+      <div className="flex-1 space-y-1 overflow-hidden">
+        {appointments.map((a) => (
+          <div key={a.time} className="flex items-center gap-2 bg-[#161929] rounded px-2 py-1.5">
+            <div className="text-[8px] font-medium text-[#4A5580] w-8 flex-shrink-0">{a.time}</div>
+            <div className="flex-1 min-w-0">
+              <div className="text-[8px] font-semibold text-[#ECF0FF] truncate">{a.patient}</div>
+              <div className="text-[7px] text-[#4A5580]">{a.type}</div>
             </div>
-            <div className="flex-1 text-[8px] text-[#8B9BC0] truncate">{c.name}</div>
-            <div className="text-[8px] px-1.5 py-0.5 rounded" style={{ background: `${c.color}20`, color: c.color }}>{c.stage}</div>
-            <div className="text-[8px] font-medium text-[#ECF0FF]">{c.value}</div>
+            <div
+              className="text-[7px] px-1.5 py-0.5 rounded-full flex-shrink-0"
+              style={{ background: `${a.color}18`, color: a.color }}
+            >
+              {a.status}
+            </div>
           </div>
         ))}
       </div>
@@ -180,12 +184,13 @@ const SOLUTIONS = [
     mockup: <ERPMockup />,
   },
   {
-    color: "#7C3AED",
-    icon: Users2,
-    tag: "Comercial",
-    title: "Gestão Comercial (CRM)",
-    desc: "Funil de vendas visual, acompanhamento de leads, propostas, histórico de negociações e dashboards de desempenho do time.",
-    mockup: <CRMMockup />,
+    color: "#3B82F6",
+    icon: Stethoscope,
+    tag: "Clínicas e Saúde",
+    title: "BlessSystem Clinic",
+    desc: "Agenda inteligente, prontuário eletrônico, controle financeiro, gestão de pacientes e relatórios clínicos — tudo em uma plataforma.",
+    mockup: <ClinicMockup />,
+    href: "/blesssystemclinic",
   },
   {
     color: "#3B82F6",
@@ -291,18 +296,29 @@ export default function SolutionsShowcase() {
                 {s.mockup}
 
                 {/* CTA */}
-                <button
-                  onClick={() =>
-                    document
-                      .querySelector("#contato")
-                      ?.scrollIntoView({ behavior: "smooth" })
-                  }
-                  className="mt-4 flex items-center gap-1.5 text-[12.5px] font-semibold opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
-                  style={{ color: s.color }}
-                >
-                  Solicitar proposta para este tipo
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </button>
+                {"href" in s ? (
+                  <Link
+                    href={(s as { href: string }).href}
+                    className="mt-4 flex items-center gap-1.5 text-[12.5px] font-semibold opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
+                    style={{ color: s.color }}
+                  >
+                    Conhecer o sistema
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
+                ) : (
+                  <button
+                    onClick={() =>
+                      document
+                        .querySelector("#contato")
+                        ?.scrollIntoView({ behavior: "smooth" })
+                    }
+                    className="mt-4 flex items-center gap-1.5 text-[12.5px] font-semibold opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
+                    style={{ color: s.color }}
+                  >
+                    Solicitar proposta para este tipo
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </button>
+                )}
               </div>
             </motion.div>
           ))}

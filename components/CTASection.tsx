@@ -5,7 +5,7 @@ import { motion, useInView } from "framer-motion"
 import { ArrowRight, MessageCircle, Zap } from "lucide-react"
 
 const WA_LINK =
-  "https://wa.me/5543988585127?text=Ol%C3%A1%2C%20quero%20falar%20sobre%20um%20projeto"
+  "https://wa.me/5543988720576?text=Ol%C3%A1%2C%20quero%20falar%20sobre%20um%20projeto"
 
 export default function CTASection() {
   const ref = useRef(null)
