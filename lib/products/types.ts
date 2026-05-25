@@ -18,7 +18,10 @@ export type Plan = {
   id: string
   name: string
   desc: string
+  /** Preço mensal cobrado no plano mensal. */
   price: number
+  /** Preço por mês cobrado no plano anual (já descontado). */
+  priceAnnual: number
   hot?: boolean
   features: string[]
 }

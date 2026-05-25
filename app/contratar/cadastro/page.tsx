@@ -1,28 +1,11 @@
 "use client"
 
-import { useState, useEffect, Suspense } from "react"
+import { useState, Suspense } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { motion } from "framer-motion"
-import { ArrowLeft, ArrowRight, User, Mail, Phone, MapPin, FileText, Building2 } from "lucide-react"
+import { ArrowLeft, ArrowRight, User, Mail, Phone, MapPin, FileText } from "lucide-react"
 import Navbar from "@/components/Navbar"
-
-const PLAN_LABELS: Record<string, string> = {
-  essencial: "Essencial",
-  avancado: "Avançado",
-  experts: "Experts",
-  profissional: "Profissional",
-  enterprise: "Enterprise",
-}
-
-const PLAN_PRICES: Record<string, Record<string, number>> = {
-  clinic: { essencial: 349, avancado: 499, experts: 899 },
-  mob: { essencial: 249, profissional: 399, enterprise: 549 },
-}
-
-const PLAN_PRICES_ANUAL: Record<string, Record<string, number>> = {
-  clinic: { essencial: 279, avancado: 399, experts: 719 },
-  mob: { essencial: 199, profissional: 319, enterprise: 439 },
-}
+import { getProduct, getPlan, type Periodo } from "@/lib/products/registry"
 
 function formatCpfCnpj(value: string) {
   const digits = value.replace(/\D/g, "")
@@ -57,12 +40,14 @@ function CadastroContent() {
 
   const sistema = params.get("sistema") ?? "clinic"
   const plano = params.get("plano") ?? "essencial"
-  const periodo = params.get("periodo") ?? "mensal"
+  const periodo: Periodo = params.get("periodo") === "anual" ? "anual" : "mensal"
 
-  const priceMap = periodo === "anual" ? PLAN_PRICES_ANUAL : PLAN_PRICES
-  const price = priceMap[sistema]?.[plano] ?? 0
-  const sistemaLabel = sistema === "clinic" ? "BlessSystemClinic" : "BlessSystemMob"
-  const sistemaColor = sistema === "clinic" ? "#7C3AED" : "#06B6D4"
+  const product = getProduct(sistema)
+  const plan = getPlan(sistema, plano)
+  const price = plan ? (periodo === "anual" ? plan.priceAnnual : plan.price) : 0
+  const planLabel = plan?.name ?? plano
+  const sistemaLabel = product.name
+  const sistemaColor = sistema === "mob" ? "#06B6D4" : "#7C3AED"
 
   const [tipoPessoa, setTipoPessoa] = useState<"pf" | "pj">("pj")
   const [form, setForm] = useState({
@@ -154,7 +139,7 @@ function CadastroContent() {
                 {sistemaLabel}
               </div>
               <div className="text-[15px] font-semibold text-[#ECF0FF]">
-                Plano {PLAN_LABELS[plano]} —{" "}
+                Plano {planLabel} —{" "}
                 <span style={{ color: sistemaColor }}>
                   R$ {price.toLocaleString("pt-BR")}/mês
                 </span>

@@ -6,131 +6,19 @@ import { motion } from "framer-motion"
 import { Check, ArrowRight, Stethoscope, Building2 } from "lucide-react"
 import Navbar from "@/components/Navbar"
 import Footer from "@/components/Footer"
-
-type Sistema = "clinic" | "mob"
-type Periodo = "mensal" | "anual"
-
-const CLINIC_PLANS = [
-  {
-    id: "essencial",
-    name: "Essencial",
-    desc: "As ferramentas certas para crescer",
-    priceMonthly: 70,
-    priceAnnual: 56,
-    highlighted: false,
-    features: [
-      "Até 3 usuários",
-      "Agenda inteligente",
-      "Fichas personalizadas",
-      "Gestão de pacientes",
-      "Agendamento online",
-      "5 GB de armazenamento",
-      "Notificações via API Meta",
-    ],
-  },
-  {
-    id: "avancado",
-    name: "Avançado",
-    desc: "Eficiência e automatização de processos",
-    priceMonthly: 110,
-    priceAnnual: 88,
-    highlighted: true,
-    features: [
-      "Tudo do Essencial",
-      "Até 10 usuários",
-      "Assinatura eletrônica",
-      "Gestão financeira completa",
-      "Gestão de vendas (Pacotes)",
-      "Controle de estoque completo",
-      "Comissões automatizadas",
-      "10 GB de armazenamento",
-      "Painel de chamada",
-    ],
-  },
-  {
-    id: "experts",
-    name: "Experts",
-    desc: "Escale para o próximo nível",
-    priceMonthly: 170,
-    priceAnnual: 136,
-    highlighted: false,
-    features: [
-      "Tudo do Avançado",
-      "Usuários ilimitados",
-      "Assinaturas eletrônicas ilimitadas",
-      "CRM integrado",
-      "Emissão de NF (Produto/Serviço)",
-      "Central no WhatsApp",
-      "25 GB de armazenamento",
-      "Painel de chamada",
-    ],
-  },
-]
-
-const MOB_PLANS = [
-  {
-    id: "essencial",
-    name: "Essencial",
-    desc: "Para iniciar sua jornada",
-    priceMonthly: 70,
-    priceAnnual: 56,
-    highlighted: false,
-    features: [
-      "1 módulo principal",
-      "Financeiro básico",
-      "Central do Cliente",
-      "Atualizações incluídas",
-      "Infraestrutura em nuvem",
-      "4h de treinamento na implantação",
-      "Suporte WhatsApp comercial",
-    ],
-  },
-  {
-    id: "profissional",
-    name: "Profissional",
-    desc: "Para empresas em crescimento",
-    priceMonthly: 110,
-    priceAnnual: 88,
-    highlighted: true,
-    features: [
-      "Tudo do Essencial",
-      "2 módulos principais + CRM",
-      "Financeiro completo",
-      "Sites inteligentes integrados",
-      "Integração boletos/PIX",
-      "Integração com portais",
-      "6h de treinamento na implantação",
-    ],
-  },
-  {
-    id: "enterprise",
-    name: "Enterprise",
-    desc: "Solução completa",
-    priceMonthly: 170,
-    priceAnnual: 136,
-    highlighted: false,
-    features: [
-      "Tudo do Profissional",
-      "Todos os módulos liberados",
-      "Todas as integrações disponíveis",
-      "Customizações avançadas",
-      "Suporte prioritário WhatsApp + Tel.",
-      "10h de treinamento na implantação",
-    ],
-  },
-]
+import { PRODUCTS, type Periodo, type ProductSlug } from "@/lib/products/registry"
 
 const SISTEMAS = [
   {
-    id: "clinic",
-    label: "BlessSystemClinic",
+    id: "clinic" as const,
+    label: PRODUCTS.clinic.name,
     sub: "Clínicas odontológicas e estética",
     icon: Stethoscope,
     color: "#7C3AED",
   },
   {
-    id: "mob",
-    label: "BlessSystemMob",
+    id: "mob" as const,
+    label: PRODUCTS.mob.name,
     sub: "Imóveis, loteamento e contratos",
     icon: Building2,
     color: "#06B6D4",
@@ -139,10 +27,11 @@ const SISTEMAS = [
 
 export default function ContratarPage() {
   const router = useRouter()
-  const [sistema, setSistema] = useState<Sistema>("clinic")
+  const [sistema, setSistema] = useState<ProductSlug>("clinic")
   const [periodo, setPeriodo] = useState<Periodo>("mensal")
 
-  const plans = sistema === "clinic" ? CLINIC_PLANS : MOB_PLANS
+  const product = PRODUCTS[sistema]
+  const plans = product.pricing.plans
   const sistemaInfo = SISTEMAS.find((s) => s.id === sistema)!
 
   const handleAssinar = (planoId: string) => {
@@ -197,7 +86,7 @@ export default function ContratarPage() {
                 return (
                   <button
                     key={s.id}
-                    onClick={() => setSistema(s.id as Sistema)}
+                    onClick={() => setSistema(s.id)}
                     className="px-6 py-3 rounded-lg text-sm font-semibold transition-all flex items-center gap-2.5"
                     style={{
                       background: active ? `${s.color}15` : "transparent",
@@ -251,96 +140,97 @@ export default function ContratarPage() {
 
           {/* Plan cards */}
           <div className="grid lg:grid-cols-3 gap-5">
-            {plans.map((plan, i) => (
-              <motion.div
-                key={plan.id}
-                initial={{ opacity: 0, y: 32 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.1 + 0.2, duration: 0.55 }}
-                className="relative rounded-2xl p-7 flex flex-col"
-                style={{
-                  background: plan.highlighted ? `${sistemaInfo.color}08` : "rgba(255,255,255,0.025)",
-                  border: plan.highlighted
-                    ? `1px solid ${sistemaInfo.color}40`
-                    : "1px solid var(--gs-border)",
-                }}
-              >
-                {plan.highlighted && (
-                  <>
-                    <div
-                      className="absolute top-0 left-0 right-0 h-[1.5px] rounded-t-2xl"
-                      style={{ background: `linear-gradient(90deg, transparent, ${sistemaInfo.color}, transparent)` }}
-                    />
-                    <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
-                      <span
-                        className="text-[11px] font-bold px-3 py-1 rounded-full text-white whitespace-nowrap"
-                        style={{ background: sistemaInfo.color }}
-                      >
-                        Mais popular
-                      </span>
-                    </div>
-                  </>
-                )}
+            {plans.map((plan, i) => {
+              const price = periodo === "anual" ? plan.priceAnnual : plan.price
+              return (
+                <motion.div
+                  key={plan.id}
+                  initial={{ opacity: 0, y: 32 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.1 + 0.2, duration: 0.55 }}
+                  className="relative rounded-2xl p-7 flex flex-col"
+                  style={{
+                    background: plan.hot ? `${sistemaInfo.color}08` : "rgba(255,255,255,0.025)",
+                    border: plan.hot
+                      ? `1px solid ${sistemaInfo.color}40`
+                      : "1px solid var(--gs-border)",
+                  }}
+                >
+                  {plan.hot && (
+                    <>
+                      <div
+                        className="absolute top-0 left-0 right-0 h-[1.5px] rounded-t-2xl"
+                        style={{ background: `linear-gradient(90deg, transparent, ${sistemaInfo.color}, transparent)` }}
+                      />
+                      <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
+                        <span
+                          className="text-[11px] font-bold px-3 py-1 rounded-full text-white whitespace-nowrap"
+                          style={{ background: sistemaInfo.color }}
+                        >
+                          Mais popular
+                        </span>
+                      </div>
+                    </>
+                  )}
 
-                <div className="mb-5">
-                  <h3
-                    className="text-xl font-bold text-[#ECF0FF] mb-1"
-                    style={{ fontFamily: "var(--font-space-grotesk)" }}
-                  >
-                    {plan.name}
-                  </h3>
-                  <p className="text-[13px] text-[#8B9BC0]">{plan.desc}</p>
-                </div>
-
-                <div className="mb-6">
-                  <div className="flex items-end gap-1">
-                    <span className="text-[13px] text-[#8B9BC0] mb-1">R$</span>
-                    <span
-                      className="text-4xl font-bold text-[#ECF0FF]"
+                  <div className="mb-5">
+                    <h3
+                      className="text-xl font-bold text-[#ECF0FF] mb-1"
                       style={{ fontFamily: "var(--font-space-grotesk)" }}
                     >
-                      {periodo === "mensal"
-                        ? plan.priceMonthly.toLocaleString("pt-BR")
-                        : plan.priceAnnual.toLocaleString("pt-BR")}
-                    </span>
-                    <span className="text-[13px] text-[#8B9BC0] mb-1">/mês</span>
+                      {plan.name}
+                    </h3>
+                    <p className="text-[13px] text-[#8B9BC0]">{plan.desc}</p>
                   </div>
-                  {periodo === "anual" ? (
-                    <p className="text-[12px] text-[#10B981] mt-1">
-                      Cobrado R$ {(plan.priceAnnual * 12).toLocaleString("pt-BR")}/ano
-                    </p>
-                  ) : (
-                    <p className="text-[12px] text-[#4A5580] mt-1">Pagamento mensal recorrente</p>
-                  )}
-                </div>
 
-                <button
-                  onClick={() => handleAssinar(plan.id)}
-                  className="w-full py-3 rounded-xl text-[14px] font-semibold transition-all mb-6 flex items-center justify-center gap-2 cursor-pointer"
-                  style={
-                    plan.highlighted
-                      ? { background: sistemaInfo.color, color: "white" }
-                      : {
-                          background: "rgba(255,255,255,0.06)",
-                          color: "#ECF0FF",
-                          border: "1px solid var(--gs-border)",
-                        }
-                  }
-                >
-                  Assinar {plan.name}
-                  <ArrowRight className="w-4 h-4" />
-                </button>
+                  <div className="mb-6">
+                    <div className="flex items-end gap-1">
+                      <span className="text-[13px] text-[#8B9BC0] mb-1">R$</span>
+                      <span
+                        className="text-4xl font-bold text-[#ECF0FF]"
+                        style={{ fontFamily: "var(--font-space-grotesk)" }}
+                      >
+                        {price.toLocaleString("pt-BR")}
+                      </span>
+                      <span className="text-[13px] text-[#8B9BC0] mb-1">/mês</span>
+                    </div>
+                    {periodo === "anual" ? (
+                      <p className="text-[12px] text-[#10B981] mt-1">
+                        Cobrado R$ {(plan.priceAnnual * 12).toLocaleString("pt-BR")}/ano
+                      </p>
+                    ) : (
+                      <p className="text-[12px] text-[#4A5580] mt-1">Pagamento mensal recorrente</p>
+                    )}
+                  </div>
 
-                <ul className="flex flex-col gap-2.5">
-                  {plan.features.map((f) => (
-                    <li key={f} className="flex items-start gap-2.5">
-                      <Check className="w-4 h-4 mt-0.5 flex-shrink-0 text-[#10B981]" />
-                      <span className="text-[13px] text-[#8B9BC0] leading-snug">{f}</span>
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
-            ))}
+                  <button
+                    onClick={() => handleAssinar(plan.id)}
+                    className="w-full py-3 rounded-xl text-[14px] font-semibold transition-all mb-6 flex items-center justify-center gap-2 cursor-pointer"
+                    style={
+                      plan.hot
+                        ? { background: sistemaInfo.color, color: "white" }
+                        : {
+                            background: "rgba(255,255,255,0.06)",
+                            color: "#ECF0FF",
+                            border: "1px solid var(--gs-border)",
+                          }
+                    }
+                  >
+                    Assinar {plan.name}
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+
+                  <ul className="flex flex-col gap-2.5">
+                    {plan.features.map((f) => (
+                      <li key={f} className="flex items-start gap-2.5">
+                        <Check className="w-4 h-4 mt-0.5 flex-shrink-0 text-[#10B981]" />
+                        <span className="text-[13px] text-[#8B9BC0] leading-snug">{f}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </motion.div>
+              )
+            })}
           </div>
 
           {/* Bottom CTA */}

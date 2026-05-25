@@ -3,26 +3,9 @@
 import { useState, useEffect, Suspense } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { motion } from "framer-motion"
-import { ArrowLeft, QrCode, FileText, CreditCard, Copy, Check } from "lucide-react"
+import { ArrowLeft, QrCode, FileText, CreditCard } from "lucide-react"
 import Navbar from "@/components/Navbar"
-
-const PLAN_LABELS: Record<string, string> = {
-  essencial: "Essencial",
-  avancado: "Avançado",
-  experts: "Experts",
-  profissional: "Profissional",
-  enterprise: "Enterprise",
-}
-
-const PLAN_PRICES: Record<string, Record<string, number>> = {
-  clinic: { essencial: 70, avancado: 110, experts: 170 },
-  mob: { essencial: 70, profissional: 110, enterprise: 170 },
-}
-
-const PLAN_PRICES_ANUAL: Record<string, Record<string, number>> = {
-  clinic: { essencial: 56, avancado: 88, experts: 136 },
-  mob: { essencial: 56, profissional: 88, enterprise: 136 },
-}
+import { getProduct, getPlan, type Periodo } from "@/lib/products/registry"
 
 type MetodoPagamento = "pix" | "boleto" | "cartao"
 
@@ -32,12 +15,14 @@ function PagamentoContent() {
 
   const sistema = params.get("sistema") ?? "clinic"
   const plano = params.get("plano") ?? "essencial"
-  const periodo = params.get("periodo") ?? "mensal"
+  const periodo: Periodo = params.get("periodo") === "anual" ? "anual" : "mensal"
 
-  const priceMap = periodo === "anual" ? PLAN_PRICES_ANUAL : PLAN_PRICES
-  const price = priceMap[sistema]?.[plano] ?? 0
-  const sistemaLabel = sistema === "clinic" ? "BlessSystemClinic" : "BlessSystemMob"
-  const sistemaColor = sistema === "clinic" ? "#7C3AED" : "#06B6D4"
+  const product = getProduct(sistema)
+  const plan = getPlan(sistema, plano)
+  const price = plan ? (periodo === "anual" ? plan.priceAnnual : plan.price) : 0
+  const planLabel = plan?.name ?? plano
+  const sistemaLabel = product.name
+  const sistemaColor = sistema === "mob" ? "#06B6D4" : "#7C3AED"
 
   const [metodo, setMetodo] = useState<MetodoPagamento>("pix")
   const [cadastro, setCadastro] = useState<Record<string, string> | null>(null)
@@ -93,7 +78,7 @@ function PagamentoContent() {
             <div className="flex items-center justify-between">
               <div>
                 <div className="text-[11px] font-bold uppercase tracking-wider mb-0.5" style={{ color: sistemaColor }}>
-                  {sistemaLabel} — Plano {PLAN_LABELS[plano]}
+                  {sistemaLabel} — Plano {planLabel}
                 </div>
                 <div className="text-[13px] text-[#8B9BC0]">
                   {cadastro.nome} · {cadastro.email}

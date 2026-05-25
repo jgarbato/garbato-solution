@@ -3,19 +3,10 @@
 import { Suspense } from "react"
 import { useSearchParams } from "next/navigation"
 import { motion } from "framer-motion"
-import { CheckCircle2, Mail, MessageCircle, ArrowRight, ExternalLink } from "lucide-react"
+import { CheckCircle2, Mail, MessageCircle, ExternalLink } from "lucide-react"
 import Navbar from "@/components/Navbar"
 import Footer from "@/components/Footer"
-import { clinicProduct } from "@/app/blesssystemclinic/data"
-import { mobProduct } from "@/app/blesssystemmob/data"
-
-const PLAN_LABELS: Record<string, string> = {
-  essencial: "Essencial",
-  avancado: "Avançado",
-  experts: "Experts",
-  profissional: "Profissional",
-  enterprise: "Enterprise",
-}
+import { getProduct, getPlan } from "@/lib/products/registry"
 
 const METODO_LABELS: Record<string, string> = {
   pix: "PIX",
@@ -23,25 +14,18 @@ const METODO_LABELS: Record<string, string> = {
   cartao: "Cartão de Crédito",
 }
 
-const PRODUCTS = { clinic: clinicProduct, mob: mobProduct } as const
-type ProductSlug = keyof typeof PRODUCTS
-
-const SISTEMA_COLORS: Record<ProductSlug, string> = {
-  clinic: "#7C3AED",
-  mob: "#06B6D4",
-}
-
 function ConfirmacaoContent() {
   const params = useSearchParams()
-  const sistemaParam = params.get("sistema") ?? "clinic"
-  const sistema: ProductSlug = sistemaParam in PRODUCTS ? (sistemaParam as ProductSlug) : "clinic"
+  const sistema = params.get("sistema") ?? "clinic"
   const plano = params.get("plano") ?? "essencial"
   const periodo = params.get("periodo") ?? "mensal"
   const metodo = params.get("metodo") ?? "pix"
 
-  const product = PRODUCTS[sistema]
+  const product = getProduct(sistema)
+  const plan = getPlan(sistema, plano)
+  const planLabel = plan?.name ?? plano
   const sistemaLabel = product.name
-  const sistemaColor = SISTEMA_COLORS[sistema]
+  const sistemaColor = sistema === "mob" ? "#06B6D4" : "#7C3AED"
   const appUrl = product.appUrl
 
   return (
@@ -83,7 +67,7 @@ function ConfirmacaoContent() {
               Solicitação recebida!
             </h1>
             <p className="text-[#8B9BC0] text-lg mb-8">
-              Sua assinatura do {sistemaLabel} — Plano {PLAN_LABELS[plano]} está sendo processada.
+              Sua assinatura do {sistemaLabel} — Plano {planLabel} está sendo processada.
             </p>
           </motion.div>
 
@@ -101,7 +85,7 @@ function ConfirmacaoContent() {
             <div className="flex flex-col gap-3">
               {[
                 { label: "Sistema", value: sistemaLabel },
-                { label: "Plano", value: PLAN_LABELS[plano] },
+                { label: "Plano", value: planLabel },
                 { label: "Período", value: periodo === "anual" ? "Anual" : "Mensal" },
                 { label: "Pagamento", value: METODO_LABELS[metodo] },
               ].map((item) => (
