@@ -29,17 +29,17 @@ function ConfirmacaoContent() {
   const appUrl = product.appUrl
 
   return (
-    <main className="min-h-screen" style={{ background: "#08080E" }}>
+    <main className="min-h-screen" style={{ background: "#FFFFFF" }}>
       <Navbar />
 
       <section className="relative pt-32 pb-24 px-6">
-        <div className="absolute inset-0 grid-overlay opacity-[0.03] pointer-events-none" />
+        <div className="absolute inset-0 grid-overlay opacity-100 pointer-events-none" />
         <div
-          className="absolute top-20 left-1/2 -translate-x-1/2 w-[500px] h-[300px] rounded-full opacity-10 blur-[120px] pointer-events-none"
+          className="absolute top-20 left-1/2 -translate-x-1/2 w-[500px] h-[300px] rounded-full opacity-20 blur-[120px] pointer-events-none"
           style={{ background: `radial-gradient(circle, ${sistemaColor}, transparent)` }}
         />
 
-        <div className="max-w-xl mx-auto text-center">
+        <div className="max-w-xl mx-auto text-center relative z-10">
           {/* Success icon */}
           <motion.div
             initial={{ scale: 0, opacity: 0 }}
@@ -48,8 +48,11 @@ function ConfirmacaoContent() {
             className="flex justify-center mb-6"
           >
             <div
-              className="w-20 h-20 rounded-full flex items-center justify-center"
-              style={{ background: `${sistemaColor}15`, border: `2px solid ${sistemaColor}40` }}
+              className="w-20 h-20 rounded-full flex items-center justify-center bg-white"
+              style={{
+                border: `2px solid ${sistemaColor}45`,
+                boxShadow: `0 12px 32px ${sistemaColor}25`,
+              }}
             >
               <CheckCircle2 className="w-10 h-10" style={{ color: sistemaColor }} />
             </div>
@@ -61,12 +64,12 @@ function ConfirmacaoContent() {
             transition={{ delay: 0.2 }}
           >
             <h1
-              className="text-3xl sm:text-4xl font-bold text-[#ECF0FF] mb-3"
+              className="text-3xl sm:text-4xl font-bold text-[#0A0B14] mb-3"
               style={{ fontFamily: "var(--font-space-grotesk)" }}
             >
               Solicitação recebida!
             </h1>
-            <p className="text-[#8B9BC0] text-lg mb-8">
+            <p className="text-[#5B6478] text-lg mb-8">
               Sua assinatura do {sistemaLabel} — Plano {planLabel} está sendo processada.
             </p>
           </motion.div>
@@ -76,10 +79,13 @@ function ConfirmacaoContent() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="rounded-2xl p-6 text-left mb-8"
-            style={{ background: "rgba(255,255,255,0.025)", border: "1px solid var(--gs-border)" }}
+            className="rounded-2xl p-6 text-left mb-8 bg-white"
+            style={{
+              border: "1px solid var(--gs-border)",
+              boxShadow: "var(--gs-shadow-sm)",
+            }}
           >
-            <div className="text-[11px] font-bold text-[#4A5580] uppercase tracking-wider mb-4">
+            <div className="text-[11px] font-bold text-[#8D95A8] uppercase tracking-wider mb-4">
               Resumo do pedido
             </div>
             <div className="flex flex-col gap-3">
@@ -90,8 +96,8 @@ function ConfirmacaoContent() {
                 { label: "Pagamento", value: METODO_LABELS[metodo] },
               ].map((item) => (
                 <div key={item.label} className="flex items-center justify-between">
-                  <span className="text-[13px] text-[#8B9BC0]">{item.label}</span>
-                  <span className="text-[13px] font-semibold text-[#ECF0FF]">{item.value}</span>
+                  <span className="text-[13px] text-[#5B6478]">{item.label}</span>
+                  <span className="text-[13px] font-semibold text-[#0A0B14]">{item.value}</span>
                 </div>
               ))}
             </div>
@@ -105,23 +111,29 @@ function ConfirmacaoContent() {
             className="flex flex-col gap-3 mb-8"
           >
             <div
-              className="rounded-xl p-4 flex items-center gap-3 text-left"
-              style={{ background: "rgba(255,255,255,0.025)", border: "1px solid var(--gs-border)" }}
+              className="rounded-xl p-4 flex items-center gap-3 text-left bg-white"
+              style={{
+                border: "1px solid var(--gs-border)",
+                boxShadow: "var(--gs-shadow-sm)",
+              }}
             >
               <Mail className="w-5 h-5 text-[#3B82F6] flex-shrink-0" />
               <div>
-                <div className="text-[13px] font-semibold text-[#ECF0FF]">Confirme seu e-mail</div>
-                <div className="text-[12px] text-[#8B9BC0]">Enviamos as instruções de acesso para o e-mail cadastrado.</div>
+                <div className="text-[13px] font-semibold text-[#0A0B14]">Confirme seu e-mail</div>
+                <div className="text-[12px] text-[#5B6478]">Enviamos as instruções de acesso para o e-mail cadastrado.</div>
               </div>
             </div>
             <div
-              className="rounded-xl p-4 flex items-center gap-3 text-left"
-              style={{ background: "rgba(255,255,255,0.025)", border: "1px solid var(--gs-border)" }}
+              className="rounded-xl p-4 flex items-center gap-3 text-left bg-white"
+              style={{
+                border: "1px solid var(--gs-border)",
+                boxShadow: "var(--gs-shadow-sm)",
+              }}
             >
               <MessageCircle className="w-5 h-5 text-[#10B981] flex-shrink-0" />
               <div>
-                <div className="text-[13px] font-semibold text-[#ECF0FF]">Nossa equipe vai entrar em contato</div>
-                <div className="text-[12px] text-[#8B9BC0]">Em até 24h úteis para agendar a implantação e treinamento.</div>
+                <div className="text-[13px] font-semibold text-[#0A0B14]">Nossa equipe vai entrar em contato</div>
+                <div className="text-[12px] text-[#5B6478]">Em até 24h úteis para agendar a implantação e treinamento.</div>
               </div>
             </div>
           </motion.div>
@@ -138,7 +150,11 @@ function ConfirmacaoContent() {
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-[14px] font-bold transition-all hover:opacity-90"
-              style={{ background: sistemaColor, color: "white" }}
+              style={{
+                background: sistemaColor,
+                color: "white",
+                boxShadow: `0 8px 24px ${sistemaColor}40`,
+              }}
             >
               Acessar {sistemaLabel}
               <ExternalLink className="w-4 h-4" />
@@ -148,7 +164,11 @@ function ConfirmacaoContent() {
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-[14px] font-semibold transition-all hover:opacity-90"
-              style={{ background: "rgba(255,255,255,0.08)", color: "#ECF0FF", border: "1px solid var(--gs-border)" }}
+              style={{
+                background: "#F2F4F8",
+                color: "#0A0B14",
+                border: "1px solid var(--gs-border)",
+              }}
             >
               <MessageCircle className="w-4 h-4" />
               Falar no WhatsApp
@@ -159,7 +179,7 @@ function ConfirmacaoContent() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}
-            className="text-[12px] text-[#4A5580] mt-4"
+            className="text-[12px] text-[#8D95A8] mt-4"
           >
             Acesso liberado após a confirmação do pagamento. Em caso de dúvidas, fale com nossa equipe.
           </motion.p>

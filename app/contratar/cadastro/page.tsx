@@ -112,17 +112,17 @@ function CadastroContent() {
   }
 
   return (
-    <main className="min-h-screen" style={{ background: "#08080E" }}>
+    <main className="min-h-screen" style={{ background: "#FFFFFF" }}>
       <Navbar />
 
       <section className="relative pt-32 pb-24 px-6">
-        <div className="absolute inset-0 grid-overlay opacity-[0.03] pointer-events-none" />
+        <div className="absolute inset-0 grid-overlay opacity-100 pointer-events-none" />
 
-        <div className="max-w-2xl mx-auto">
+        <div className="max-w-2xl mx-auto relative z-10">
           {/* Back */}
           <button
             onClick={() => router.back()}
-            className="flex items-center gap-1.5 text-[13px] text-[#8B9BC0] hover:text-[#ECF0FF] transition-colors mb-8 cursor-pointer"
+            className="flex items-center gap-1.5 text-[13px] text-[#5B6478] hover:text-[#0A0B14] transition-colors mb-8 cursor-pointer"
           >
             <ArrowLeft className="w-4 h-4" /> Voltar aos planos
           </button>
@@ -132,19 +132,23 @@ function CadastroContent() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             className="rounded-xl p-4 flex items-center justify-between mb-8"
-            style={{ background: `${sistemaColor}08`, border: `1px solid ${sistemaColor}30` }}
+            style={{
+              background: `${sistemaColor}06`,
+              border: `1px solid ${sistemaColor}35`,
+              boxShadow: "var(--gs-shadow-sm)",
+            }}
           >
             <div>
               <div className="text-[11px] font-bold uppercase tracking-wider mb-0.5" style={{ color: sistemaColor }}>
                 {sistemaLabel}
               </div>
-              <div className="text-[15px] font-semibold text-[#ECF0FF]">
+              <div className="text-[15px] font-semibold text-[#0A0B14]">
                 Plano {planLabel} —{" "}
                 <span style={{ color: sistemaColor }}>
                   R$ {price.toLocaleString("pt-BR")}/mês
                 </span>
               </div>
-              <div className="text-[11px] text-[#4A5580] mt-0.5">
+              <div className="text-[11px] text-[#8D95A8] mt-0.5">
                 {periodo === "anual" ? "Cobrança anual" : "Cobrança mensal recorrente"}
               </div>
             </div>
@@ -155,11 +159,14 @@ function CadastroContent() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="rounded-2xl p-8"
-            style={{ background: "rgba(255,255,255,0.025)", border: "1px solid var(--gs-border)" }}
+            className="rounded-2xl p-8 bg-white"
+            style={{
+              border: "1px solid var(--gs-border)",
+              boxShadow: "var(--gs-shadow-md)",
+            }}
           >
             <h2
-              className="text-2xl font-bold text-[#ECF0FF] mb-6"
+              className="text-2xl font-bold text-[#0A0B14] mb-6"
               style={{ fontFamily: "var(--font-space-grotesk)" }}
             >
               Seus dados
@@ -173,9 +180,9 @@ function CadastroContent() {
                   onClick={() => setTipoPessoa(t)}
                   className="px-4 py-2 rounded-lg text-[13px] font-semibold transition-all cursor-pointer"
                   style={{
-                    background: tipoPessoa === t ? "rgba(59,130,246,0.15)" : "rgba(255,255,255,0.04)",
-                    color: tipoPessoa === t ? "#3B82F6" : "#8B9BC0",
-                    border: tipoPessoa === t ? "1px solid rgba(59,130,246,0.3)" : "1px solid var(--gs-border)",
+                    background: tipoPessoa === t ? "rgba(59,130,246,0.10)" : "#F2F4F8",
+                    color: tipoPessoa === t ? "#3B82F6" : "#5B6478",
+                    border: tipoPessoa === t ? "1px solid rgba(59,130,246,0.30)" : "1px solid var(--gs-border)",
                   }}
                 >
                   {t === "pj" ? "Pessoa Jurídica" : "Pessoa Física"}
@@ -297,8 +304,12 @@ function CadastroContent() {
 
             <button
               onClick={handleContinuar}
-              className="mt-8 w-full py-3.5 rounded-xl text-[15px] font-semibold flex items-center justify-center gap-2 transition-all cursor-pointer"
-              style={{ background: sistemaColor, color: "white" }}
+              className="mt-8 w-full py-3.5 rounded-xl text-[15px] font-semibold flex items-center justify-center gap-2 transition-all cursor-pointer hover:opacity-90"
+              style={{
+                background: sistemaColor,
+                color: "white",
+                boxShadow: `0 8px 24px ${sistemaColor}40`,
+              }}
             >
               Continuar para pagamento
               <ArrowRight className="w-4 h-4" />
@@ -331,12 +342,12 @@ function Field({
 }) {
   return (
     <div>
-      <label className="block text-[12px] font-semibold text-[#8B9BC0] mb-1.5 uppercase tracking-wider">
+      <label className="block text-[12px] font-semibold text-[#5B6478] mb-1.5 uppercase tracking-wider">
         {label}
       </label>
       <div className="relative">
         {icon && (
-          <div className="absolute left-3 top-1/2 -translate-y-1/2 text-[#4A5580]">{icon}</div>
+          <div className="absolute left-3 top-1/2 -translate-y-1/2 text-[#8D95A8]">{icon}</div>
         )}
         <input
           type={type}
@@ -344,22 +355,24 @@ function Field({
           onChange={(e) => onChange(e.target.value)}
           placeholder={placeholder}
           maxLength={maxLength}
-          className="w-full rounded-xl py-3 text-[14px] text-[#ECF0FF] placeholder-[#4A5580] outline-none transition-all"
+          className="w-full rounded-xl py-3 text-[14px] text-[#0A0B14] placeholder-[#8D95A8] outline-none transition-all"
           style={{
-            background: "rgba(255,255,255,0.04)",
-            border: error ? "1px solid rgba(239,68,68,0.5)" : "1px solid var(--gs-border)",
+            background: "#FFFFFF",
+            border: error ? "1px solid rgba(239,68,68,0.55)" : "1px solid var(--gs-border)",
             paddingLeft: icon ? "40px" : "14px",
             paddingRight: "14px",
           }}
           onFocus={(e) => {
-            e.currentTarget.style.borderColor = "rgba(59,130,246,0.5)"
+            e.currentTarget.style.borderColor = "rgba(59,130,246,0.50)"
+            e.currentTarget.style.boxShadow = "0 0 0 3px rgba(59,130,246,0.12)"
           }}
           onBlur={(e) => {
-            e.currentTarget.style.borderColor = error ? "rgba(239,68,68,0.5)" : "var(--gs-border)"
+            e.currentTarget.style.borderColor = error ? "rgba(239,68,68,0.55)" : "var(--gs-border)"
+            e.currentTarget.style.boxShadow = "none"
           }}
         />
       </div>
-      {error && <p className="text-[11px] text-red-400 mt-1">{error}</p>}
+      {error && <p className="text-[11px] text-red-500 mt-1">{error}</p>}
     </div>
   )
 }
