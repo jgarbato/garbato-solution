@@ -53,8 +53,12 @@ export default function BenefitsSection() {
   const inView = useInView(ref, { once: true, margin: "-60px" })
 
   return (
-    <section id="beneficios" className="relative py-24 px-6 bg-[#0C0D18]">
-      <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/[0.07] to-transparent" />
+    <section
+      id="beneficios"
+      className="relative py-24 px-6"
+      style={{ background: "#FFFFFF" }}
+    >
+      <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[rgba(15,22,36,0.10)] to-transparent" />
 
       <div className="max-w-7xl mx-auto" ref={ref}>
         {/* Header */}
@@ -67,14 +71,14 @@ export default function BenefitsSection() {
           <div>
             <span className="badge-blue mb-4 inline-flex">Benefícios concretos</span>
             <h2
-              className="text-3xl sm:text-4xl xl:text-5xl font-bold text-[#ECF0FF]"
+              className="text-3xl sm:text-4xl xl:text-5xl font-bold text-[#0A0B14]"
               style={{ fontFamily: "var(--font-space-grotesk)" }}
             >
               O que muda com um sistema{" "}
               <span className="text-gradient-blue">bem feito</span>
             </h2>
           </div>
-          <p className="text-[#8B9BC0] text-lg leading-relaxed">
+          <p className="text-[#5B6478] text-lg leading-relaxed">
             Sistemas sob medida não são apenas mais bonitos — eles entregam
             resultados mensuráveis para a operação, a equipe e os números do negócio.
           </p>
@@ -93,10 +97,10 @@ export default function BenefitsSection() {
                   duration: 0.55,
                   ease: "easeOut",
                 }}
-                className="group relative rounded-2xl p-7 card-hover"
+                className="group relative rounded-2xl p-7 card-hover bg-white"
                 style={{
-                  background: "rgba(255,255,255,0.025)",
                   border: "1px solid var(--gs-border)",
+                  boxShadow: "var(--gs-shadow-sm)",
                 }}
               >
                 {/* Metric */}
@@ -105,7 +109,6 @@ export default function BenefitsSection() {
                   style={{
                     fontFamily: "var(--font-space-grotesk)",
                     color: b.color,
-                    textShadow: `0 0 30px ${b.color}40`,
                   }}
                 >
                   {b.metric}
@@ -115,16 +118,16 @@ export default function BenefitsSection() {
                 <div className="flex items-center gap-2 mb-3">
                   <div
                     className="w-8 h-8 rounded-lg flex items-center justify-center"
-                    style={{ background: `${b.color}15`, border: `1px solid ${b.color}25` }}
+                    style={{ background: `${b.color}12`, border: `1px solid ${b.color}25` }}
                   >
                     <b.icon className="w-4 h-4" style={{ color: b.color }} />
                   </div>
-                  <span className="text-[15px] font-semibold text-[#ECF0FF]">
+                  <span className="text-[15px] font-semibold text-[#0A0B14]">
                     {b.label}
                   </span>
                 </div>
 
-                <p className="text-[13.5px] text-[#8B9BC0] leading-relaxed">
+                <p className="text-[13.5px] text-[#5B6478] leading-relaxed">
                   {b.desc}
                 </p>
               </motion.div>
@@ -142,10 +145,10 @@ export default function BenefitsSection() {
                   duration: 0.55,
                   ease: "easeOut",
                 }}
-                className="group relative rounded-2xl p-7 card-hover flex gap-6 items-start"
+                className="group relative rounded-2xl p-7 card-hover flex gap-6 items-start bg-white"
                 style={{
-                  background: "rgba(255,255,255,0.025)",
                   border: "1px solid var(--gs-border)",
+                  boxShadow: "var(--gs-shadow-sm)",
                 }}
               >
                 {/* Metric */}
@@ -154,7 +157,6 @@ export default function BenefitsSection() {
                   style={{
                     fontFamily: "var(--font-space-grotesk)",
                     color: b.color,
-                    textShadow: `0 0 24px ${b.color}40`,
                   }}
                 >
                   {b.metric}
@@ -164,15 +166,15 @@ export default function BenefitsSection() {
                   <div className="flex items-center gap-2 mb-2">
                     <div
                       className="w-7 h-7 rounded-lg flex items-center justify-center"
-                      style={{ background: `${b.color}15`, border: `1px solid ${b.color}25` }}
+                      style={{ background: `${b.color}12`, border: `1px solid ${b.color}25` }}
                     >
                       <b.icon className="w-3.5 h-3.5" style={{ color: b.color }} />
                     </div>
-                    <span className="text-[15px] font-semibold text-[#ECF0FF]">
+                    <span className="text-[15px] font-semibold text-[#0A0B14]">
                       {b.label}
                     </span>
                   </div>
-                  <p className="text-[13.5px] text-[#8B9BC0] leading-relaxed">
+                  <p className="text-[13.5px] text-[#5B6478] leading-relaxed">
                     {b.desc}
                   </p>
                 </div>
