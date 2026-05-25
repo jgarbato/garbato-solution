@@ -87,6 +87,8 @@ export type ProductSEO = {
 export type Product = {
   slug: string
   path: string
+  /** URL externa do sistema final (login do cliente após contratação). */
+  appUrl: string
   name: string
   logoIcon: LucideIcon
   logoSuffix: string

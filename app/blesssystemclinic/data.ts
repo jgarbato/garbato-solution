@@ -8,6 +8,7 @@ import type { Product } from "@/lib/products/types"
 export const clinicProduct: Product = {
   slug: "clinic",
   path: "/blesssystemclinic",
+  appUrl: "https://blesssystem.app",
   name: "BlessSystemClinic",
   logoIcon: Stethoscope,
   logoSuffix: "Clinic",

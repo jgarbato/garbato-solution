@@ -1,11 +1,13 @@
 "use client"
 
-import { useEffect, Suspense } from "react"
+import { Suspense } from "react"
 import { useSearchParams } from "next/navigation"
 import { motion } from "framer-motion"
-import { CheckCircle2, Mail, MessageCircle, ArrowRight } from "lucide-react"
+import { CheckCircle2, Mail, MessageCircle, ArrowRight, ExternalLink } from "lucide-react"
 import Navbar from "@/components/Navbar"
 import Footer from "@/components/Footer"
+import { clinicProduct } from "@/app/blesssystemclinic/data"
+import { mobProduct } from "@/app/blesssystemmob/data"
 
 const PLAN_LABELS: Record<string, string> = {
   essencial: "Essencial",
@@ -21,15 +23,26 @@ const METODO_LABELS: Record<string, string> = {
   cartao: "Cartão de Crédito",
 }
 
+const PRODUCTS = { clinic: clinicProduct, mob: mobProduct } as const
+type ProductSlug = keyof typeof PRODUCTS
+
+const SISTEMA_COLORS: Record<ProductSlug, string> = {
+  clinic: "#7C3AED",
+  mob: "#06B6D4",
+}
+
 function ConfirmacaoContent() {
   const params = useSearchParams()
-  const sistema = params.get("sistema") ?? "clinic"
+  const sistemaParam = params.get("sistema") ?? "clinic"
+  const sistema: ProductSlug = sistemaParam in PRODUCTS ? (sistemaParam as ProductSlug) : "clinic"
   const plano = params.get("plano") ?? "essencial"
   const periodo = params.get("periodo") ?? "mensal"
   const metodo = params.get("metodo") ?? "pix"
 
-  const sistemaLabel = sistema === "clinic" ? "BlessSystemClinic" : "BlessSystemMob"
-  const sistemaColor = sistema === "clinic" ? "#7C3AED" : "#06B6D4"
+  const product = PRODUCTS[sistema]
+  const sistemaLabel = product.name
+  const sistemaColor = SISTEMA_COLORS[sistema]
+  const appUrl = product.appUrl
 
   return (
     <main className="min-h-screen" style={{ background: "#08080E" }}>
@@ -129,23 +142,43 @@ function ConfirmacaoContent() {
             </div>
           </motion.div>
 
-          {/* CTA */}
+          {/* CTAs */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
+            className="flex flex-col sm:flex-row gap-3 justify-center items-center"
           >
+            <a
+              href={appUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-[14px] font-bold transition-all hover:opacity-90"
+              style={{ background: sistemaColor, color: "white" }}
+            >
+              Acessar {sistemaLabel}
+              <ExternalLink className="w-4 h-4" />
+            </a>
             <a
               href="https://wa.me/5543988720576?text=Olá, acabei de contratar o plano e quero mais informações"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-[14px] font-semibold transition-all"
-              style={{ background: "#25D366", color: "white" }}
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-[14px] font-semibold transition-all hover:opacity-90"
+              style={{ background: "rgba(255,255,255,0.08)", color: "#ECF0FF", border: "1px solid var(--gs-border)" }}
             >
               <MessageCircle className="w-4 h-4" />
-              Falar com a equipe no WhatsApp
+              Falar no WhatsApp
             </a>
           </motion.div>
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.6 }}
+            className="text-[12px] text-[#4A5580] mt-4"
+          >
+            Acesso liberado após a confirmação do pagamento. Em caso de dúvidas, fale com nossa equipe.
+          </motion.p>
         </div>
       </section>
 
