@@ -98,14 +98,14 @@ export const mobProduct: Product = {
       {
         id: "essencial",
         name: "Essencial",
-        price: 249,
+        price: 70,
         desc: "Para iniciar sua jornada",
         features: ["Até 3 usuários", "1 módulo principal", "Financeiro básico", "Central do Cliente", "Infraestrutura em nuvem", "4h de treinamento", "Suporte WhatsApp comercial"],
       },
       {
         id: "profissional",
         name: "Profissional",
-        price: 399,
+        price: 110,
         desc: "Para empresas em crescimento",
         hot: true,
         features: ["Tudo do Essencial", "Até 10 usuários", "2 módulos + CRM", "Financeiro completo", "Sites inteligentes", "Integração boleto/PIX", "Integração com portais", "6h de treinamento"],
@@ -113,7 +113,7 @@ export const mobProduct: Product = {
       {
         id: "enterprise",
         name: "Enterprise",
-        price: 549,
+        price: 170,
         desc: "Solução completa",
         features: ["Tudo do Profissional", "Usuários ilimitados", "Todos os módulos", "Todas as integrações", "Customizações avançadas", "Suporte prioritário", "10h de treinamento"],
       },

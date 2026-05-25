@@ -16,12 +16,12 @@ const PLAN_LABELS: Record<string, string> = {
 
 const PLAN_PRICES: Record<string, Record<string, number>> = {
   clinic: { essencial: 70, avancado: 110, experts: 170 },
-  mob: { essencial: 249, profissional: 399, enterprise: 549 },
+  mob: { essencial: 70, profissional: 110, enterprise: 170 },
 }
 
 const PLAN_PRICES_ANUAL: Record<string, Record<string, number>> = {
   clinic: { essencial: 56, avancado: 88, experts: 136 },
-  mob: { essencial: 199, profissional: 319, enterprise: 439 },
+  mob: { essencial: 56, profissional: 88, enterprise: 136 },
 }
 
 type MetodoPagamento = "pix" | "boleto" | "cartao"
