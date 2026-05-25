@@ -17,64 +17,64 @@ const SERVICES = [
   {
     icon: Settings2,
     color: "#3B82F6",
-    bg: "rgba(59,130,246,0.1)",
-    border: "rgba(59,130,246,0.2)",
+    bg: "rgba(59,130,246,0.08)",
+    border: "rgba(59,130,246,0.20)",
     title: "Gestão Operacional",
     desc: "Centralize fluxos, tarefas, aprovações e registros em uma plataforma única que espelha a operação real da empresa.",
   },
   {
     icon: Zap,
     color: "#F59E0B",
-    bg: "rgba(245,158,11,0.1)",
-    border: "rgba(245,158,11,0.2)",
+    bg: "rgba(245,158,11,0.08)",
+    border: "rgba(245,158,11,0.20)",
     title: "Automação",
     desc: "Elimine tarefas manuais e repetitivas com workflows automáticos, gatilhos e regras de negócio configuráveis.",
   },
   {
     icon: DollarSign,
     color: "#10B981",
-    bg: "rgba(16,185,129,0.1)",
-    border: "rgba(16,185,129,0.2)",
+    bg: "rgba(16,185,129,0.08)",
+    border: "rgba(16,185,129,0.20)",
     title: "Financeiro",
     desc: "Controle de contas a pagar/receber, fluxo de caixa, emissão de documentos fiscais e conciliação bancária.",
   },
   {
     icon: Users,
     color: "#7C3AED",
-    bg: "rgba(124,58,237,0.1)",
-    border: "rgba(124,58,237,0.2)",
+    bg: "rgba(124,58,237,0.08)",
+    border: "rgba(124,58,237,0.20)",
     title: "CRM Comercial",
     desc: "Gestão do funil de vendas, acompanhamento de oportunidades, atividades e histórico completo de cada cliente.",
   },
   {
     icon: BarChart3,
     color: "#06B6D4",
-    bg: "rgba(6,182,212,0.1)",
-    border: "rgba(6,182,212,0.2)",
+    bg: "rgba(6,182,212,0.08)",
+    border: "rgba(6,182,212,0.20)",
     title: "Dashboards",
     desc: "Painéis gerenciais com indicadores em tempo real — KPIs, gráficos e relatórios para tomada de decisão baseada em dados.",
   },
   {
     icon: Plug,
     color: "#EC4899",
-    bg: "rgba(236,72,153,0.1)",
-    border: "rgba(236,72,153,0.2)",
+    bg: "rgba(236,72,153,0.08)",
+    border: "rgba(236,72,153,0.20)",
     title: "APIs e Integrações",
     desc: "Conecte seu sistema a WhatsApp, bancos, ERPs, plataformas de e-commerce, gateways de pagamento e outros serviços.",
   },
   {
     icon: LayoutDashboard,
     color: "#8B5CF6",
-    bg: "rgba(139,92,246,0.1)",
-    border: "rgba(139,92,246,0.2)",
+    bg: "rgba(139,92,246,0.08)",
+    border: "rgba(139,92,246,0.20)",
     title: "Portais Administrativos",
     desc: "Interfaces internas para gestão de usuários, configurações, permissões e monitoramento completo da operação.",
   },
   {
     icon: Database,
     color: "#F97316",
-    bg: "rgba(249,115,22,0.1)",
-    border: "rgba(249,115,22,0.2)",
+    bg: "rgba(249,115,22,0.08)",
+    border: "rgba(249,115,22,0.20)",
     title: "ERP Sob Medida",
     desc: "Plataforma integrada com módulos de compras, estoque, vendas, financeiro, produção e relatórios — desenhada para o seu segmento.",
   },
@@ -85,7 +85,11 @@ export default function ServicesGrid() {
   const inView = useInView(ref, { once: true, margin: "-60px" })
 
   return (
-    <section id="solucoes" className="relative py-24 px-6">
+    <section
+      id="solucoes"
+      className="relative py-24 px-6"
+      style={{ background: "#F7F8FA" }}
+    >
       <div className="max-w-7xl mx-auto" ref={ref}>
         {/* Header */}
         <motion.div
@@ -96,13 +100,13 @@ export default function ServicesGrid() {
         >
           <span className="badge-blue mb-4 inline-flex">O que desenvolvemos</span>
           <h2
-            className="text-3xl sm:text-4xl xl:text-5xl font-bold text-[#ECF0FF] mb-4"
+            className="text-3xl sm:text-4xl xl:text-5xl font-bold text-[#0A0B14] mb-4"
             style={{ fontFamily: "var(--font-space-grotesk)" }}
           >
             Sistemas para cada área{" "}
             <span className="text-gradient-blue">do seu negócio</span>
           </h2>
-          <p className="text-[#8B9BC0] text-lg max-w-xl mx-auto">
+          <p className="text-[#5B6478] text-lg max-w-xl mx-auto">
             Da operação ao estratégico — desenvolvemos módulos integrados que
             trabalham juntos ou individualmente, conforme a necessidade.
           </p>
@@ -120,10 +124,10 @@ export default function ServicesGrid() {
                 duration: 0.5,
                 ease: "easeOut",
               }}
-              className="group relative rounded-2xl p-6 card-hover cursor-default"
+              className="group relative rounded-2xl p-6 card-hover cursor-default bg-white"
               style={{
-                background: "rgba(255,255,255,0.025)",
                 border: "1px solid var(--gs-border)",
+                boxShadow: "var(--gs-shadow-sm)",
               }}
             >
               {/* Hover accent */}
@@ -142,12 +146,12 @@ export default function ServicesGrid() {
 
               {/* Content */}
               <h3
-                className="relative text-[15px] font-semibold text-[#ECF0FF] mb-2"
+                className="relative text-[15px] font-semibold text-[#0A0B14] mb-2"
                 style={{ fontFamily: "var(--font-space-grotesk)" }}
               >
                 {s.title}
               </h3>
-              <p className="relative text-[13px] text-[#8B9BC0] leading-relaxed">
+              <p className="relative text-[13px] text-[#5B6478] leading-relaxed">
                 {s.desc}
               </p>
 

@@ -55,7 +55,11 @@ export default function DifferentialsSection() {
   const inView = useInView(ref, { once: true, margin: "-60px" })
 
   return (
-    <section id="diferenciais" className="relative py-24 px-6">
+    <section
+      id="diferenciais"
+      className="relative py-24 px-6"
+      style={{ background: "#F7F8FA" }}
+    >
       <div className="max-w-7xl mx-auto" ref={ref}>
         {/* Header */}
         <motion.div
@@ -67,7 +71,7 @@ export default function DifferentialsSection() {
           <div>
             <span className="badge-blue mb-4 inline-flex">Por que escolher</span>
             <h2
-              className="text-3xl sm:text-4xl xl:text-5xl font-bold text-[#ECF0FF]"
+              className="text-3xl sm:text-4xl xl:text-5xl font-bold text-[#0A0B14]"
               style={{ fontFamily: "var(--font-space-grotesk)" }}
             >
               Não apenas programamos.{" "}
@@ -76,7 +80,7 @@ export default function DifferentialsSection() {
               </span>
             </h2>
           </div>
-          <p className="text-[#8B9BC0] text-lg leading-relaxed lg:mb-2">
+          <p className="text-[#5B6478] text-lg leading-relaxed lg:mb-2">
             A diferença entre um sistema que resolve e um que gera mais problemas
             está na forma como ele é concebido — não apenas desenvolvido.
           </p>
@@ -94,15 +98,15 @@ export default function DifferentialsSection() {
                 duration: 0.55,
                 ease: "easeOut",
               }}
-              className="group relative rounded-2xl p-6 card-hover"
+              className="group relative rounded-2xl p-6 card-hover bg-white"
               style={{
-                background: "rgba(255,255,255,0.025)",
                 border: "1px solid var(--gs-border)",
+                boxShadow: "var(--gs-shadow-sm)",
               }}
             >
               {/* Number label */}
               <div
-                className="absolute top-5 right-5 text-[11px] font-bold opacity-15 group-hover:opacity-30 transition-opacity"
+                className="absolute top-5 right-5 text-[11px] font-bold opacity-25 group-hover:opacity-50 transition-opacity"
                 style={{ color: d.color, fontFamily: "var(--font-space-grotesk)" }}
               >
                 0{i + 1}
@@ -112,7 +116,7 @@ export default function DifferentialsSection() {
               <div
                 className="w-10 h-10 rounded-xl flex items-center justify-center mb-4"
                 style={{
-                  background: `${d.color}15`,
+                  background: `${d.color}12`,
                   border: `1px solid ${d.color}25`,
                 }}
               >
@@ -121,14 +125,14 @@ export default function DifferentialsSection() {
 
               {/* Title */}
               <h3
-                className="text-[16px] font-bold text-[#ECF0FF] mb-2.5"
+                className="text-[16px] font-bold text-[#0A0B14] mb-2.5"
                 style={{ fontFamily: "var(--font-space-grotesk)" }}
               >
                 {d.title}
               </h3>
 
               {/* Desc */}
-              <p className="text-[13.5px] text-[#8B9BC0] leading-relaxed">
+              <p className="text-[13.5px] text-[#5B6478] leading-relaxed">
                 {d.desc}
               </p>
 
