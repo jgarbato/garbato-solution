@@ -8,6 +8,7 @@ import { Check, ArrowRight, ChevronDown, MessageCircle } from "lucide-react"
 import type { Product, FAQ as FAQType, ProductTheme } from "@/lib/products/types"
 import { whatsappUrl } from "@/lib/constants"
 import DashboardMockup from "./DashboardMockup"
+import { Section, SectionHeader } from "./Section"
 
 type Props = { product: Product }
 
@@ -113,220 +114,182 @@ export default function ProductLandingPage({ product }: Props) {
       </section>
 
       {/* ── Features ──────────────────────────────────────────────────────── */}
-      <section id="funcionalidades" className="py-20 px-6 scroll-mt-20" ref={featRef}>
-        <div className="max-w-6xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={featInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5 }}
-            className="text-center mb-12"
-          >
-            <span
-              className="inline-block text-[11px] font-bold px-3 py-1 rounded-full mb-3"
-              style={{ background: t.bgTinted, color: t.primary }}
-            >
-              {features.badge}
-            </span>
-            <h2
-              className="text-[2rem] font-bold mb-3"
-              style={{ color: t.dark, fontFamily: "var(--font-space-grotesk)" }}
-            >
-              {features.titlePre}{" "}
-              <span style={{ color: t.primary }}>{features.titleHighlight}</span>
-            </h2>
-            <p className="text-[14px] max-w-md mx-auto" style={{ color: t.body }}>
-              {features.subtitle}
-            </p>
-          </motion.div>
+      <Section id="funcionalidades" ref={featRef}>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={featInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5 }}
+        >
+          <SectionHeader
+            theme={t}
+            badge={features.badge}
+            titlePre={features.titlePre}
+            titleHighlight={features.titleHighlight}
+            subtitle={features.subtitle}
+          />
+        </motion.div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {features.items.map((f, i) => (
-              <motion.div
-                key={f.title}
-                initial={{ opacity: 0, y: 20 }}
-                animate={featInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: i * 0.07, duration: 0.5 }}
-                className="rounded-xl p-5 transition-shadow hover:shadow-md"
-                style={{ background: "white", border: `1px solid ${t.border}` }}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {features.items.map((f, i) => (
+            <motion.div
+              key={f.title}
+              initial={{ opacity: 0, y: 20 }}
+              animate={featInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: i * 0.07, duration: 0.5 }}
+              className="rounded-xl p-5 transition-shadow hover:shadow-md"
+              style={{ background: "white", border: `1px solid ${t.border}` }}
+            >
+              <div
+                className="w-9 h-9 rounded-lg flex items-center justify-center mb-3"
+                style={{ background: t.bgTinted }}
               >
-                <div
-                  className="w-9 h-9 rounded-lg flex items-center justify-center mb-3"
-                  style={{ background: t.bgTinted }}
-                >
-                  <f.icon className="w-4 h-4" style={{ color: t.primary }} />
-                </div>
-                <h3 className="text-[13.5px] font-bold mb-1.5" style={{ color: t.dark }}>{f.title}</h3>
-                <p className="text-[12.5px] leading-relaxed" style={{ color: t.body }}>{f.desc}</p>
-              </motion.div>
-            ))}
-          </div>
+                <f.icon className="w-4 h-4" style={{ color: t.primary }} />
+              </div>
+              <h3 className="text-[13.5px] font-bold mb-1.5" style={{ color: t.dark }}>{f.title}</h3>
+              <p className="text-[12.5px] leading-relaxed" style={{ color: t.body }}>{f.desc}</p>
+            </motion.div>
+          ))}
         </div>
-      </section>
+      </Section>
 
       {/* ── How it works ──────────────────────────────────────────────────── */}
-      <section className="py-20 px-6" style={{ background: t.bgTinted }}>
-        <div className="max-w-5xl mx-auto text-center">
-          <span
-            className="inline-block text-[11px] font-bold px-3 py-1 rounded-full mb-3"
-            style={{ background: "white", color: t.primary }}
-          >
-            {howItWorks.badge}
-          </span>
-          <h2
-            className="text-[2rem] font-bold mb-12"
-            style={{ color: t.dark, fontFamily: "var(--font-space-grotesk)" }}
-          >
-            {howItWorks.titlePre}{" "}
-            <span style={{ color: t.primary }}>{howItWorks.titleHighlight}</span>
-          </h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            {howItWorks.steps.map((s) => (
+      <Section maxWidth="5xl" bg={t.bgTinted}>
+        <SectionHeader
+          theme={t}
+          badge={howItWorks.badge}
+          badgeBg="white"
+          titlePre={howItWorks.titlePre}
+          titleHighlight={howItWorks.titleHighlight}
+        />
+
+        <div className="grid md:grid-cols-3 gap-6">
+          {howItWorks.steps.map((s) => (
+            <div
+              key={s.n}
+              className="rounded-xl p-6 text-center"
+              style={{ background: "white", border: `1px solid ${t.border}` }}
+            >
               <div
-                key={s.n}
-                className="rounded-xl p-6 text-center"
-                style={{ background: "white", border: `1px solid ${t.border}` }}
+                className="w-10 h-10 rounded-xl flex items-center justify-center mx-auto mb-3"
+                style={{ background: t.bgTinted }}
               >
-                <div
-                  className="w-10 h-10 rounded-xl flex items-center justify-center mx-auto mb-3"
-                  style={{ background: t.bgTinted }}
-                >
-                  <s.icon className="w-5 h-5" style={{ color: t.primary }} />
-                </div>
-                <p className="text-[10px] font-bold mb-1" style={{ color: t.primary }}>{s.n}</p>
-                <h3 className="text-[14px] font-bold mb-2" style={{ color: t.dark }}>{s.title}</h3>
-                <p className="text-[12.5px] leading-relaxed" style={{ color: t.body }}>{s.desc}</p>
+                <s.icon className="w-5 h-5" style={{ color: t.primary }} />
               </div>
-            ))}
-          </div>
+              <p className="text-[10px] font-bold mb-1" style={{ color: t.primary }}>{s.n}</p>
+              <h3 className="text-[14px] font-bold mb-2" style={{ color: t.dark }}>{s.title}</h3>
+              <p className="text-[12.5px] leading-relaxed" style={{ color: t.body }}>{s.desc}</p>
+            </div>
+          ))}
         </div>
-      </section>
+      </Section>
 
       {/* ── Pricing ───────────────────────────────────────────────────────── */}
-      <section id="planos" className="py-20 px-6 scroll-mt-20" ref={planRef}>
-        <div className="max-w-5xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={planInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5 }}
-            className="text-center mb-12"
-          >
-            <span
-              className="inline-block text-[11px] font-bold px-3 py-1 rounded-full mb-3"
-              style={{ background: t.bgTinted, color: t.primary }}
+      <Section id="planos" maxWidth="5xl" ref={planRef}>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={planInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5 }}
+        >
+          <SectionHeader
+            theme={t}
+            badge={pricing.badge}
+            titlePre={pricing.titlePre}
+            titleHighlight={pricing.titleHighlight}
+          />
+        </motion.div>
+
+        <div className="grid lg:grid-cols-3 gap-4">
+          {pricing.plans.map((plan, i) => (
+            <motion.div
+              key={plan.id}
+              initial={{ opacity: 0, y: 24 }}
+              animate={planInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: i * 0.1, duration: 0.5 }}
+              className="relative rounded-2xl p-6 flex flex-col"
+              style={{
+                background: plan.hot ? t.primary : "white",
+                border: plan.hot ? "none" : `1px solid ${t.border}`,
+                boxShadow: plan.hot ? `0 16px 48px rgba(${t.shadowRgba},0.22)` : "none",
+              }}
             >
-              {pricing.badge}
-            </span>
-            <h2
-              className="text-[2rem] font-bold mb-2"
-              style={{ color: t.dark, fontFamily: "var(--font-space-grotesk)" }}
-            >
-              {pricing.titlePre}{" "}
-              <span style={{ color: t.primary }}>{pricing.titleHighlight}</span>
-            </h2>
-          </motion.div>
-
-          <div className="grid lg:grid-cols-3 gap-4">
-            {pricing.plans.map((plan, i) => (
-              <motion.div
-                key={plan.id}
-                initial={{ opacity: 0, y: 24 }}
-                animate={planInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: i * 0.1, duration: 0.5 }}
-                className="relative rounded-2xl p-6 flex flex-col"
-                style={{
-                  background: plan.hot ? t.primary : "white",
-                  border: plan.hot ? "none" : `1px solid ${t.border}`,
-                  boxShadow: plan.hot ? `0 16px 48px rgba(${t.shadowRgba},0.22)` : "none",
-                }}
-              >
-                {plan.hot && (
-                  <div
-                    className="absolute -top-3 left-1/2 -translate-x-1/2 text-[10px] font-bold px-3 py-0.5 rounded-full"
-                    style={{ background: t.accent, color: "white" }}
-                  >
-                    Mais popular
-                  </div>
-                )}
-
-                <div className="mb-4">
-                  <h3
-                    className="text-[17px] font-bold"
-                    style={{ color: plan.hot ? "white" : t.dark, fontFamily: "var(--font-space-grotesk)" }}
-                  >
-                    {plan.name}
-                  </h3>
-                  <p className="text-[12px] mt-0.5" style={{ color: plan.hot ? "rgba(255,255,255,0.65)" : t.muted }}>
-                    {plan.desc}
-                  </p>
-                </div>
-
-                <div className="flex items-end gap-1 mb-5">
-                  <span className="text-[13px] mb-1" style={{ color: plan.hot ? "rgba(255,255,255,0.65)" : t.muted }}>R$</span>
-                  <span
-                    className="text-[2.2rem] font-bold leading-none"
-                    style={{ color: plan.hot ? "white" : t.dark, fontFamily: "var(--font-space-grotesk)" }}
-                  >
-                    {plan.price.toLocaleString("pt-BR")}
-                  </span>
-                  <span className="text-[13px] mb-1" style={{ color: plan.hot ? "rgba(255,255,255,0.65)" : t.muted }}>/mês</span>
-                </div>
-
-                <button
-                  onClick={() => router.push(contratarHref)}
-                  className="w-full py-2.5 rounded-xl text-[13px] font-bold mb-5 cursor-pointer transition-all hover:opacity-90"
-                  style={
-                    plan.hot
-                      ? { background: "white", color: t.primary }
-                      : { background: t.primary, color: "white" }
-                  }
+              {plan.hot && (
+                <div
+                  className="absolute -top-3 left-1/2 -translate-x-1/2 text-[10px] font-bold px-3 py-0.5 rounded-full"
+                  style={{ background: t.accent, color: "white" }}
                 >
-                  Assinar {plan.name}
-                </button>
+                  Mais popular
+                </div>
+              )}
 
-                <ul className="flex flex-col gap-2">
-                  {plan.features.map((f) => (
-                    <li key={f} className="flex items-center gap-2">
-                      <Check
-                        className="w-3.5 h-3.5 flex-shrink-0"
-                        style={{ color: plan.hot ? "rgba(255,255,255,0.75)" : t.accent }}
-                      />
-                      <span
-                        className="text-[12.5px]"
-                        style={{ color: plan.hot ? "rgba(255,255,255,0.8)" : t.body }}
-                      >
-                        {f}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
-            ))}
-          </div>
+              <div className="mb-4">
+                <h3
+                  className="text-[17px] font-bold"
+                  style={{ color: plan.hot ? "white" : t.dark, fontFamily: "var(--font-space-grotesk)" }}
+                >
+                  {plan.name}
+                </h3>
+                <p className="text-[12px] mt-0.5" style={{ color: plan.hot ? "rgba(255,255,255,0.65)" : t.muted }}>
+                  {plan.desc}
+                </p>
+              </div>
+
+              <div className="flex items-end gap-1 mb-5">
+                <span className="text-[13px] mb-1" style={{ color: plan.hot ? "rgba(255,255,255,0.65)" : t.muted }}>R$</span>
+                <span
+                  className="text-[2.2rem] font-bold leading-none"
+                  style={{ color: plan.hot ? "white" : t.dark, fontFamily: "var(--font-space-grotesk)" }}
+                >
+                  {plan.price.toLocaleString("pt-BR")}
+                </span>
+                <span className="text-[13px] mb-1" style={{ color: plan.hot ? "rgba(255,255,255,0.65)" : t.muted }}>/mês</span>
+              </div>
+
+              <button
+                onClick={() => router.push(contratarHref)}
+                className="w-full py-2.5 rounded-xl text-[13px] font-bold mb-5 cursor-pointer transition-all hover:opacity-90"
+                style={
+                  plan.hot
+                    ? { background: "white", color: t.primary }
+                    : { background: t.primary, color: "white" }
+                }
+              >
+                Assinar {plan.name}
+              </button>
+
+              <ul className="flex flex-col gap-2">
+                {plan.features.map((f) => (
+                  <li key={f} className="flex items-center gap-2">
+                    <Check
+                      className="w-3.5 h-3.5 flex-shrink-0"
+                      style={{ color: plan.hot ? "rgba(255,255,255,0.75)" : t.accent }}
+                    />
+                    <span
+                      className="text-[12.5px]"
+                      style={{ color: plan.hot ? "rgba(255,255,255,0.8)" : t.body }}
+                    >
+                      {f}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          ))}
         </div>
-      </section>
+      </Section>
 
       {/* ── FAQ ───────────────────────────────────────────────────────────── */}
-      <section id="faq" className="py-20 px-6 scroll-mt-20" style={{ background: t.bgSoft }}>
-        <div className="max-w-2xl mx-auto">
-          <div className="text-center mb-10">
-            <span
-              className="inline-block text-[11px] font-bold px-3 py-1 rounded-full mb-3"
-              style={{ background: t.bgTinted, color: t.primary }}
-            >
-              {faq.badge}
-            </span>
-            <h2
-              className="text-[2rem] font-bold"
-              style={{ color: t.dark, fontFamily: "var(--font-space-grotesk)" }}
-            >
-              Dúvidas <span style={{ color: t.primary }}>frequentes</span>
-            </h2>
-          </div>
-          <div className="flex flex-col gap-2.5">
-            {faq.items.map((item) => <FAQItem key={item.q} item={item} theme={t} />)}
-          </div>
+      <Section id="faq" maxWidth="2xl" bg={t.bgSoft}>
+        <SectionHeader
+          theme={t}
+          badge={faq.badge}
+          titlePre="Dúvidas"
+          titleHighlight="frequentes"
+          className="text-center mb-10"
+        />
+        <div className="flex flex-col gap-2.5">
+          {faq.items.map((item) => <FAQItem key={item.q} item={item} theme={t} />)}
         </div>
-      </section>
+      </Section>
 
       {/* ── CTA ───────────────────────────────────────────────────────────── */}
       <section className="py-20 px-6" style={{ background: t.primary }}>

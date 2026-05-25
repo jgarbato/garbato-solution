@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import { Space_Grotesk, DM_Sans } from "next/font/google"
+import { SITE_URL } from "@/lib/constants"
 import "./globals.css"
 
 const spaceGrotesk = Space_Grotesk({
@@ -17,6 +18,7 @@ const dmSans = DM_Sans({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: "Garbato Solution | Sistemas Sob Medida para Empresas",
   description:
     "Desenvolvemos sistemas sob medida para empresas que precisam organizar processos, centralizar informações e ganhar produtividade com tecnologia. ERP, CRM, portais administrativos e muito mais.",

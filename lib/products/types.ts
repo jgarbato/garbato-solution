@@ -86,6 +86,7 @@ export type ProductSEO = {
 
 export type Product = {
   slug: string
+  path: string
   name: string
   logoIcon: LucideIcon
   logoSuffix: string
