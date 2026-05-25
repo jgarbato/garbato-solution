@@ -97,14 +97,14 @@ export const clinicProduct: Product = {
       {
         id: "essencial",
         name: "Essencial",
-        price: 349,
+        price: 70,
         desc: "Para clínicas que estão começando",
         features: ["Até 3 usuários", "Agenda inteligente", "Fichas personalizadas", "Agendamento online", "5 GB de armazenamento", "Notificações via Meta API"],
       },
       {
         id: "avancado",
         name: "Avançado",
-        price: 499,
+        price: 110,
         desc: "Para clínicas em crescimento",
         hot: true,
         features: ["Até 10 usuários", "Tudo do Essencial", "Assinatura eletrônica", "Gestão financeira completa", "Controle de estoque", "Comissões automatizadas", "10 GB de armazenamento", "Painel de chamada"],
@@ -112,7 +112,7 @@ export const clinicProduct: Product = {
       {
         id: "experts",
         name: "Experts",
-        price: 899,
+        price: 170,
         desc: "Para clínicas que querem escalar",
         features: ["Usuários ilimitados", "Tudo do Avançado", "CRM integrado", "Emissão de NF", "Central no WhatsApp", "25 GB de armazenamento", "Suporte prioritário"],
       },

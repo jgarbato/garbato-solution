@@ -182,6 +182,7 @@ const SOLUTIONS = [
     title: "ERP Imobiliário e Financeiro",
     desc: "Gestão completa de imóveis, contratos, locatários, repasses, financeiro integrado e conciliação bancária em uma única plataforma.",
     mockup: <ERPMockup />,
+    href: "/blesssystemmob",
   },
   {
     color: "#3B82F6",

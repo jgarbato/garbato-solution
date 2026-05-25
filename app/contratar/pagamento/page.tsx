@@ -15,12 +15,12 @@ const PLAN_LABELS: Record<string, string> = {
 }
 
 const PLAN_PRICES: Record<string, Record<string, number>> = {
-  clinic: { essencial: 349, avancado: 499, experts: 899 },
+  clinic: { essencial: 70, avancado: 110, experts: 170 },
   mob: { essencial: 249, profissional: 399, enterprise: 549 },
 }
 
 const PLAN_PRICES_ANUAL: Record<string, Record<string, number>> = {
-  clinic: { essencial: 279, avancado: 399, experts: 719 },
+  clinic: { essencial: 56, avancado: 88, experts: 136 },
   mob: { essencial: 199, profissional: 319, enterprise: 439 },
 }
 
