@@ -29,28 +29,28 @@ export default function Footer() {
   return (
     <footer
       className="relative border-t"
-      style={{ borderColor: "var(--gs-border)", background: "#0C0D18" }}
+      style={{ borderColor: "var(--gs-border)", background: "#F7F8FA" }}
     >
       {/* Top gradient */}
-      <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#3B82F6]/20 to-transparent" />
+      <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#3B82F6]/30 to-transparent" />
 
       <div className="max-w-7xl mx-auto px-6 py-14">
         <div className="grid lg:grid-cols-4 gap-10 mb-12">
           {/* Brand */}
           <div className="lg:col-span-2">
             <div className="flex items-center gap-2.5 mb-4">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#3B82F6] to-[#7C3AED] flex items-center justify-center shadow-[0_0_16px_rgba(59,130,246,0.3)]">
+              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#3B82F6] to-[#7C3AED] flex items-center justify-center shadow-[0_4px_14px_rgba(59,130,246,0.25)]">
                 <Zap className="w-4 h-4 text-white" strokeWidth={2.5} />
               </div>
               <span
-                className="text-[15px] font-semibold text-[#ECF0FF]"
+                className="text-[15px] font-semibold text-[#0A0B14]"
                 style={{ fontFamily: "var(--font-space-grotesk)" }}
               >
                 Garbato<span className="text-[#3B82F6]"> Solution</span>
               </span>
             </div>
 
-            <p className="text-[#8B9BC0] text-[14px] leading-relaxed max-w-xs mb-6">
+            <p className="text-[#5B6478] text-[14px] leading-relaxed max-w-xs mb-6">
               Desenvolvemos sistemas sob medida para empresas que precisam
               organizar processos, centralizar informações e ganhar
               produtividade com tecnologia.
@@ -60,12 +60,12 @@ export default function Footer() {
             <div className="flex flex-col gap-2">
               <a
                 href="mailto:contato@garbatosolution.com.br"
-                className="flex items-center gap-2 text-[13px] text-[#8B9BC0] hover:text-[#ECF0FF] transition-colors"
+                className="flex items-center gap-2 text-[13px] text-[#5B6478] hover:text-[#0A0B14] transition-colors"
               >
                 <Mail className="w-3.5 h-3.5 text-[#3B82F6]" />
                 contato@garbatosolution.com.br
               </a>
-              <div className="flex items-center gap-2 text-[13px] text-[#8B9BC0]">
+              <div className="flex items-center gap-2 text-[13px] text-[#5B6478]">
                 <Globe className="w-3.5 h-3.5 text-[#3B82F6]" />
                 garbatosolution.com.br
               </div>
@@ -75,7 +75,7 @@ export default function Footer() {
           {/* Navigation */}
           <div>
             <div
-              className="text-[11px] font-bold text-[#4A5580] uppercase tracking-wider mb-4"
+              className="text-[11px] font-bold text-[#8D95A8] uppercase tracking-wider mb-4"
               style={{ fontFamily: "var(--font-space-grotesk)" }}
             >
               Navegação
@@ -85,7 +85,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <a
                     href={link.href}
-                    className="text-[13.5px] text-[#8B9BC0] hover:text-[#ECF0FF] transition-colors"
+                    className="text-[13.5px] text-[#5B6478] hover:text-[#0A0B14] transition-colors"
                     onClick={(e) => {
                       e.preventDefault()
                       document
@@ -103,7 +103,7 @@ export default function Footer() {
           {/* Social + team */}
           <div>
             <div
-              className="text-[11px] font-bold text-[#4A5580] uppercase tracking-wider mb-4"
+              className="text-[11px] font-bold text-[#8D95A8] uppercase tracking-wider mb-4"
               style={{ fontFamily: "var(--font-space-grotesk)" }}
             >
               Redes sociais
@@ -118,19 +118,20 @@ export default function Footer() {
                   aria-label={s.label}
                   className="w-9 h-9 rounded-lg flex items-center justify-center transition-all hover:-translate-y-0.5"
                   style={{
-                    background: "rgba(255,255,255,0.04)",
+                    background: "#FFFFFF",
                     border: "1px solid var(--gs-border)",
+                    boxShadow: "var(--gs-shadow-sm)",
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = "rgba(59,130,246,0.3)"
-                    e.currentTarget.style.background = "rgba(59,130,246,0.08)"
+                    e.currentTarget.style.borderColor = "rgba(59,130,246,0.30)"
+                    e.currentTarget.style.background = "rgba(59,130,246,0.05)"
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.borderColor = "var(--gs-border)"
-                    e.currentTarget.style.background = "rgba(255,255,255,0.04)"
+                    e.currentTarget.style.background = "#FFFFFF"
                   }}
                 >
-                  <s.icon className="w-4 h-4 text-[#8B9BC0]" />
+                  <s.icon className="w-4 h-4 text-[#5B6478]" />
                 </a>
               ))}
             </div>
@@ -139,18 +140,19 @@ export default function Footer() {
             <div
               className="rounded-xl p-3 flex items-center gap-3"
               style={{
-                background: "rgba(255,255,255,0.025)",
+                background: "#FFFFFF",
                 border: "1px solid var(--gs-border)",
+                boxShadow: "var(--gs-shadow-sm)",
               }}
             >
               <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[#3B82F6] to-[#7C3AED] flex items-center justify-center text-white text-[13px] font-bold flex-shrink-0">
                 JG
               </div>
               <div>
-                <div className="text-[13px] font-semibold text-[#ECF0FF]">
+                <div className="text-[13px] font-semibold text-[#0A0B14]">
                   Juan Garbato
                 </div>
-                <div className="text-[11px] text-[#4A5580]">CEO · Fundador</div>
+                <div className="text-[11px] text-[#8D95A8]">CEO · Fundador</div>
               </div>
             </div>
           </div>
@@ -161,14 +163,14 @@ export default function Footer() {
           className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3"
           style={{ borderTop: "1px solid var(--gs-border)" }}
         >
-          <p className="text-[12px] text-[#4A5580]">
+          <p className="text-[12px] text-[#8D95A8]">
             © {new Date().getFullYear()} Garbato Solution. Todos os direitos reservados.
           </p>
           <div className="flex items-center gap-4">
-            <a href="#" className="text-[12px] text-[#4A5580] hover:text-[#8B9BC0] transition-colors">
+            <a href="#" className="text-[12px] text-[#8D95A8] hover:text-[#5B6478] transition-colors">
               Política de Privacidade
             </a>
-            <a href="#" className="text-[12px] text-[#4A5580] hover:text-[#8B9BC0] transition-colors">
+            <a href="#" className="text-[12px] text-[#8D95A8] hover:text-[#5B6478] transition-colors">
               Termos de Uso
             </a>
           </div>

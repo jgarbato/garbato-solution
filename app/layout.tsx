@@ -51,9 +51,9 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
-      className={`${spaceGrotesk.variable} ${dmSans.variable} dark`}
+      className={`${spaceGrotesk.variable} ${dmSans.variable}`}
     >
-      <body className="min-h-screen antialiased bg-[#08080E] text-[#ECF0FF] overflow-x-hidden">
+      <body className="min-h-screen antialiased bg-white text-[#0A0B14] overflow-x-hidden">
         {children}
       </body>
     </html>
