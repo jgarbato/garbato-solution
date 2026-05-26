@@ -10,14 +10,32 @@
 const PROD_BASE_URL = "https://api.asaas.com/v3"
 const SANDBOX_BASE_URL = "https://api-sandbox.asaas.com/v3"
 
+/**
+ * Detecta o ambiente real pelo prefixo da chave Asaas:
+ *   - `$aact_hmlg_` → sandbox/homologação
+ *   - qualquer outra coisa → produção
+ *
+ * Isso evita o erro "invalid_environment" quando a chave foi
+ * acidentalmente colocada na env var "errada" (ex.: chave sandbox em
+ * `ASAAS_API_KEY` de prod) — o nome da var não importa, só o prefixo.
+ */
+function detectEnv(key: string): "sandbox" | "production" {
+  return key.includes("hmlg") ? "sandbox" : "production"
+}
+
 function resolveCredentials() {
-  const prodKey = process.env.ASAAS_API_KEY
-  const sandboxKey = process.env.ASAAS_API_KEY_SANDBOX
-  if (prodKey) return { key: prodKey, baseUrl: PROD_BASE_URL, env: "production" as const }
-  if (sandboxKey) return { key: sandboxKey, baseUrl: SANDBOX_BASE_URL, env: "sandbox" as const }
-  throw new Error(
-    "Asaas: faltam credenciais. Defina ASAAS_API_KEY (prod) ou ASAAS_API_KEY_SANDBOX.",
-  )
+  const key = process.env.ASAAS_API_KEY ?? process.env.ASAAS_API_KEY_SANDBOX
+  if (!key) {
+    throw new Error(
+      "Asaas: faltam credenciais. Defina ASAAS_API_KEY ou ASAAS_API_KEY_SANDBOX.",
+    )
+  }
+  const env = detectEnv(key)
+  return {
+    key,
+    env,
+    baseUrl: env === "production" ? PROD_BASE_URL : SANDBOX_BASE_URL,
+  }
 }
 
 async function asaasFetch<T>(path: string, init?: RequestInit): Promise<T> {
