@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { useRouter, usePathname } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X, ArrowRight, MessageCircle, Zap } from "lucide-react"
 
@@ -17,6 +18,10 @@ const NAV_LINKS = [
 ]
 
 export default function Navbar() {
+  const router = useRouter()
+  const pathname = usePathname()
+  const isHome = pathname === "/"
+
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
 
@@ -28,8 +33,22 @@ export default function Navbar() {
 
   const handleNav = (href: string) => {
     setMenuOpen(false)
-    const el = document.querySelector(href)
-    if (el) el.scrollIntoView({ behavior: "smooth" })
+    if (isHome) {
+      const el = document.querySelector(href)
+      if (el) el.scrollIntoView({ behavior: "smooth" })
+    } else {
+      // Fora da home — navega pra home com o anchor.
+      router.push(`/${href}`)
+    }
+  }
+
+  const handleLogo = () => {
+    setMenuOpen(false)
+    if (isHome) {
+      window.scrollTo({ top: 0, behavior: "smooth" })
+    } else {
+      router.push("/")
+    }
   }
 
   return (
@@ -52,8 +71,8 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between gap-8">
           {/* Logo */}
           <button
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="flex items-center gap-2.5 group"
+            onClick={handleLogo}
+            className="flex items-center gap-2.5 group cursor-pointer"
           >
             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#3B82F6] to-[#7C3AED] flex items-center justify-center flex-shrink-0 shadow-[0_4px_14px_rgba(59,130,246,0.30)]">
               <Zap className="w-4 h-4 text-white" strokeWidth={2.5} />
