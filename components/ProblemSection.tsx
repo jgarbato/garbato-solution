@@ -109,16 +109,15 @@ export default function ProblemSection() {
           ))}
         </div>
 
-        {/* Solution reveal — bloco dark de contraste, marca um momento na pagina */}
+        {/* Solution reveal — card branco em destaque */}
         <motion.div
           initial={{ opacity: 0, y: 32, scale: 0.98 }}
           animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
           transition={{ delay: 0.5, duration: 0.7, ease: "easeOut" }}
-          className="relative rounded-2xl overflow-hidden"
+          className="relative rounded-2xl overflow-hidden bg-white"
           style={{
-            background: "linear-gradient(135deg, #0F1628 0%, #131A35 100%)",
-            border: "1px solid rgba(59,130,246,0.30)",
-            boxShadow: "0 20px 50px rgba(15,22,36,0.18), 0 0 60px rgba(59,130,246,0.10)",
+            border: "1px solid rgba(59,130,246,0.25)",
+            boxShadow: "0 20px 50px rgba(15,22,36,0.06), 0 0 60px rgba(59,130,246,0.06)",
           }}
         >
           {/* Glow accent */}
@@ -128,19 +127,19 @@ export default function ProblemSection() {
             <div className="flex flex-col lg:flex-row items-start lg:items-center gap-8">
               <div className="flex-1">
                 <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-semibold mb-4"
-                  style={{ background: "rgba(59,130,246,0.15)", color: "#60A5FA", border: "1px solid rgba(59,130,246,0.30)" }}
+                  style={{ background: "rgba(59,130,246,0.10)", color: "#1D4ED8", border: "1px solid rgba(59,130,246,0.25)" }}
                 >
                   A solução
                 </div>
                 <h3
-                  className="text-2xl sm:text-3xl font-bold text-[#ECF0FF] mb-4"
+                  className="text-2xl sm:text-3xl font-bold text-[#0A0B14] mb-4"
                   style={{ fontFamily: "var(--font-space-grotesk)" }}
                 >
                   Centralizamos a operação em um{" "}
                   <span className="text-gradient-blue">sistema único</span>,
                   pensado para o seu negócio
                 </h3>
-                <p className="text-[#8B9BC0] text-base leading-relaxed max-w-xl">
+                <p className="text-[#5B6478] text-base leading-relaxed max-w-xl">
                   Em vez de adaptar a empresa a um software genérico, desenvolvemos
                   a plataforma conforme a realidade, os processos e os objetivos
                   de cada cliente — do fluxo operacional à experiência do usuário.
@@ -155,7 +154,7 @@ export default function ProblemSection() {
                 ].map((item) => (
                   <div key={item} className="flex items-center gap-3">
                     <CheckCircle2 className="w-4 h-4 text-[#10B981] flex-shrink-0" />
-                    <span className="text-[14px] text-[#ECF0FF] font-medium">
+                    <span className="text-[14px] text-[#0A0B14] font-medium">
                       {item}
                     </span>
                   </div>
@@ -166,7 +165,7 @@ export default function ProblemSection() {
                       .querySelector("#contato")
                       ?.scrollIntoView({ behavior: "smooth" })
                   }
-                  className="mt-2 flex items-center gap-2 text-[13px] font-semibold text-[#60A5FA] hover:text-[#93C5FD] transition-colors cursor-pointer"
+                  className="mt-2 flex items-center gap-2 text-[13px] font-semibold text-[#3B82F6] hover:text-[#1D4ED8] transition-colors cursor-pointer"
                 >
                   Ver como funciona
                   <ArrowRight className="w-3.5 h-3.5" />
