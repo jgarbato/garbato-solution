@@ -156,6 +156,8 @@ export const asaas = {
       city?: string
       state?: string
       externalReference?: string
+      /** Quando true, o Asaas NÃO dispara emails/SMS automáticos pro cliente. */
+      notificationDisabled?: boolean
     }) {
       return asaasFetch<AsaasCustomer>("/customers", {
         method: "POST",

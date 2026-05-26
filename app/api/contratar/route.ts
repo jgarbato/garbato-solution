@@ -108,6 +108,9 @@ export async function POST(req: Request) {
         province: c.bairro || undefined,
         city: c.cidade || undefined,
         state: c.estado || undefined,
+        // Desativa email/SMS automáticos do Asaas. Quem manda comunicação
+        // pro cliente somos nós (welcome email via Resend depois do pagamento).
+        notificationDisabled: true,
       })
       asaasCustomerId = created.id
 
