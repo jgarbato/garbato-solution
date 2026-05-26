@@ -19,11 +19,16 @@ import {
   CheckCircle2,
 } from "lucide-react"
 
+const MOCKUP_OUTER =
+  "w-full h-[180px] bg-[#F7F8FA] rounded-xl border border-[rgba(15,22,36,0.06)] overflow-hidden"
+const MOCKUP_CARD =
+  "bg-white rounded-lg border border-[rgba(15,22,36,0.06)] shadow-[0_1px_2px_rgba(15,22,36,0.03)]"
+
 function ERPMockup() {
   return (
-    <div className="w-full h-[180px] bg-[#0C0D18] rounded-xl border border-white/[0.08] overflow-hidden p-3 flex flex-col gap-2">
+    <div className={`${MOCKUP_OUTER} p-3 flex flex-col gap-2`}>
       <div className="flex items-center justify-between mb-1">
-        <div className="text-[9px] font-semibold text-[#ECF0FF]">ERP Imobiliário</div>
+        <div className="text-[9px] font-semibold text-[#0A0B14]">ERP Imobiliário</div>
         <div className="w-2 h-2 rounded-full bg-[#10B981]" />
       </div>
       <div className="grid grid-cols-3 gap-1.5">
@@ -32,25 +37,25 @@ function ERPMockup() {
           { l: "Contratos", v: "147", c: "#10B981" },
           { l: "Receita/mês", v: "R$92k", c: "#F59E0B" },
         ].map((m) => (
-          <div key={m.l} className="bg-[#161929] rounded-lg p-2 text-center">
+          <div key={m.l} className={`${MOCKUP_CARD} p-2 text-center`}>
             <div className="text-[11px] font-bold" style={{ color: m.c }}>{m.v}</div>
-            <div className="text-[8px] text-[#4A5580]">{m.l}</div>
+            <div className="text-[8px] text-[#8D95A8]">{m.l}</div>
           </div>
         ))}
       </div>
       <div className="flex-1 flex gap-1.5">
-        <div className="flex-1 bg-[#161929] rounded-lg p-2">
-          <div className="text-[8px] text-[#8B9BC0] mb-1.5">Vencimentos</div>
+        <div className={`${MOCKUP_CARD} flex-1 p-2`}>
+          <div className="text-[8px] text-[#5B6478] font-semibold mb-1.5">Vencimentos</div>
           {["Contrato #122 — R$2.400", "Contrato #87 — R$3.100"].map((c) => (
-            <div key={c} className="text-[7.5px] text-[#4A5580] py-0.5 border-b border-white/[0.04] truncate">{c}</div>
+            <div key={c} className="text-[7.5px] text-[#5B6478] py-0.5 border-b border-[rgba(15,22,36,0.05)] truncate">{c}</div>
           ))}
         </div>
-        <div className="w-20 bg-[#161929] rounded-lg p-2">
-          <div className="text-[8px] text-[#8B9BC0] mb-1.5">Status</div>
+        <div className={`${MOCKUP_CARD} w-20 p-2`}>
+          <div className="text-[8px] text-[#5B6478] font-semibold mb-1.5">Status</div>
           {[["Ocupado", "#10B981", "71%"], ["Vago", "#F59E0B", "18%"], ["Em obras", "#EC4899", "11%"]].map(([l, c, p]) => (
             <div key={l} className="flex items-center gap-1 mb-1">
               <div className="w-1.5 h-1.5 rounded-full" style={{ background: c as string }} />
-              <div className="text-[7px] text-[#8B9BC0] flex-1">{l}</div>
+              <div className="text-[7px] text-[#5B6478] flex-1">{l}</div>
               <div className="text-[7px] font-medium" style={{ color: c as string }}>{p}</div>
             </div>
           ))}
@@ -68,28 +73,28 @@ function ClinicMockup() {
     { time: "11:30", patient: "Carlos Lima", type: "Cirurgia", status: "Em andamento", color: "#3B82F6" },
   ]
   return (
-    <div className="w-full h-[180px] bg-[#0C0D18] rounded-xl border border-white/[0.08] overflow-hidden p-3 flex flex-col gap-2">
+    <div className={`${MOCKUP_OUTER} p-3 flex flex-col gap-2`}>
       <div className="flex items-center justify-between mb-1">
         <div className="flex items-center gap-1.5">
           <Calendar className="w-3 h-3 text-[#3B82F6]" />
-          <div className="text-[9px] font-semibold text-[#ECF0FF]">Agenda do dia</div>
+          <div className="text-[9px] font-semibold text-[#0A0B14]">Agenda do dia</div>
         </div>
         <div className="flex items-center gap-1">
           <div className="w-1.5 h-1.5 rounded-full bg-[#10B981] animate-pulse" />
-          <div className="text-[8px] text-[#10B981]">4 agendamentos</div>
+          <div className="text-[8px] text-[#059669] font-medium">4 agendamentos</div>
         </div>
       </div>
       <div className="flex-1 space-y-1 overflow-hidden">
         {appointments.map((a) => (
-          <div key={a.time} className="flex items-center gap-2 bg-[#161929] rounded px-2 py-1.5">
-            <div className="text-[8px] font-medium text-[#4A5580] w-8 flex-shrink-0">{a.time}</div>
+          <div key={a.time} className={`${MOCKUP_CARD} flex items-center gap-2 px-2 py-1.5`}>
+            <div className="text-[8px] font-medium text-[#8D95A8] w-8 flex-shrink-0">{a.time}</div>
             <div className="flex-1 min-w-0">
-              <div className="text-[8px] font-semibold text-[#ECF0FF] truncate">{a.patient}</div>
-              <div className="text-[7px] text-[#4A5580]">{a.type}</div>
+              <div className="text-[8px] font-semibold text-[#0A0B14] truncate">{a.patient}</div>
+              <div className="text-[7px] text-[#8D95A8]">{a.type}</div>
             </div>
             <div
-              className="text-[7px] px-1.5 py-0.5 rounded-full flex-shrink-0"
-              style={{ background: `${a.color}18`, color: a.color }}
+              className="text-[7px] px-1.5 py-0.5 rounded-full flex-shrink-0 font-medium"
+              style={{ background: `${a.color}15`, color: a.color }}
             >
               {a.status}
             </div>
@@ -102,16 +107,22 @@ function ClinicMockup() {
 
 function AdminMockup() {
   return (
-    <div className="w-full h-[180px] bg-[#0C0D18] rounded-xl border border-white/[0.08] overflow-hidden flex">
-      <div className="w-12 bg-[#08080E] border-r border-white/[0.06] flex flex-col items-center py-3 gap-2.5">
+    <div className={`${MOCKUP_OUTER} flex`}>
+      {/* Sidebar em brand color pra contraste */}
+      <div className="w-12 bg-gradient-to-b from-[#3B82F6] to-[#7C3AED] flex flex-col items-center py-3 gap-2.5">
         {[LayoutGrid, Users2, Package, FileText].map((Icon, i) => (
-          <div key={i} className={`w-7 h-7 rounded-lg flex items-center justify-center ${i === 0 ? "bg-[#3B82F6]/20 text-[#3B82F6]" : "text-[#4A5580]"}`}>
+          <div
+            key={i}
+            className={`w-7 h-7 rounded-lg flex items-center justify-center ${
+              i === 0 ? "bg-white/20 text-white" : "text-white/60"
+            }`}
+          >
             <Icon className="w-3.5 h-3.5" />
           </div>
         ))}
       </div>
       <div className="flex-1 p-3 flex flex-col gap-2">
-        <div className="text-[9px] font-semibold text-[#ECF0FF]">Portal Admin</div>
+        <div className="text-[9px] font-semibold text-[#0A0B14]">Portal Admin</div>
         <div className="grid grid-cols-2 gap-1.5">
           {[
             { l: "Usuários", v: "48", c: "#3B82F6" },
@@ -119,16 +130,16 @@ function AdminMockup() {
             { l: "Acessos hoje", v: "284", c: "#06B6D4" },
             { l: "Alertas", v: "3", c: "#F59E0B" },
           ].map((m) => (
-            <div key={m.l} className="bg-[#161929] rounded-lg p-1.5 flex items-center gap-1.5">
+            <div key={m.l} className={`${MOCKUP_CARD} p-1.5 flex items-center gap-1.5`}>
               <div className="text-[11px] font-bold" style={{ color: m.c }}>{m.v}</div>
-              <div className="text-[7.5px] text-[#4A5580]">{m.l}</div>
+              <div className="text-[7.5px] text-[#5B6478]">{m.l}</div>
             </div>
           ))}
         </div>
-        <div className="flex-1 bg-[#161929] rounded-lg p-2">
-          <div className="text-[8px] text-[#8B9BC0] mb-1">Atividade recente</div>
+        <div className={`${MOCKUP_CARD} flex-1 p-2`}>
+          <div className="text-[8px] text-[#5B6478] font-semibold mb-1">Atividade recente</div>
           {["Admin acessou módulo financeiro", "3 usuários criados hoje", "Backup executado com sucesso"].map((a) => (
-            <div key={a} className="text-[7px] text-[#4A5580] py-0.5 border-b border-white/[0.04] truncate">{a}</div>
+            <div key={a} className="text-[7px] text-[#5B6478] py-0.5 border-b border-[rgba(15,22,36,0.05)] truncate">{a}</div>
           ))}
         </div>
       </div>
@@ -138,12 +149,12 @@ function AdminMockup() {
 
 function BankingMockup() {
   return (
-    <div className="w-full h-[180px] bg-[#0C0D18] rounded-xl border border-white/[0.08] overflow-hidden p-3">
+    <div className={`${MOCKUP_OUTER} p-3`}>
       <div className="flex items-center justify-between mb-2">
-        <div className="text-[9px] font-semibold text-[#ECF0FF]">Integração Bancária</div>
+        <div className="text-[9px] font-semibold text-[#0A0B14]">Integração Bancária</div>
         <div className="flex items-center gap-1">
           <div className="w-1.5 h-1.5 rounded-full bg-[#10B981] animate-pulse" />
-          <div className="text-[8px] text-[#10B981]">Conectado</div>
+          <div className="text-[8px] text-[#059669] font-medium">Conectado</div>
         </div>
       </div>
       <div className="grid grid-cols-2 gap-1.5 mb-2">
@@ -151,21 +162,21 @@ function BankingMockup() {
           { l: "Saldo atual", v: "R$ 148.294", c: "#10B981" },
           { l: "A receber", v: "R$ 87.340", c: "#3B82F6" },
         ].map((m) => (
-          <div key={m.l} className="bg-[#161929] rounded-lg p-2">
-            <div className="text-[8px] text-[#4A5580]">{m.l}</div>
+          <div key={m.l} className={`${MOCKUP_CARD} p-2`}>
+            <div className="text-[8px] text-[#8D95A8]">{m.l}</div>
             <div className="text-[11px] font-bold mt-0.5" style={{ color: m.c }}>{m.v}</div>
           </div>
         ))}
       </div>
       <div className="flex-1 space-y-1">
-        <div className="text-[8px] text-[#8B9BC0] mb-1.5">Últimas transações</div>
+        <div className="text-[8px] text-[#5B6478] font-semibold mb-1.5">Últimas transações</div>
         {[
           { desc: "Pagamento recebido — Cliente XY", v: "+R$8.400", c: "#10B981" },
           { desc: "Boleto pago — Fornecedor AB", v: "-R$2.100", c: "#EC4899" },
           { desc: "TED recebida — Obra #07", v: "+R$15.000", c: "#10B981" },
         ].map((t) => (
-          <div key={t.desc} className="flex items-center gap-2 bg-[#161929] rounded px-2 py-1">
-            <div className="flex-1 text-[7.5px] text-[#8B9BC0] truncate">{t.desc}</div>
+          <div key={t.desc} className={`${MOCKUP_CARD} flex items-center gap-2 px-2 py-1`}>
+            <div className="flex-1 text-[7.5px] text-[#5B6478] truncate">{t.desc}</div>
             <div className="text-[8px] font-medium" style={{ color: t.c }}>{t.v}</div>
           </div>
         ))}

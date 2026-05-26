@@ -48,16 +48,16 @@ const FLOAT_CARDS = [
 
 function DashboardMockup() {
   return (
-    <div className="w-full max-w-[580px] rounded-2xl overflow-hidden border border-white/[0.1] shadow-[0_24px_60px_rgba(15,22,36,0.18),0_4px_12px_rgba(15,22,36,0.08)] bg-[#0C0D18]">
+    <div className="w-full max-w-[580px] rounded-2xl overflow-hidden bg-white shadow-[0_24px_60px_rgba(15,22,36,0.12),0_4px_12px_rgba(15,22,36,0.04)] border border-[rgba(15,22,36,0.08)]">
       {/* Window bar */}
-      <div className="flex items-center gap-2 px-4 py-3 border-b border-white/[0.06] bg-[#10121F]">
+      <div className="flex items-center gap-2 px-4 py-3 border-b border-[rgba(15,22,36,0.06)] bg-[#F7F8FA]">
         <div className="flex gap-1.5">
           <div className="w-2.5 h-2.5 rounded-full bg-[#FF5F57]" />
           <div className="w-2.5 h-2.5 rounded-full bg-[#FEBC2E]" />
           <div className="w-2.5 h-2.5 rounded-full bg-[#28C840]" />
         </div>
         <div className="flex-1 flex justify-center">
-          <div className="px-3 py-1 rounded bg-white/[0.05] border border-white/[0.07] text-[10px] text-[#8B9BC0] font-mono">
+          <div className="px-3 py-1 rounded bg-white border border-[rgba(15,22,36,0.08)] text-[10px] text-[#5B6478] font-mono">
             app.garbatosolution.com.br/dashboard
           </div>
         </div>
@@ -65,9 +65,9 @@ function DashboardMockup() {
 
       {/* Dashboard layout */}
       <div className="flex h-[340px]">
-        {/* Sidebar */}
-        <div className="w-14 flex-shrink-0 bg-[#08080E] border-r border-white/[0.05] flex flex-col items-center py-4 gap-3">
-          <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-[#3B82F6] to-[#7C3AED] flex items-center justify-center">
+        {/* Sidebar (mantém em cor brand pra dar contraste e identidade visual) */}
+        <div className="w-14 flex-shrink-0 bg-gradient-to-b from-[#3B82F6] to-[#7C3AED] flex flex-col items-center py-4 gap-3">
+          <div className="w-7 h-7 rounded-lg bg-white/25 flex items-center justify-center">
             <Circle className="w-3 h-3 text-white fill-white" />
           </div>
           {[BarChart3, Users, FileText, Layers, Cpu].map((Icon, i) => (
@@ -75,8 +75,8 @@ function DashboardMockup() {
               key={i}
               className={`w-8 h-8 rounded-lg flex items-center justify-center transition-all ${
                 i === 0
-                  ? "bg-[#3B82F6]/20 text-[#3B82F6]"
-                  : "text-[#4A5580] hover:text-[#8B9BC0]"
+                  ? "bg-white/20 text-white"
+                  : "text-white/60 hover:text-white"
               }`}
             >
               <Icon className="w-4 h-4" />
@@ -85,20 +85,20 @@ function DashboardMockup() {
         </div>
 
         {/* Main */}
-        <div className="flex-1 overflow-hidden flex flex-col">
+        <div className="flex-1 overflow-hidden flex flex-col bg-[#FAFBFC]">
           {/* Top bar */}
-          <div className="flex items-center justify-between px-4 py-2.5 border-b border-white/[0.05]">
+          <div className="flex items-center justify-between px-4 py-2.5 border-b border-[rgba(15,22,36,0.06)] bg-white">
             <div>
-              <div className="text-[11px] font-semibold text-[#ECF0FF]">
+              <div className="text-[11px] font-semibold text-[#0A0B14]">
                 Dashboard Operacional
               </div>
-              <div className="text-[9px] text-[#4A5580]">
+              <div className="text-[9px] text-[#8D95A8]">
                 Visão geral — Abril 2025
               </div>
             </div>
             <div className="flex items-center gap-2">
               <div className="relative">
-                <Bell className="w-3.5 h-3.5 text-[#8B9BC0]" />
+                <Bell className="w-3.5 h-3.5 text-[#5B6478]" />
                 <div className="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 rounded-full bg-[#3B82F6]" />
               </div>
               <div className="w-5 h-5 rounded-full bg-gradient-to-br from-[#3B82F6] to-[#7C3AED]" />
@@ -115,15 +115,15 @@ function DashboardMockup() {
             ].map((m) => (
               <div
                 key={m.label}
-                className="bg-[#161929] rounded-lg p-2 border border-white/[0.05]"
+                className="bg-white rounded-lg p-2 border border-[rgba(15,22,36,0.06)] shadow-[0_1px_2px_rgba(15,22,36,0.03)]"
               >
-                <div className="text-[8px] text-[#4A5580] mb-1">{m.label}</div>
-                <div className="text-[11px] font-bold text-[#ECF0FF]">
+                <div className="text-[8px] text-[#8D95A8] mb-1">{m.label}</div>
+                <div className="text-[11px] font-bold text-[#0A0B14]">
                   {m.value}
                 </div>
                 <div
                   className={`text-[8px] font-medium ${
-                    m.up ? "text-[#10B981]" : "text-[#F59E0B]"
+                    m.up ? "text-[#059669]" : "text-[#D97706]"
                   }`}
                 >
                   {m.change}
@@ -135,8 +135,8 @@ function DashboardMockup() {
           {/* Chart + list */}
           <div className="flex gap-2 px-3 pb-3 flex-1 min-h-0">
             {/* Chart area */}
-            <div className="flex-1 bg-[#161929] rounded-xl border border-white/[0.05] p-3 flex flex-col">
-              <div className="text-[9px] text-[#8B9BC0] font-medium mb-2">
+            <div className="flex-1 bg-white rounded-xl border border-[rgba(15,22,36,0.06)] p-3 flex flex-col shadow-[0_1px_2px_rgba(15,22,36,0.03)]">
+              <div className="text-[9px] text-[#5B6478] font-semibold mb-2">
                 Crescimento Mensal
               </div>
               <div className="flex-1 flex items-end gap-1">
@@ -151,8 +151,8 @@ function DashboardMockup() {
                           i === 11
                             ? "linear-gradient(to top, #3B82F6, #06B6D4)"
                             : i >= 9
-                            ? "rgba(59,130,246,0.4)"
-                            : "rgba(59,130,246,0.18)",
+                            ? "rgba(59,130,246,0.55)"
+                            : "rgba(59,130,246,0.28)",
                       }}
                     />
                   )
@@ -160,7 +160,7 @@ function DashboardMockup() {
               </div>
               <div className="flex justify-between mt-1">
                 {["Jan", "Abr", "Jul", "Out", "Dez"].map((m) => (
-                  <div key={m} className="text-[7px] text-[#4A5580]">
+                  <div key={m} className="text-[7px] text-[#8D95A8]">
                     {m}
                   </div>
                 ))}
@@ -168,8 +168,8 @@ function DashboardMockup() {
             </div>
 
             {/* Recent list */}
-            <div className="w-28 bg-[#161929] rounded-xl border border-white/[0.05] p-2.5">
-              <div className="text-[8px] text-[#8B9BC0] font-medium mb-2">
+            <div className="w-28 bg-white rounded-xl border border-[rgba(15,22,36,0.06)] p-2.5 shadow-[0_1px_2px_rgba(15,22,36,0.03)]">
+              <div className="text-[8px] text-[#5B6478] font-semibold mb-2">
                 Recentes
               </div>
               {[
@@ -180,7 +180,7 @@ function DashboardMockup() {
               ].map((item, i) => (
                 <div
                   key={i}
-                  className="flex items-center gap-1.5 py-1 border-b border-white/[0.04] last:border-0"
+                  className="flex items-center gap-1.5 py-1 border-b border-[rgba(15,22,36,0.05)] last:border-0"
                 >
                   <div
                     className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${
@@ -189,7 +189,7 @@ function DashboardMockup() {
                         : "bg-[#F59E0B]"
                     }`}
                   />
-                  <div className="text-[7.5px] text-[#8B9BC0] truncate">
+                  <div className="text-[7.5px] text-[#5B6478] truncate">
                     {item.name}
                   </div>
                 </div>
