@@ -75,7 +75,9 @@ function PagamentoContent() {
       })
       const data = await res.json()
       if (!res.ok) {
-        setErro(data.error ?? "Falha ao gerar cobrança")
+        const baseMsg = data.error ?? "Falha ao gerar cobrança"
+        const detail = data.detail ? ` — ${data.detail}` : ""
+        setErro(`${baseMsg}${detail}`)
         setProcessando(false)
         return
       }
