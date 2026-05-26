@@ -48,7 +48,7 @@ const FLOAT_CARDS = [
 
 function DashboardMockup() {
   return (
-    <div className="w-full max-w-[580px] rounded-2xl overflow-hidden border border-white/[0.1] shadow-[0_40px_120px_rgba(0,0,0,0.7),0_0_0_1px_rgba(255,255,255,0.05)] bg-[#0C0D18]">
+    <div className="w-full max-w-[580px] rounded-2xl overflow-hidden border border-white/[0.1] shadow-[0_24px_60px_rgba(15,22,36,0.18),0_4px_12px_rgba(15,22,36,0.08)] bg-[#0C0D18]">
       {/* Window bar */}
       <div className="flex items-center gap-2 px-4 py-3 border-b border-white/[0.06] bg-[#10121F]">
         <div className="flex gap-1.5">
@@ -57,7 +57,7 @@ function DashboardMockup() {
           <div className="w-2.5 h-2.5 rounded-full bg-[#28C840]" />
         </div>
         <div className="flex-1 flex justify-center">
-          <div className="px-3 py-1 rounded bg-white/[0.05] border border-white/[0.07] text-[10px] text-[#4A5580] font-mono">
+          <div className="px-3 py-1 rounded bg-white/[0.05] border border-white/[0.07] text-[10px] text-[#8B9BC0] font-mono">
             app.garbatosolution.com.br/dashboard
           </div>
         </div>
@@ -207,6 +207,7 @@ export default function HeroSection() {
     <section
       id="hero"
       className="relative min-h-screen flex items-center pt-20 pb-16 overflow-hidden"
+      style={{ background: "#FFFFFF" }}
     >
       {/* Background gradients */}
       <div
@@ -216,17 +217,17 @@ export default function HeroSection() {
         {/* Grid */}
         <div className="absolute inset-0 grid-overlay opacity-100" />
 
-        {/* Glow blobs */}
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-[120px] bg-[#3B82F6]/[0.07] pointer-events-none" />
-        <div className="absolute top-1/2 right-0 w-[400px] h-[400px] rounded-full blur-[100px] bg-[#7C3AED]/[0.06] pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-[300px] h-[300px] rounded-full blur-[80px] bg-[#06B6D4]/[0.05] pointer-events-none" />
+        {/* Glow blobs (sutis sobre branco) */}
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-[120px] bg-[#3B82F6]/[0.10] pointer-events-none" />
+        <div className="absolute top-1/2 right-0 w-[400px] h-[400px] rounded-full blur-[100px] bg-[#7C3AED]/[0.08] pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-[300px] h-[300px] rounded-full blur-[80px] bg-[#06B6D4]/[0.08] pointer-events-none" />
 
-        {/* Radial vignette */}
+        {/* Radial vignette top */}
         <div
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(59,130,246,0.04) 0%, transparent 70%)",
+              "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(59,130,246,0.06) 0%, transparent 70%)",
           }}
         />
       </div>
@@ -252,7 +253,7 @@ export default function HeroSection() {
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.08, duration: 0.6, ease: "easeOut" }}
-              className="text-4xl sm:text-5xl xl:text-[3.5rem] font-bold tracking-tight leading-[1.1] text-[#ECF0FF]"
+              className="text-4xl sm:text-5xl xl:text-[3.5rem] font-bold tracking-tight leading-[1.1] text-[#0A0B14]"
               style={{ fontFamily: "var(--font-space-grotesk)" }}
             >
               Sistemas sob medida para empresas que querem crescer com{" "}
@@ -265,7 +266,7 @@ export default function HeroSection() {
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.16, duration: 0.6, ease: "easeOut" }}
-              className="text-[#8B9BC0] text-lg leading-relaxed max-w-[500px]"
+              className="text-[#5B6478] text-lg leading-relaxed max-w-[500px]"
             >
               Transformamos processos dispersos em plataformas profissionais,
               modernas e escaláveis, desenhadas para a operação real do seu
@@ -285,7 +286,7 @@ export default function HeroSection() {
                     .querySelector("#contato")
                     ?.scrollIntoView({ behavior: "smooth" })
                 }}
-                className="flex items-center gap-2 px-6 py-3 bg-[#3B82F6] hover:bg-[#2563EB] text-white font-semibold rounded-xl transition-all shadow-[0_0_24px_rgba(59,130,246,0.35)] hover:shadow-[0_0_36px_rgba(59,130,246,0.5)] hover:-translate-y-0.5 cursor-pointer"
+                className="flex items-center gap-2 px-6 py-3 bg-[#3B82F6] hover:bg-[#2563EB] text-white font-semibold rounded-xl transition-all shadow-[0_8px_24px_rgba(59,130,246,0.35)] hover:shadow-[0_12px_32px_rgba(59,130,246,0.45)] hover:-translate-y-0.5 cursor-pointer"
               >
                 Solicitar Projeto
                 <ArrowRight className="w-4 h-4" />
@@ -294,7 +295,7 @@ export default function HeroSection() {
                 href={WA_LINK}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 px-6 py-3 border border-white/[0.1] hover:border-white/[0.2] text-[#ECF0FF] font-medium rounded-xl transition-all hover:bg-white/[0.04] hover:-translate-y-0.5"
+                className="flex items-center gap-2 px-6 py-3 border border-[rgba(15,22,36,0.14)] hover:border-[rgba(15,22,36,0.22)] text-[#0A0B14] font-medium rounded-xl transition-all hover:bg-[rgba(15,22,36,0.03)] hover:-translate-y-0.5"
               >
                 <MessageCircle className="w-4 h-4 text-[#25D366]" />
                 Falar pelo WhatsApp
@@ -311,7 +312,7 @@ export default function HeroSection() {
               {BADGES.map((badge) => (
                 <span
                   key={badge}
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/[0.04] border border-white/[0.07] text-[12px] text-[#8B9BC0]"
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white border border-[rgba(15,22,36,0.08)] text-[12px] text-[#5B6478] shadow-[var(--gs-shadow-sm)]"
                 >
                   <CheckCircle2 className="w-3 h-3 text-[#3B82F6]" />
                   {badge}
@@ -328,7 +329,7 @@ export default function HeroSection() {
             className="relative hidden lg:flex justify-center"
           >
             {/* Floating glow behind mockup */}
-            <div className="absolute inset-0 bg-gradient-to-br from-[#3B82F6]/10 via-transparent to-[#7C3AED]/10 rounded-3xl blur-2xl scale-110" />
+            <div className="absolute inset-0 bg-gradient-to-br from-[#3B82F6]/15 via-transparent to-[#7C3AED]/15 rounded-3xl blur-2xl scale-110" />
 
             {/* Dashboard */}
             <motion.div
@@ -366,12 +367,15 @@ export default function HeroSection() {
                       ease: "easeInOut",
                       delay: i * 0.4,
                     }}
-                    className="glass-card rounded-xl px-3 py-2.5 flex items-center gap-2.5 min-w-[130px]"
-                    style={{ border: "1px solid var(--gs-border-accent)" }}
+                    className="rounded-xl px-3 py-2.5 flex items-center gap-2.5 min-w-[130px] bg-white"
+                    style={{
+                      border: "1px solid var(--gs-border)",
+                      boxShadow: "var(--gs-shadow-md)",
+                    }}
                   >
                     <div
                       className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
-                      style={{ background: `${card.color}20` }}
+                      style={{ background: `${card.color}15` }}
                     >
                       <card.icon
                         className="w-4 h-4"
@@ -385,7 +389,7 @@ export default function HeroSection() {
                       >
                         {card.label}
                       </div>
-                      <div className="text-[10px] text-[#8B9BC0] leading-tight">
+                      <div className="text-[10px] text-[#5B6478] leading-tight">
                         {card.sub}
                       </div>
                     </div>
@@ -397,8 +401,8 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* Bottom fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none bg-gradient-to-t from-[#08080E] to-transparent" />
+      {/* Bottom fade — transição suave pra próxima seção */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none bg-gradient-to-t from-[#F7F8FA] to-transparent" />
     </section>
   )
 }

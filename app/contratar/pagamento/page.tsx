@@ -26,7 +26,6 @@ function PagamentoContent() {
 
   const [metodo, setMetodo] = useState<MetodoPagamento>("pix")
   const [cadastro, setCadastro] = useState<Record<string, string> | null>(null)
-  const [copiado, setCopiado] = useState(false)
   const [processando, setProcessando] = useState(false)
 
   useEffect(() => {
@@ -34,14 +33,6 @@ function PagamentoContent() {
     if (!raw) { router.push("/contratar"); return }
     setCadastro(JSON.parse(raw))
   }, [router])
-
-  const pixCode = "00020126580014BR.GOV.BCB.PIX0136placeholder-pix-key-aqui5204000053039865802BR5925GARBATO SOLUTION LTDA6009SAO PAULO62070503***6304XXXX"
-
-  const handleCopiar = () => {
-    navigator.clipboard.writeText(pixCode)
-    setCopiado(true)
-    setTimeout(() => setCopiado(false), 2000)
-  }
 
   const handlePagar = () => {
     setProcessando(true)
@@ -54,16 +45,16 @@ function PagamentoContent() {
   if (!cadastro) return null
 
   return (
-    <main className="min-h-screen" style={{ background: "#08080E" }}>
+    <main className="min-h-screen" style={{ background: "#FFFFFF" }}>
       <Navbar />
 
       <section className="relative pt-32 pb-24 px-6">
-        <div className="absolute inset-0 grid-overlay opacity-[0.03] pointer-events-none" />
+        <div className="absolute inset-0 grid-overlay opacity-100 pointer-events-none" />
 
-        <div className="max-w-2xl mx-auto">
+        <div className="max-w-2xl mx-auto relative z-10">
           <button
             onClick={() => router.back()}
-            className="flex items-center gap-1.5 text-[13px] text-[#8B9BC0] hover:text-[#ECF0FF] transition-colors mb-8 cursor-pointer"
+            className="flex items-center gap-1.5 text-[13px] text-[#5B6478] hover:text-[#0A0B14] transition-colors mb-8 cursor-pointer"
           >
             <ArrowLeft className="w-4 h-4" /> Voltar ao cadastro
           </button>
@@ -73,22 +64,26 @@ function PagamentoContent() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             className="rounded-xl p-5 mb-6"
-            style={{ background: `${sistemaColor}08`, border: `1px solid ${sistemaColor}30` }}
+            style={{
+              background: `${sistemaColor}06`,
+              border: `1px solid ${sistemaColor}35`,
+              boxShadow: "var(--gs-shadow-sm)",
+            }}
           >
             <div className="flex items-center justify-between">
               <div>
                 <div className="text-[11px] font-bold uppercase tracking-wider mb-0.5" style={{ color: sistemaColor }}>
                   {sistemaLabel} — Plano {planLabel}
                 </div>
-                <div className="text-[13px] text-[#8B9BC0]">
+                <div className="text-[13px] text-[#5B6478]">
                   {cadastro.nome} · {cadastro.email}
                 </div>
               </div>
               <div className="text-right">
-                <div className="text-2xl font-bold text-[#ECF0FF]" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+                <div className="text-2xl font-bold text-[#0A0B14]" style={{ fontFamily: "var(--font-space-grotesk)" }}>
                   R$ {price.toLocaleString("pt-BR")}
                 </div>
-                <div className="text-[11px] text-[#4A5580]">
+                <div className="text-[11px] text-[#8D95A8]">
                   {periodo === "anual" ? `R$ ${(price * 12).toLocaleString("pt-BR")}/ano` : "por mês"}
                 </div>
               </div>
@@ -100,11 +95,14 @@ function PagamentoContent() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="rounded-2xl p-8"
-            style={{ background: "rgba(255,255,255,0.025)", border: "1px solid var(--gs-border)" }}
+            className="rounded-2xl p-8 bg-white"
+            style={{
+              border: "1px solid var(--gs-border)",
+              boxShadow: "var(--gs-shadow-md)",
+            }}
           >
             <h2
-              className="text-2xl font-bold text-[#ECF0FF] mb-6"
+              className="text-2xl font-bold text-[#0A0B14] mb-6"
               style={{ fontFamily: "var(--font-space-grotesk)" }}
             >
               Forma de pagamento
@@ -122,9 +120,9 @@ function PagamentoContent() {
                   onClick={() => setMetodo(m.id)}
                   className="flex flex-col items-center gap-1.5 py-4 px-3 rounded-xl transition-all cursor-pointer"
                   style={{
-                    background: metodo === m.id ? `${sistemaColor}12` : "rgba(255,255,255,0.04)",
-                    border: metodo === m.id ? `1px solid ${sistemaColor}40` : "1px solid var(--gs-border)",
-                    color: metodo === m.id ? sistemaColor : "#8B9BC0",
+                    background: metodo === m.id ? `${sistemaColor}10` : "#F7F8FA",
+                    border: metodo === m.id ? `1px solid ${sistemaColor}45` : "1px solid var(--gs-border)",
+                    color: metodo === m.id ? sistemaColor : "#5B6478",
                   }}
                 >
                   <m.icon className="w-5 h-5" />
@@ -139,15 +137,15 @@ function PagamentoContent() {
               <div className="flex flex-col items-center gap-4">
                 <div
                   className="w-48 h-48 rounded-xl flex items-center justify-center"
-                  style={{ background: "rgba(255,255,255,0.04)", border: "1px solid var(--gs-border)" }}
+                  style={{ background: "#F7F8FA", border: "1px solid var(--gs-border)" }}
                 >
                   <div className="text-center">
-                    <QrCode className="w-16 h-16 text-[#4A5580] mx-auto mb-2" />
-                    <p className="text-[10px] text-[#4A5580]">QR Code gerado após confirmação</p>
+                    <QrCode className="w-16 h-16 text-[#8D95A8] mx-auto mb-2" />
+                    <p className="text-[10px] text-[#8D95A8]">QR Code gerado após confirmação</p>
                   </div>
                 </div>
-                <p className="text-[12px] text-[#8B9BC0] text-center max-w-xs">
-                  Clique em "Gerar cobrança" para criar o QR Code PIX. O acesso é liberado automaticamente após o pagamento.
+                <p className="text-[12px] text-[#5B6478] text-center max-w-xs">
+                  Clique em &ldquo;Gerar cobrança&rdquo; para criar o QR Code PIX. O acesso é liberado automaticamente após o pagamento.
                 </p>
               </div>
             )}
@@ -157,10 +155,10 @@ function PagamentoContent() {
               <div className="flex flex-col items-center gap-4">
                 <div
                   className="w-full rounded-xl p-5 flex flex-col items-center gap-3"
-                  style={{ background: "rgba(255,255,255,0.04)", border: "1px solid var(--gs-border)" }}
+                  style={{ background: "#F7F8FA", border: "1px solid var(--gs-border)" }}
                 >
-                  <FileText className="w-12 h-12 text-[#4A5580]" />
-                  <p className="text-[13px] text-[#8B9BC0] text-center">
+                  <FileText className="w-12 h-12 text-[#8D95A8]" />
+                  <p className="text-[13px] text-[#5B6478] text-center">
                     O boleto bancário será gerado e enviado para o seu e-mail. Prazo de compensação: até 3 dias úteis.
                   </p>
                 </div>
@@ -172,9 +170,9 @@ function PagamentoContent() {
               <div className="flex flex-col gap-4">
                 <div
                   className="w-full rounded-xl p-5"
-                  style={{ background: "rgba(255,255,255,0.04)", border: "1px solid var(--gs-border)" }}
+                  style={{ background: "#F7F8FA", border: "1px solid var(--gs-border)" }}
                 >
-                  <p className="text-[13px] text-[#8B9BC0] text-center">
+                  <p className="text-[13px] text-[#5B6478] text-center">
                     Você será redirecionado para o ambiente seguro de pagamento. Aceitamos Visa, Mastercard e Elo.
                   </p>
                 </div>
@@ -185,8 +183,12 @@ function PagamentoContent() {
             <button
               onClick={handlePagar}
               disabled={processando}
-              className="mt-8 w-full py-3.5 rounded-xl text-[15px] font-semibold flex items-center justify-center gap-2 transition-all cursor-pointer disabled:opacity-70"
-              style={{ background: sistemaColor, color: "white" }}
+              className="mt-8 w-full py-3.5 rounded-xl text-[15px] font-semibold flex items-center justify-center gap-2 transition-all cursor-pointer disabled:opacity-70 hover:opacity-90"
+              style={{
+                background: sistemaColor,
+                color: "white",
+                boxShadow: `0 8px 24px ${sistemaColor}40`,
+              }}
             >
               {processando ? (
                 <>
@@ -200,7 +202,7 @@ function PagamentoContent() {
               )}
             </button>
 
-            <p className="text-[11px] text-[#4A5580] text-center mt-3">
+            <p className="text-[11px] text-[#8D95A8] text-center mt-3">
               🔒 Pagamento processado com segurança via Asaas
             </p>
           </motion.div>

@@ -51,9 +51,13 @@ export default function ProblemSection() {
   const inView = useInView(ref, { once: true, margin: "-80px" })
 
   return (
-    <section id="problema" className="relative py-24 px-6 overflow-hidden">
+    <section
+      id="problema"
+      className="relative py-24 px-6 overflow-hidden"
+      style={{ background: "#F7F8FA" }}
+    >
       {/* Background accent */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[1px] bg-gradient-to-r from-transparent via-[#3B82F6]/20 to-transparent" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[1px] bg-gradient-to-r from-transparent via-[#3B82F6]/30 to-transparent" />
 
       <div className="max-w-7xl mx-auto" ref={ref}>
         {/* Header */}
@@ -67,7 +71,7 @@ export default function ProblemSection() {
             Reconhece essa realidade?
           </span>
           <h2
-            className="text-3xl sm:text-4xl xl:text-5xl font-bold text-[#ECF0FF] mb-5"
+            className="text-3xl sm:text-4xl xl:text-5xl font-bold text-[#0A0B14] mb-5"
             style={{ fontFamily: "var(--font-space-grotesk)" }}
           >
             Sua operação não pode depender{" "}
@@ -75,7 +79,7 @@ export default function ProblemSection() {
               de gambiarras
             </span>
           </h2>
-          <p className="text-[#8B9BC0] text-lg max-w-xl mx-auto">
+          <p className="text-[#5B6478] text-lg max-w-xl mx-auto">
             A maioria das empresas cresce mais rápido que seus processos. O
             resultado é uma operação frágil, dependente de pessoas e impossível
             de escalar.
@@ -91,22 +95,21 @@ export default function ProblemSection() {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: i * 0.07, duration: 0.55, ease: "easeOut" }}
               className="group glass-card card-hover rounded-2xl p-6"
-              style={{ border: "1px solid var(--gs-border)" }}
             >
-              <div className="w-10 h-10 rounded-xl bg-red-500/10 border border-red-500/20 flex items-center justify-center mb-4 group-hover:bg-red-500/15 transition-colors">
-                <p.icon className="w-5 h-5 text-red-400" />
+              <div className="w-10 h-10 rounded-xl bg-red-50 border border-red-200/60 flex items-center justify-center mb-4 group-hover:bg-red-100 transition-colors">
+                <p.icon className="w-5 h-5 text-red-500" />
               </div>
-              <h3 className="text-[15px] font-semibold text-[#ECF0FF] mb-2">
+              <h3 className="text-[15px] font-semibold text-[#0A0B14] mb-2">
                 {p.title}
               </h3>
-              <p className="text-[13px] text-[#8B9BC0] leading-relaxed">
+              <p className="text-[13px] text-[#5B6478] leading-relaxed">
                 {p.desc}
               </p>
             </motion.div>
           ))}
         </div>
 
-        {/* Solution reveal */}
+        {/* Solution reveal — bloco dark de contraste, marca um momento na pagina */}
         <motion.div
           initial={{ opacity: 0, y: 32, scale: 0.98 }}
           animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
@@ -114,17 +117,21 @@ export default function ProblemSection() {
           className="relative rounded-2xl overflow-hidden"
           style={{
             background: "linear-gradient(135deg, #0F1628 0%, #131A35 100%)",
-            border: "1px solid rgba(59,130,246,0.2)",
-            boxShadow: "0 0 60px rgba(59,130,246,0.07)",
+            border: "1px solid rgba(59,130,246,0.30)",
+            boxShadow: "0 20px 50px rgba(15,22,36,0.18), 0 0 60px rgba(59,130,246,0.10)",
           }}
         >
           {/* Glow accent */}
-          <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#3B82F6]/50 to-transparent" />
+          <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#3B82F6]/60 to-transparent" />
 
           <div className="px-8 py-10 md:px-12 md:py-12">
             <div className="flex flex-col lg:flex-row items-start lg:items-center gap-8">
               <div className="flex-1">
-                <div className="badge-blue mb-4 inline-flex">A solução</div>
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-semibold mb-4"
+                  style={{ background: "rgba(59,130,246,0.15)", color: "#60A5FA", border: "1px solid rgba(59,130,246,0.30)" }}
+                >
+                  A solução
+                </div>
                 <h3
                   className="text-2xl sm:text-3xl font-bold text-[#ECF0FF] mb-4"
                   style={{ fontFamily: "var(--font-space-grotesk)" }}
@@ -159,7 +166,7 @@ export default function ProblemSection() {
                       .querySelector("#contato")
                       ?.scrollIntoView({ behavior: "smooth" })
                   }
-                  className="mt-2 flex items-center gap-2 text-[13px] font-semibold text-[#3B82F6] hover:text-[#60A5FA] transition-colors cursor-pointer"
+                  className="mt-2 flex items-center gap-2 text-[13px] font-semibold text-[#60A5FA] hover:text-[#93C5FD] transition-colors cursor-pointer"
                 >
                   Ver como funciona
                   <ArrowRight className="w-3.5 h-3.5" />

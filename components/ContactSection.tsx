@@ -55,14 +55,14 @@ function InputField({
     <div>
       <label
         htmlFor={id}
-        className="block text-[12.5px] font-medium text-[#8B9BC0] mb-1.5"
+        className="block text-[12.5px] font-medium text-[#5B6478] mb-1.5"
       >
         {label}
         {required && <span className="text-[#3B82F6] ml-0.5">*</span>}
       </label>
       <div className="relative">
         <Icon
-          className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#4A5580] pointer-events-none"
+          className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#8D95A8] pointer-events-none"
         />
         <input
           id={id}
@@ -71,19 +71,19 @@ function InputField({
           value={value}
           onChange={(e) => onChange(id, e.target.value)}
           required={required}
-          className="w-full pl-10 pr-4 py-3 rounded-xl text-[14px] text-[#ECF0FF] placeholder-[#4A5580] outline-none transition-all"
+          className="w-full pl-10 pr-4 py-3 rounded-xl text-[14px] text-[#0A0B14] placeholder-[#8D95A8] outline-none transition-all"
           style={{
-            background: "rgba(255,255,255,0.04)",
+            background: "#FFFFFF",
             border: "1px solid var(--gs-border)",
           }}
           onFocus={(e) => {
-            e.currentTarget.style.borderColor = "rgba(59,130,246,0.5)"
-            e.currentTarget.style.background = "rgba(59,130,246,0.04)"
-            e.currentTarget.style.boxShadow = "0 0 0 3px rgba(59,130,246,0.1)"
+            e.currentTarget.style.borderColor = "rgba(59,130,246,0.50)"
+            e.currentTarget.style.background = "rgba(59,130,246,0.03)"
+            e.currentTarget.style.boxShadow = "0 0 0 3px rgba(59,130,246,0.12)"
           }}
           onBlur={(e) => {
             e.currentTarget.style.borderColor = "var(--gs-border)"
-            e.currentTarget.style.background = "rgba(255,255,255,0.04)"
+            e.currentTarget.style.background = "#FFFFFF"
             e.currentTarget.style.boxShadow = "none"
           }}
         />
@@ -113,8 +113,12 @@ export default function ContactSection() {
   }
 
   return (
-    <section id="contato" className="relative py-24 px-6">
-      <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/[0.07] to-transparent" />
+    <section
+      id="contato"
+      className="relative py-24 px-6"
+      style={{ background: "#FFFFFF" }}
+    >
+      <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[rgba(15,22,36,0.10)] to-transparent" />
 
       <div className="max-w-7xl mx-auto" ref={ref}>
         {/* Header */}
@@ -128,13 +132,13 @@ export default function ContactSection() {
           <div>
             <span className="badge-blue mb-4 inline-flex">Contato</span>
             <h2
-              className="text-3xl sm:text-4xl xl:text-5xl font-bold text-[#ECF0FF] mb-5"
+              className="text-3xl sm:text-4xl xl:text-5xl font-bold text-[#0A0B14] mb-5"
               style={{ fontFamily: "var(--font-space-grotesk)" }}
             >
               Vamos construir seu{" "}
               <span className="text-gradient-blue">próximo sistema</span>
             </h2>
-            <p className="text-[#8B9BC0] text-lg leading-relaxed mb-8">
+            <p className="text-[#5B6478] text-lg leading-relaxed mb-8">
               Conte-nos sobre sua empresa e o que você precisa automatizar ou
               centralizar. Nossa equipe fará um levantamento inicial e retornará
               com uma proposta personalizada.
@@ -168,23 +172,23 @@ export default function ContactSection() {
                 <button
                   key={item.label}
                   onClick={item.action}
-                  className={`flex items-center gap-3 p-4 rounded-xl text-left transition-all ${
+                  className={`flex items-center gap-3 p-4 rounded-xl text-left transition-all bg-white ${
                     item.action ? "cursor-pointer hover:-translate-y-0.5" : "cursor-default"
                   }`}
                   style={{
-                    background: "rgba(255,255,255,0.025)",
                     border: "1px solid var(--gs-border)",
+                    boxShadow: "var(--gs-shadow-sm)",
                   }}
                 >
                   <div
                     className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0"
-                    style={{ background: `${item.color}18`, border: `1px solid ${item.color}25` }}
+                    style={{ background: `${item.color}12`, border: `1px solid ${item.color}25` }}
                   >
                     <item.icon className="w-4 h-4" style={{ color: item.color }} />
                   </div>
                   <div>
-                    <div className="text-[11px] text-[#4A5580] font-medium">{item.label}</div>
-                    <div className="text-[13.5px] text-[#ECF0FF] font-medium">{item.value}</div>
+                    <div className="text-[11px] text-[#8D95A8] font-medium">{item.label}</div>
+                    <div className="text-[13.5px] text-[#0A0B14] font-medium">{item.value}</div>
                   </div>
                 </button>
               ))}
@@ -196,14 +200,14 @@ export default function ContactSection() {
             initial={{ opacity: 0, x: 24 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ delay: 0.15, duration: 0.6, ease: "easeOut" }}
-            className="relative rounded-2xl p-7 sm:p-8"
+            className="relative rounded-2xl p-7 sm:p-8 bg-white"
             style={{
-              background: "rgba(255,255,255,0.025)",
               border: "1px solid var(--gs-border)",
+              boxShadow: "var(--gs-shadow-md)",
             }}
           >
             {/* Top accent */}
-            <div className="absolute top-0 left-0 right-0 h-[1px] rounded-t-2xl bg-gradient-to-r from-transparent via-[#3B82F6]/40 to-transparent" />
+            <div className="absolute top-0 left-0 right-0 h-[1px] rounded-t-2xl bg-gradient-to-r from-transparent via-[#3B82F6]/50 to-transparent" />
 
             <AnimatePresence mode="wait">
               {sent ? (
@@ -214,22 +218,22 @@ export default function ContactSection() {
                   transition={{ duration: 0.5, ease: "easeOut" }}
                   className="flex flex-col items-center justify-center text-center py-12 gap-4"
                 >
-                  <div className="w-16 h-16 rounded-2xl bg-[#10B981]/15 border border-[#10B981]/25 flex items-center justify-center">
+                  <div className="w-16 h-16 rounded-2xl bg-[#10B981]/10 border border-[#10B981]/25 flex items-center justify-center">
                     <CheckCircle2 className="w-8 h-8 text-[#10B981]" />
                   </div>
                   <h3
-                    className="text-2xl font-bold text-[#ECF0FF]"
+                    className="text-2xl font-bold text-[#0A0B14]"
                     style={{ fontFamily: "var(--font-space-grotesk)" }}
                   >
                     Mensagem enviada!
                   </h3>
-                  <p className="text-[#8B9BC0] text-[14px] max-w-xs">
+                  <p className="text-[#5B6478] text-[14px] max-w-xs">
                     Recebemos sua solicitação. Entraremos em contato em até 24h
                     para dar continuidade à conversa.
                   </p>
                   <button
                     onClick={() => setSent(false)}
-                    className="mt-2 text-[13px] text-[#3B82F6] hover:text-[#60A5FA] transition-colors cursor-pointer"
+                    className="mt-2 text-[13px] text-[#3B82F6] hover:text-[#1D4ED8] transition-colors cursor-pointer"
                   >
                     Enviar outra mensagem
                   </button>
@@ -244,12 +248,12 @@ export default function ContactSection() {
                 >
                   <div>
                     <h3
-                      className="text-xl font-bold text-[#ECF0FF] mb-1"
+                      className="text-xl font-bold text-[#0A0B14] mb-1"
                       style={{ fontFamily: "var(--font-space-grotesk)" }}
                     >
                       Envie sua solicitação
                     </h3>
-                    <p className="text-[13px] text-[#8B9BC0]">
+                    <p className="text-[13px] text-[#5B6478]">
                       Sem compromisso. Retornamos em até 24h.
                     </p>
                   </div>
@@ -298,30 +302,30 @@ export default function ContactSection() {
 
                   {/* Message */}
                   <div>
-                    <label className="block text-[12.5px] font-medium text-[#8B9BC0] mb-1.5">
+                    <label className="block text-[12.5px] font-medium text-[#5B6478] mb-1.5">
                       Mensagem <span className="text-[#3B82F6]">*</span>
                     </label>
                     <div className="relative">
-                      <FileText className="absolute left-3.5 top-3.5 w-4 h-4 text-[#4A5580] pointer-events-none" />
+                      <FileText className="absolute left-3.5 top-3.5 w-4 h-4 text-[#8D95A8] pointer-events-none" />
                       <textarea
                         rows={4}
                         placeholder="Descreva brevemente o que sua empresa precisa..."
                         value={form.message}
                         onChange={(e) => handleChange("message", e.target.value)}
                         required
-                        className="w-full pl-10 pr-4 py-3 rounded-xl text-[14px] text-[#ECF0FF] placeholder-[#4A5580] outline-none resize-none transition-all"
+                        className="w-full pl-10 pr-4 py-3 rounded-xl text-[14px] text-[#0A0B14] placeholder-[#8D95A8] outline-none resize-none transition-all"
                         style={{
-                          background: "rgba(255,255,255,0.04)",
+                          background: "#FFFFFF",
                           border: "1px solid var(--gs-border)",
                         }}
                         onFocus={(e) => {
-                          e.currentTarget.style.borderColor = "rgba(59,130,246,0.5)"
-                          e.currentTarget.style.background = "rgba(59,130,246,0.04)"
-                          e.currentTarget.style.boxShadow = "0 0 0 3px rgba(59,130,246,0.1)"
+                          e.currentTarget.style.borderColor = "rgba(59,130,246,0.50)"
+                          e.currentTarget.style.background = "rgba(59,130,246,0.03)"
+                          e.currentTarget.style.boxShadow = "0 0 0 3px rgba(59,130,246,0.12)"
                         }}
                         onBlur={(e) => {
                           e.currentTarget.style.borderColor = "var(--gs-border)"
-                          e.currentTarget.style.background = "rgba(255,255,255,0.04)"
+                          e.currentTarget.style.background = "#FFFFFF"
                           e.currentTarget.style.boxShadow = "none"
                         }}
                       />
@@ -333,7 +337,7 @@ export default function ContactSection() {
                     <button
                       type="submit"
                       disabled={loading}
-                      className="flex-1 flex items-center justify-center gap-2 py-3 px-5 bg-[#3B82F6] hover:bg-[#2563EB] disabled:opacity-60 text-white font-semibold rounded-xl transition-all shadow-[0_0_20px_rgba(59,130,246,0.25)] cursor-pointer"
+                      className="flex-1 flex items-center justify-center gap-2 py-3 px-5 bg-[#3B82F6] hover:bg-[#2563EB] disabled:opacity-60 text-white font-semibold rounded-xl transition-all shadow-[0_8px_24px_rgba(59,130,246,0.30)] cursor-pointer"
                     >
                       {loading ? (
                         <>

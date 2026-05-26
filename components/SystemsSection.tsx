@@ -64,8 +64,12 @@ export default function SystemsSection() {
   const inView = useInView(ref, { once: true, margin: "-60px" })
 
   return (
-    <section id="sistemas" className="relative py-24 px-6 bg-[#0C0D18]">
-      <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/[0.07] to-transparent" />
+    <section
+      id="sistemas"
+      className="relative py-24 px-6"
+      style={{ background: "#FFFFFF" }}
+    >
+      <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[rgba(15,22,36,0.10)] to-transparent" />
 
       <div className="max-w-7xl mx-auto" ref={ref}>
         {/* Header */}
@@ -77,13 +81,13 @@ export default function SystemsSection() {
         >
           <span className="badge-blue mb-4 inline-flex">Tipos de sistemas</span>
           <h2
-            className="text-3xl sm:text-4xl xl:text-5xl font-bold text-[#ECF0FF] mb-4"
+            className="text-3xl sm:text-4xl xl:text-5xl font-bold text-[#0A0B14] mb-4"
             style={{ fontFamily: "var(--font-space-grotesk)" }}
           >
             Plataformas completas para{" "}
             <span className="text-gradient-blue">cada realidade</span>
           </h2>
-          <p className="text-[#8B9BC0] text-lg max-w-xl mx-auto">
+          <p className="text-[#5B6478] text-lg max-w-xl mx-auto">
             Cada sistema é projetado para o segmento e a operação específica do
             cliente — personalização, não configuração.
           </p>
@@ -101,10 +105,10 @@ export default function SystemsSection() {
                 duration: 0.55,
                 ease: "easeOut",
               }}
-              className="group relative rounded-2xl p-7 card-hover flex flex-col"
+              className="group relative rounded-2xl p-7 card-hover flex flex-col bg-white"
               style={{
-                background: "rgba(255,255,255,0.025)",
                 border: "1px solid var(--gs-border)",
+                boxShadow: "var(--gs-shadow-sm)",
               }}
             >
               {/* Top: icon + tag */}
@@ -112,8 +116,8 @@ export default function SystemsSection() {
                 <div
                   className="w-11 h-11 rounded-xl flex items-center justify-center"
                   style={{
-                    background: `${s.color}18`,
-                    border: `1px solid ${s.color}30`,
+                    background: `${s.color}12`,
+                    border: `1px solid ${s.color}25`,
                   }}
                 >
                   <s.icon className="w-5 h-5" style={{ color: s.color }} />
@@ -121,7 +125,7 @@ export default function SystemsSection() {
                 <span
                   className="text-[11px] font-bold px-2.5 py-1 rounded-full"
                   style={{
-                    background: `${s.color}15`,
+                    background: `${s.color}10`,
                     color: s.color,
                     border: `1px solid ${s.color}25`,
                   }}
@@ -132,7 +136,7 @@ export default function SystemsSection() {
 
               {/* Title */}
               <h3
-                className="text-xl font-bold text-[#ECF0FF] mb-3"
+                className="text-xl font-bold text-[#0A0B14] mb-3"
                 style={{ fontFamily: "var(--font-space-grotesk)" }}
               >
                 {s.title}
@@ -140,31 +144,35 @@ export default function SystemsSection() {
 
               {/* For who */}
               <div className="mb-3">
-                <div className="text-[11px] font-semibold text-[#4A5580] uppercase tracking-wider mb-1.5">
+                <div className="text-[11px] font-semibold text-[#8D95A8] uppercase tracking-wider mb-1.5">
                   Para quem
                 </div>
-                <p className="text-[13.5px] text-[#8B9BC0] leading-relaxed">
+                <p className="text-[13.5px] text-[#5B6478] leading-relaxed">
                   {s.forWho}
                 </p>
               </div>
 
               {/* Value */}
               <div className="mb-5">
-                <div className="text-[11px] font-semibold text-[#4A5580] uppercase tracking-wider mb-1.5">
+                <div className="text-[11px] font-semibold text-[#8D95A8] uppercase tracking-wider mb-1.5">
                   Valor entregue
                 </div>
-                <p className="text-[13.5px] text-[#8B9BC0] leading-relaxed">
+                <p className="text-[13.5px] text-[#5B6478] leading-relaxed">
                   {s.value}
                 </p>
               </div>
 
               {/* Features */}
-              <div className="mt-auto pt-4 border-t border-white/[0.06]">
+              <div className="mt-auto pt-4 border-t" style={{ borderColor: "var(--gs-border)" }}>
                 <div className="flex flex-wrap gap-2">
                   {s.features.map((f) => (
                     <span
                       key={f}
-                      className="text-[11px] px-2.5 py-1 rounded-lg bg-white/[0.04] text-[#8B9BC0] border border-white/[0.06]"
+                      className="text-[11px] px-2.5 py-1 rounded-lg text-[#5B6478]"
+                      style={{
+                        background: "#F2F4F8",
+                        border: "1px solid var(--gs-border)",
+                      }}
                     >
                       {f}
                     </span>

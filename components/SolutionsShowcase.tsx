@@ -216,7 +216,11 @@ export default function SolutionsShowcase() {
   const inView = useInView(ref, { once: true, margin: "-60px" })
 
   return (
-    <section id="projetos" className="relative py-24 px-6">
+    <section
+      id="projetos"
+      className="relative py-24 px-6"
+      style={{ background: "#F7F8FA" }}
+    >
       <div className="max-w-7xl mx-auto" ref={ref}>
         {/* Header */}
         <motion.div
@@ -227,13 +231,13 @@ export default function SolutionsShowcase() {
         >
           <span className="badge-blue mb-4 inline-flex">Exemplos de solução</span>
           <h2
-            className="text-3xl sm:text-4xl xl:text-5xl font-bold text-[#ECF0FF] mb-4"
+            className="text-3xl sm:text-4xl xl:text-5xl font-bold text-[#0A0B14] mb-4"
             style={{ fontFamily: "var(--font-space-grotesk)" }}
           >
             Sistemas que{" "}
             <span className="text-gradient-blue">resolvem na prática</span>
           </h2>
-          <p className="text-[#8B9BC0] text-lg max-w-xl mx-auto">
+          <p className="text-[#5B6478] text-lg max-w-xl mx-auto">
             Cada projeto é único. Veja alguns exemplos de plataformas que
             desenvolvemos para operações reais.
           </p>
@@ -251,10 +255,10 @@ export default function SolutionsShowcase() {
                 duration: 0.6,
                 ease: "easeOut",
               }}
-              className="group relative rounded-2xl overflow-hidden card-hover"
+              className="group relative rounded-2xl overflow-hidden card-hover bg-white"
               style={{
-                background: "rgba(255,255,255,0.025)",
                 border: "1px solid var(--gs-border)",
+                boxShadow: "var(--gs-shadow-sm)",
               }}
             >
               {/* Top line accent */}
@@ -270,13 +274,13 @@ export default function SolutionsShowcase() {
                 <div className="flex items-center gap-2 mb-4">
                   <div
                     className="w-8 h-8 rounded-lg flex items-center justify-center"
-                    style={{ background: `${s.color}18`, border: `1px solid ${s.color}30` }}
+                    style={{ background: `${s.color}12`, border: `1px solid ${s.color}25` }}
                   >
                     <s.icon className="w-4 h-4" style={{ color: s.color }} />
                   </div>
                   <span
                     className="text-[11px] font-semibold px-2.5 py-0.5 rounded-full"
-                    style={{ background: `${s.color}15`, color: s.color }}
+                    style={{ background: `${s.color}10`, color: s.color }}
                   >
                     {s.tag}
                   </span>
@@ -284,12 +288,12 @@ export default function SolutionsShowcase() {
 
                 {/* Title + desc */}
                 <h3
-                  className="text-xl font-bold text-[#ECF0FF] mb-2"
+                  className="text-xl font-bold text-[#0A0B14] mb-2"
                   style={{ fontFamily: "var(--font-space-grotesk)" }}
                 >
                   {s.title}
                 </h3>
-                <p className="text-[13.5px] text-[#8B9BC0] leading-relaxed mb-5">
+                <p className="text-[13.5px] text-[#5B6478] leading-relaxed mb-5">
                   {s.desc}
                 </p>
 

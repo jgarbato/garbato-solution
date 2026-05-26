@@ -39,13 +39,13 @@ export default function ContratarPage() {
   }
 
   return (
-    <main className="min-h-screen" style={{ background: "#08080E" }}>
+    <main className="min-h-screen" style={{ background: "#FFFFFF" }}>
       <Navbar />
 
       <section className="relative pt-32 pb-24 px-6">
-        <div className="absolute inset-0 grid-overlay opacity-[0.03] pointer-events-none" />
+        <div className="absolute inset-0 grid-overlay opacity-100 pointer-events-none" />
         <div
-          className="absolute top-20 left-1/2 -translate-x-1/2 w-[700px] h-[300px] rounded-full opacity-10 blur-[120px] pointer-events-none"
+          className="absolute top-20 left-1/2 -translate-x-1/2 w-[700px] h-[300px] rounded-full opacity-15 blur-[120px] pointer-events-none"
           style={{ background: `radial-gradient(circle, ${sistemaInfo.color}, transparent)` }}
         />
 
@@ -55,17 +55,17 @@ export default function ContratarPage() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-12"
+            className="text-center mb-12 relative z-10"
           >
             <span className="badge-blue mb-4 inline-flex">Planos e preços</span>
             <h1
-              className="text-4xl sm:text-5xl font-bold text-[#ECF0FF] mb-4"
+              className="text-4xl sm:text-5xl font-bold text-[#0A0B14] mb-4"
               style={{ fontFamily: "var(--font-space-grotesk)" }}
             >
               Escolha o plano ideal{" "}
               <span className="text-gradient-blue">para o seu negócio</span>
             </h1>
-            <p className="text-[#8B9BC0] text-lg max-w-xl mx-auto">
+            <p className="text-[#5B6478] text-lg max-w-xl mx-auto">
               Soluções completas para clínicas e gestão imobiliária. Sem contrato de fidelidade no plano mensal.
             </p>
           </motion.div>
@@ -75,11 +75,14 @@ export default function ContratarPage() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="flex justify-center mb-8"
+            className="flex justify-center mb-8 relative z-10"
           >
             <div
-              className="flex rounded-xl p-1 gap-1"
-              style={{ background: "rgba(255,255,255,0.04)", border: "1px solid var(--gs-border)" }}
+              className="flex rounded-xl p-1 gap-1 bg-white"
+              style={{
+                border: "1px solid var(--gs-border)",
+                boxShadow: "var(--gs-shadow-sm)",
+              }}
             >
               {SISTEMAS.map((s) => {
                 const active = sistema === s.id
@@ -89,8 +92,8 @@ export default function ContratarPage() {
                     onClick={() => setSistema(s.id)}
                     className="px-6 py-3 rounded-lg text-sm font-semibold transition-all flex items-center gap-2.5"
                     style={{
-                      background: active ? `${s.color}15` : "transparent",
-                      color: active ? s.color : "#8B9BC0",
+                      background: active ? `${s.color}12` : "transparent",
+                      color: active ? s.color : "#5B6478",
                       border: active ? `1px solid ${s.color}35` : "1px solid transparent",
                     }}
                   >
@@ -110,28 +113,28 @@ export default function ContratarPage() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.15 }}
-            className="flex items-center justify-center gap-3 mb-12"
+            className="flex items-center justify-center gap-3 mb-12 relative z-10"
           >
-            <span className={`text-sm font-medium ${periodo === "mensal" ? "text-[#ECF0FF]" : "text-[#8B9BC0]"}`}>
+            <span className={`text-sm font-medium ${periodo === "mensal" ? "text-[#0A0B14]" : "text-[#8D95A8]"}`}>
               Mensal
             </span>
             <button
               onClick={() => setPeriodo((p) => (p === "mensal" ? "anual" : "mensal"))}
               className="relative w-12 h-6 rounded-full transition-colors"
-              style={{ background: periodo === "anual" ? "#3B82F6" : "rgba(255,255,255,0.1)" }}
+              style={{ background: periodo === "anual" ? "#3B82F6" : "rgba(15,22,36,0.15)" }}
             >
               <div
-                className="absolute top-1 w-4 h-4 rounded-full bg-white transition-all duration-200"
+                className="absolute top-1 w-4 h-4 rounded-full bg-white transition-all duration-200 shadow-[0_1px_3px_rgba(15,22,36,0.20)]"
                 style={{ left: periodo === "anual" ? "28px" : "4px" }}
               />
             </button>
             <div className="flex items-center gap-2">
-              <span className={`text-sm font-medium ${periodo === "anual" ? "text-[#ECF0FF]" : "text-[#8B9BC0]"}`}>
+              <span className={`text-sm font-medium ${periodo === "anual" ? "text-[#0A0B14]" : "text-[#8D95A8]"}`}>
                 Anual
               </span>
               <span
                 className="text-[11px] font-bold px-2 py-0.5 rounded-full"
-                style={{ background: "rgba(16,185,129,0.15)", color: "#10B981", border: "1px solid rgba(16,185,129,0.25)" }}
+                style={{ background: "rgba(16,185,129,0.10)", color: "#059669", border: "1px solid rgba(16,185,129,0.25)" }}
               >
                 20% OFF
               </span>
@@ -139,7 +142,7 @@ export default function ContratarPage() {
           </motion.div>
 
           {/* Plan cards */}
-          <div className="grid lg:grid-cols-3 gap-5">
+          <div className="grid lg:grid-cols-3 gap-5 relative z-10">
             {plans.map((plan, i) => {
               const price = periodo === "anual" ? plan.priceAnnual : plan.price
               return (
@@ -150,10 +153,13 @@ export default function ContratarPage() {
                   transition={{ delay: i * 0.1 + 0.2, duration: 0.55 }}
                   className="relative rounded-2xl p-7 flex flex-col"
                   style={{
-                    background: plan.hot ? `${sistemaInfo.color}08` : "rgba(255,255,255,0.025)",
+                    background: plan.hot ? `${sistemaInfo.color}06` : "#FFFFFF",
                     border: plan.hot
-                      ? `1px solid ${sistemaInfo.color}40`
+                      ? `1.5px solid ${sistemaInfo.color}50`
                       : "1px solid var(--gs-border)",
+                    boxShadow: plan.hot
+                      ? `0 16px 40px ${sistemaInfo.color}20, var(--gs-shadow-md)`
+                      : "var(--gs-shadow-sm)",
                   }}
                 >
                   {plan.hot && (
@@ -175,43 +181,47 @@ export default function ContratarPage() {
 
                   <div className="mb-5">
                     <h3
-                      className="text-xl font-bold text-[#ECF0FF] mb-1"
+                      className="text-xl font-bold text-[#0A0B14] mb-1"
                       style={{ fontFamily: "var(--font-space-grotesk)" }}
                     >
                       {plan.name}
                     </h3>
-                    <p className="text-[13px] text-[#8B9BC0]">{plan.desc}</p>
+                    <p className="text-[13px] text-[#5B6478]">{plan.desc}</p>
                   </div>
 
                   <div className="mb-6">
                     <div className="flex items-end gap-1">
-                      <span className="text-[13px] text-[#8B9BC0] mb-1">R$</span>
+                      <span className="text-[13px] text-[#5B6478] mb-1">R$</span>
                       <span
-                        className="text-4xl font-bold text-[#ECF0FF]"
+                        className="text-4xl font-bold text-[#0A0B14]"
                         style={{ fontFamily: "var(--font-space-grotesk)" }}
                       >
                         {price.toLocaleString("pt-BR")}
                       </span>
-                      <span className="text-[13px] text-[#8B9BC0] mb-1">/mês</span>
+                      <span className="text-[13px] text-[#5B6478] mb-1">/mês</span>
                     </div>
                     {periodo === "anual" ? (
-                      <p className="text-[12px] text-[#10B981] mt-1">
+                      <p className="text-[12px] text-[#059669] mt-1">
                         Cobrado R$ {(plan.priceAnnual * 12).toLocaleString("pt-BR")}/ano
                       </p>
                     ) : (
-                      <p className="text-[12px] text-[#4A5580] mt-1">Pagamento mensal recorrente</p>
+                      <p className="text-[12px] text-[#8D95A8] mt-1">Pagamento mensal recorrente</p>
                     )}
                   </div>
 
                   <button
                     onClick={() => handleAssinar(plan.id)}
-                    className="w-full py-3 rounded-xl text-[14px] font-semibold transition-all mb-6 flex items-center justify-center gap-2 cursor-pointer"
+                    className="w-full py-3 rounded-xl text-[14px] font-semibold transition-all mb-6 flex items-center justify-center gap-2 cursor-pointer hover:opacity-90"
                     style={
                       plan.hot
-                        ? { background: sistemaInfo.color, color: "white" }
+                        ? {
+                            background: sistemaInfo.color,
+                            color: "white",
+                            boxShadow: `0 8px 24px ${sistemaInfo.color}40`,
+                          }
                         : {
-                            background: "rgba(255,255,255,0.06)",
-                            color: "#ECF0FF",
+                            background: "#F2F4F8",
+                            color: "#0A0B14",
                             border: "1px solid var(--gs-border)",
                           }
                     }
@@ -224,7 +234,7 @@ export default function ContratarPage() {
                     {plan.features.map((f) => (
                       <li key={f} className="flex items-start gap-2.5">
                         <Check className="w-4 h-4 mt-0.5 flex-shrink-0 text-[#10B981]" />
-                        <span className="text-[13px] text-[#8B9BC0] leading-snug">{f}</span>
+                        <span className="text-[13px] text-[#5B6478] leading-snug">{f}</span>
                       </li>
                     ))}
                   </ul>
@@ -238,16 +248,16 @@ export default function ContratarPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}
-            className="text-center mt-12"
+            className="text-center mt-12 relative z-10"
           >
-            <p className="text-[14px] text-[#8B9BC0] mb-3">
+            <p className="text-[14px] text-[#5B6478] mb-3">
               Ainda com dúvidas? Nossa equipe está pronta para te ajudar.
             </p>
             <a
               href="https://wa.me/5543988720576?text=Olá, quero saber mais sobre os planos"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-[13px] font-semibold text-[#3B82F6] hover:text-[#60A5FA] transition-colors"
+              className="inline-flex items-center gap-2 text-[13px] font-semibold text-[#3B82F6] hover:text-[#1D4ED8] transition-colors"
             >
               Falar no WhatsApp <ArrowRight className="w-3.5 h-3.5" />
             </a>

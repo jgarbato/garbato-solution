@@ -20,10 +20,11 @@ export default function WhatsAppFloatButton() {
             animate={{ opacity: 1, x: 0, scale: 1 }}
             exit={{ opacity: 0, x: 8, scale: 0.95 }}
             transition={{ duration: 0.18 }}
-            className="px-3 py-2 rounded-xl text-[13px] font-medium text-white whitespace-nowrap pointer-events-none"
+            className="px-3 py-2 rounded-xl text-[13px] font-medium text-[#0A0B14] whitespace-nowrap pointer-events-none"
             style={{
-              background: "rgba(8,8,14,0.92)",
-              border: "1px solid rgba(37,211,102,0.25)",
+              background: "rgba(255,255,255,0.96)",
+              border: "1px solid var(--gs-border)",
+              boxShadow: "var(--gs-shadow-md)",
               backdropFilter: "blur(12px)",
             }}
           >

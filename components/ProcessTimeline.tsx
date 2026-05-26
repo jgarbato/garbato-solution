@@ -61,8 +61,12 @@ export default function ProcessTimeline() {
   const inView = useInView(ref, { once: true, margin: "-60px" })
 
   return (
-    <section id="processo" className="relative py-24 px-6 bg-[#0C0D18]">
-      <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/[0.07] to-transparent" />
+    <section
+      id="processo"
+      className="relative py-24 px-6"
+      style={{ background: "#FFFFFF" }}
+    >
+      <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[rgba(15,22,36,0.10)] to-transparent" />
 
       <div className="max-w-7xl mx-auto" ref={ref}>
         {/* Header */}
@@ -74,22 +78,22 @@ export default function ProcessTimeline() {
         >
           <span className="badge-blue mb-4 inline-flex">Como trabalhamos</span>
           <h2
-            className="text-3xl sm:text-4xl xl:text-5xl font-bold text-[#ECF0FF] mb-4"
+            className="text-3xl sm:text-4xl xl:text-5xl font-bold text-[#0A0B14] mb-4"
             style={{ fontFamily: "var(--font-space-grotesk)" }}
           >
             Do levantamento à{" "}
             <span className="text-gradient-blue">evolução contínua</span>
           </h2>
-          <p className="text-[#8B9BC0] text-lg max-w-xl mx-auto">
+          <p className="text-[#5B6478] text-lg max-w-xl mx-auto">
             Um processo estruturado que garante clareza, previsibilidade e
             resultado em cada etapa do projeto.
           </p>
         </motion.div>
 
-        {/* Timeline — desktop: horizontal grid, mobile: vertical */}
+        {/* Timeline */}
         <div className="relative">
           {/* Desktop connector line */}
-          <div className="hidden lg:block absolute top-[52px] left-[calc(8.33%+20px)] right-[calc(8.33%+20px)] h-[1px]">
+          <div className="hidden lg:block absolute top-[52px] left-[calc(8.33%+20px)] right-[calc(8.33%+20px)] h-[2px]">
             <motion.div
               initial={{ scaleX: 0 }}
               animate={inView ? { scaleX: 1 } : {}}
@@ -97,6 +101,7 @@ export default function ProcessTimeline() {
               className="h-full origin-left"
               style={{
                 background: "linear-gradient(90deg, #3B82F6, #7C3AED, #06B6D4, #10B981, #F59E0B, #EC4899)",
+                opacity: 0.4,
               }}
             />
           </div>
@@ -118,17 +123,16 @@ export default function ProcessTimeline() {
                 <div className="relative flex-shrink-0 mb-5 lg:mb-6">
                   {/* Outer glow ring */}
                   <div
-                    className="absolute inset-[-4px] rounded-full opacity-30"
+                    className="absolute inset-[-6px] rounded-full opacity-60"
                     style={{
-                      background: `radial-gradient(circle, ${step.color}40, transparent 70%)`,
+                      background: `radial-gradient(circle, ${step.color}30, transparent 70%)`,
                     }}
                   />
                   <div
-                    className="w-[44px] h-[44px] rounded-full flex items-center justify-center border-2 relative z-10"
+                    className="w-[44px] h-[44px] rounded-full flex items-center justify-center border-2 relative z-10 bg-white"
                     style={{
-                      background: `${step.color}15`,
                       borderColor: step.color,
-                      boxShadow: `0 0 16px ${step.color}30`,
+                      boxShadow: `0 4px 14px ${step.color}30`,
                     }}
                   >
                     <step.icon className="w-5 h-5" style={{ color: step.color }} />
@@ -144,12 +148,12 @@ export default function ProcessTimeline() {
                     {step.number}
                   </div>
                   <h3
-                    className="text-[15px] font-bold text-[#ECF0FF] mb-2"
+                    className="text-[15px] font-bold text-[#0A0B14] mb-2"
                     style={{ fontFamily: "var(--font-space-grotesk)" }}
                   >
                     {step.title}
                   </h3>
-                  <p className="text-[12.5px] text-[#8B9BC0] leading-relaxed">
+                  <p className="text-[12.5px] text-[#5B6478] leading-relaxed">
                     {step.desc}
                   </p>
                 </div>
