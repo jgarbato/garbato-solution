@@ -1,9 +1,9 @@
 "use client"
 
-import { Suspense } from "react"
+import { Suspense, useEffect, useRef, useState } from "react"
 import { useSearchParams } from "next/navigation"
 import { motion } from "framer-motion"
-import { CheckCircle2, Mail, MessageCircle, ExternalLink } from "lucide-react"
+import { CheckCircle2, Mail, MessageCircle, ExternalLink, Clock } from "lucide-react"
 import Navbar from "@/components/Navbar"
 import Footer from "@/components/Footer"
 import { getProduct, getPlan } from "@/lib/products/registry"
@@ -14,12 +14,27 @@ const METODO_LABELS: Record<string, string> = {
   cartao: "Cartão de Crédito",
 }
 
+type PaymentStatusResponse = {
+  paymentId: string
+  status: string
+  paidAt: string | null
+  billingType: string
+  valueCents: number
+  accessGranted: string | null
+  subscriptionStatus: string | null
+}
+
+const PAID_STATUSES = new Set(["RECEIVED", "CONFIRMED", "RECEIVED_IN_CASH"])
+const POLL_INTERVAL_MS = 4000
+const POLL_MAX_DURATION_MS = 5 * 60 * 1000 // 5 minutos
+
 function ConfirmacaoContent() {
   const params = useSearchParams()
   const sistema = params.get("sistema") ?? "clinic"
   const plano = params.get("plano") ?? "essencial"
   const periodo = params.get("periodo") ?? "mensal"
   const metodo = params.get("metodo") ?? "pix"
+  const paymentId = params.get("paymentId") ?? ""
 
   const product = getProduct(sistema)
   const plan = getPlan(sistema, plano)
@@ -27,6 +42,43 @@ function ConfirmacaoContent() {
   const sistemaLabel = product.name
   const sistemaColor = sistema === "mob" ? "#06B6D4" : "#7C3AED"
   const appUrl = product.appUrl
+
+  const [status, setStatus] = useState<PaymentStatusResponse | null>(null)
+  const startedAtRef = useRef<number>(Date.now())
+
+  const confirmado = status ? PAID_STATUSES.has(status.status) || !!status.accessGranted : false
+
+  useEffect(() => {
+    if (!paymentId) return
+    let timer: ReturnType<typeof setTimeout> | null = null
+    let stopped = false
+
+    const tick = async () => {
+      if (stopped) return
+      try {
+        const res = await fetch(`/api/payments/${paymentId}`, { cache: "no-store" })
+        if (res.ok) {
+          const data = (await res.json()) as PaymentStatusResponse
+          setStatus(data)
+          if (PAID_STATUSES.has(data.status) || data.accessGranted) {
+            return // confirmado, para o polling
+          }
+        }
+      } catch (err) {
+        console.warn("[confirmacao] erro no polling", err)
+      }
+      if (Date.now() - startedAtRef.current > POLL_MAX_DURATION_MS) return
+      timer = setTimeout(tick, POLL_INTERVAL_MS)
+    }
+
+    tick()
+    return () => {
+      stopped = true
+      if (timer) clearTimeout(timer)
+    }
+  }, [paymentId])
+
+  const aguardando = !!paymentId && !confirmado
 
   return (
     <main className="min-h-screen" style={{ background: "#FFFFFF" }}>
@@ -40,7 +92,7 @@ function ConfirmacaoContent() {
         />
 
         <div className="max-w-xl mx-auto text-center relative z-10">
-          {/* Success icon */}
+          {/* Status icon */}
           <motion.div
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
@@ -50,11 +102,19 @@ function ConfirmacaoContent() {
             <div
               className="w-20 h-20 rounded-full flex items-center justify-center bg-white"
               style={{
-                border: `2px solid ${sistemaColor}45`,
-                boxShadow: `0 12px 32px ${sistemaColor}25`,
+                border: aguardando
+                  ? "2px solid rgba(245,158,11,0.45)"
+                  : `2px solid ${sistemaColor}45`,
+                boxShadow: aguardando
+                  ? "0 12px 32px rgba(245,158,11,0.25)"
+                  : `0 12px 32px ${sistemaColor}25`,
               }}
             >
-              <CheckCircle2 className="w-10 h-10" style={{ color: sistemaColor }} />
+              {aguardando ? (
+                <Clock className="w-10 h-10 text-[#F59E0B]" />
+              ) : (
+                <CheckCircle2 className="w-10 h-10" style={{ color: sistemaColor }} />
+              )}
             </div>
           </motion.div>
 
@@ -67,12 +127,26 @@ function ConfirmacaoContent() {
               className="text-3xl sm:text-4xl font-bold text-[#0A0B14] mb-3"
               style={{ fontFamily: "var(--font-space-grotesk)" }}
             >
-              Solicitação recebida!
+              {aguardando ? "Aguardando pagamento" : "Pagamento confirmado!"}
             </h1>
             <p className="text-[#5B6478] text-lg mb-8">
-              Sua assinatura do {sistemaLabel} — Plano {planLabel} está sendo processada.
+              {aguardando
+                ? `Estamos monitorando seu pagamento via ${METODO_LABELS[metodo]}. Esta página atualiza sozinha quando confirmar.`
+                : `Sua assinatura do ${sistemaLabel} — Plano ${planLabel} está ativa.`}
             </p>
           </motion.div>
+
+          {/* Polling indicator */}
+          {aguardando && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="flex items-center justify-center gap-2 mb-6 text-[12px] text-[#8D95A8]"
+            >
+              <div className="w-3 h-3 border-2 border-[#F59E0B] border-t-transparent rounded-full animate-spin" />
+              Verificando status do pagamento...
+            </motion.div>
+          )}
 
           {/* Details card */}
           <motion.div
@@ -94,10 +168,25 @@ function ConfirmacaoContent() {
                 { label: "Plano", value: planLabel },
                 { label: "Período", value: periodo === "anual" ? "Anual" : "Mensal" },
                 { label: "Pagamento", value: METODO_LABELS[metodo] },
+                ...(status
+                  ? [
+                      {
+                        label: "Status",
+                        value: confirmado ? "Confirmado" : "Aguardando",
+                      },
+                    ]
+                  : []),
               ].map((item) => (
                 <div key={item.label} className="flex items-center justify-between">
                   <span className="text-[13px] text-[#5B6478]">{item.label}</span>
-                  <span className="text-[13px] font-semibold text-[#0A0B14]">{item.value}</span>
+                  <span
+                    className="text-[13px] font-semibold"
+                    style={{
+                      color: item.label === "Status" && confirmado ? "#059669" : "#0A0B14",
+                    }}
+                  >
+                    {item.value}
+                  </span>
                 </div>
               ))}
             </div>
@@ -119,8 +208,14 @@ function ConfirmacaoContent() {
             >
               <Mail className="w-5 h-5 text-[#3B82F6] flex-shrink-0" />
               <div>
-                <div className="text-[13px] font-semibold text-[#0A0B14]">Confirme seu e-mail</div>
-                <div className="text-[12px] text-[#5B6478]">Enviamos as instruções de acesso para o e-mail cadastrado.</div>
+                <div className="text-[13px] font-semibold text-[#0A0B14]">
+                  {confirmado ? "Confira seu e-mail" : "Você receberá instruções por e-mail"}
+                </div>
+                <div className="text-[12px] text-[#5B6478]">
+                  {confirmado
+                    ? "Enviamos as instruções de acesso para o e-mail cadastrado."
+                    : "Assim que o pagamento for confirmado, o acesso vai direto para o seu e-mail."}
+                </div>
               </div>
             </div>
             <div
@@ -151,9 +246,12 @@ function ConfirmacaoContent() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-[14px] font-bold transition-all hover:opacity-90"
               style={{
-                background: sistemaColor,
-                color: "white",
-                boxShadow: `0 8px 24px ${sistemaColor}40`,
+                background: confirmado ? sistemaColor : "#F2F4F8",
+                color: confirmado ? "white" : "#5B6478",
+                border: confirmado ? "none" : "1px solid var(--gs-border)",
+                boxShadow: confirmado ? `0 8px 24px ${sistemaColor}40` : "none",
+                pointerEvents: confirmado ? "auto" : "none",
+                opacity: confirmado ? 1 : 0.55,
               }}
             >
               Acessar {sistemaLabel}
@@ -181,7 +279,9 @@ function ConfirmacaoContent() {
             transition={{ delay: 0.6 }}
             className="text-[12px] text-[#8D95A8] mt-4"
           >
-            Acesso liberado após a confirmação do pagamento. Em caso de dúvidas, fale com nossa equipe.
+            {confirmado
+              ? "Pode acessar o sistema agora ou usar o link que enviamos por e-mail."
+              : "Acesso liberado após a confirmação do pagamento. Em caso de dúvidas, fale com nossa equipe."}
           </motion.p>
         </div>
       </section>
