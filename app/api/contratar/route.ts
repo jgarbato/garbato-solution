@@ -2,7 +2,7 @@ import { NextResponse } from "next/server"
 import { eq } from "drizzle-orm"
 import { db } from "@/lib/db"
 import { customers, subscriptions, payments } from "@/lib/db/schema"
-import { asaas, type AsaasBillingType } from "@/lib/asaas"
+import { asaas, getAsaasEnv, type AsaasBillingType } from "@/lib/asaas"
 import { getPlan, getProduct, isProductSlug, type Periodo } from "@/lib/products/registry"
 
 export const runtime = "nodejs"
@@ -134,7 +134,12 @@ export async function POST(req: Request) {
     } catch (err) {
       console.error("[contratar] erro criando customer", err)
       return NextResponse.json(
-        { error: "falha ao criar cliente no gateway de pagamento" },
+        {
+          error: "falha ao criar cliente no gateway de pagamento",
+          ...(getAsaasEnv() === "sandbox" && {
+            detail: err instanceof Error ? err.message : String(err),
+          }),
+        },
         { status: 502 },
       )
     }
@@ -173,7 +178,12 @@ export async function POST(req: Request) {
   } catch (err) {
     console.error("[contratar] erro criando subscription", err)
     return NextResponse.json(
-      { error: "falha ao criar assinatura no gateway de pagamento" },
+      {
+        error: "falha ao criar assinatura no gateway de pagamento",
+        ...(getAsaasEnv() === "sandbox" && {
+          detail: err instanceof Error ? err.message : String(err),
+        }),
+      },
       { status: 502 },
     )
   }
