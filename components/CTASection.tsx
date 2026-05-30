@@ -3,6 +3,7 @@
 import { useRef } from "react"
 import { motion, useInView } from "framer-motion"
 import { ArrowRight, MessageCircle, Zap } from "lucide-react"
+import { LiquidButton } from "@/components/ui/liquid-glass-button"
 
 const WA_LINK =
   "https://wa.me/5543988720576?text=Ol%C3%A1%2C%20quero%20falar%20sobre%20um%20projeto"
@@ -74,19 +75,18 @@ export default function CTASection() {
           transition={{ delay: 0.3, duration: 0.6 }}
           className="flex flex-wrap justify-center gap-4"
         >
-          <motion.button
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.98 }}
+          <LiquidButton
+            size="xxl"
             onClick={() =>
               document
                 .querySelector("#contato")
                 ?.scrollIntoView({ behavior: "smooth" })
             }
-            className="flex items-center gap-2.5 px-8 py-4 bg-[#3B82F6] hover:bg-[#2563EB] text-white font-semibold text-lg rounded-xl transition-colors shadow-[0_12px_36px_rgba(59,130,246,0.40)] cursor-pointer"
+            className="text-[#0A0B14] font-semibold text-lg"
           >
             Vamos conversar sobre seu projeto
             <ArrowRight className="w-5 h-5" />
-          </motion.button>
+          </LiquidButton>
 
           <motion.a
             whileHover={{ scale: 1.03 }}

@@ -1,11 +1,12 @@
 import Navbar from "@/components/Navbar"
-import HeroSection from "@/components/HeroSection"
+import { HeroGarbato } from "@/components/ui/hero-garbato"
+import ProductScroll from "@/components/ProductScroll"
 import ProblemSection from "@/components/ProblemSection"
 import AboutSection from "@/components/AboutSection"
 import ServicesGrid from "@/components/ServicesGrid"
 import SystemsSection from "@/components/SystemsSection"
 import DifferentialsSection from "@/components/DifferentialsSection"
-import ProcessTimeline from "@/components/ProcessTimeline"
+import ProcessOrbital from "@/components/ProcessOrbital"
 import SolutionsShowcase from "@/components/SolutionsShowcase"
 import BenefitsSection from "@/components/BenefitsSection"
 import TrustSection from "@/components/TrustSection"
@@ -20,13 +21,14 @@ export default function Home() {
     <>
       <Navbar />
       <main>
-        <HeroSection />
+        <HeroGarbato />
+        <ProductScroll />
         <ProblemSection />
         <AboutSection />
         <ServicesGrid />
         <SystemsSection />
         <DifferentialsSection />
-        <ProcessTimeline />
+        <ProcessOrbital />
         <SolutionsShowcase />
         <BenefitsSection />
         <TrustSection />
