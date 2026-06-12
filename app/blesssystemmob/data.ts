@@ -16,7 +16,7 @@ export const mobProduct: Product = {
   seo: {
     title: "BlessSystemMob — ERP para imobiliárias e loteadoras",
     description:
-      "Sistema completo de gestão para imobiliárias e loteadoras: gestão de lotes, contratos digitais, CRM, financeiro integrado e sites inteligentes. Mais de 250 empresas atendidas. 14 dias grátis.",
+      "Sistema completo de gestão para imobiliárias e loteadoras: lotes e quadras com mapa interativo, contratos, financeiro com boletos e conciliação bancária, reajuste por IGPM/IPCA e relatórios gerenciais.",
     ogTitle: "BlessSystemMob — Tecnologia de ponta para sua imobiliária crescer",
     ogDescription:
       "ERP completo para imobiliárias e loteadoras: lotes, contratos, CRM, financeiro e sites em uma só plataforma.",
@@ -51,17 +51,17 @@ export const mobProduct: Product = {
     titlePre: "Tecnologia de ponta para sua",
     titleHighlight: "imobiliária crescer",
     description:
-      "ERP completo com gestão de lotes, contratos digitais, CRM integrado e sites inteligentes. Mais de 250 imobiliárias já confiam no BlessSystemMob.",
-    primaryCta: "Começar 14 dias grátis",
-    secondaryCta: "Falar com consultor",
-    bullets: ["✓ 14 dias grátis", "✓ Sem cartão", "✓ Suporte incluído"],
+      "ERP completo com gestão de lotes, contratos, financeiro integrado e conciliação bancária — construído sobre operações reais de loteamento e gestão patrimonial.",
+    primaryCta: "Começar agora",
+    secondaryCta: "Falar no WhatsApp",
+    bullets: ["✓ Implantação guiada", "✓ Suporte incluído", "✓ Cancele quando quiser"],
   },
 
   stats: [
-    { value: "250+", label: "Imobiliárias ativas" },
-    { value: "R$2B+", label: "Em vendas gerenciadas" },
-    { value: "98%", label: "Satisfação" },
-    { value: "48h", label: "Implantação" },
+    { value: "IA 24/7", label: "Atende leads no WhatsApp" },
+    { value: "100%", label: "Na nuvem" },
+    { value: "48h", label: "Implantação guiada" },
+    { value: "LGPD", label: "Dados protegidos" },
   ],
 
   features: {
@@ -71,10 +71,10 @@ export const mobProduct: Product = {
     subtitle: "Elimine planilhas e sistemas desconectados de uma vez por todas.",
     items: [
       { icon: Map, title: "Gestão de lotes e quadras", desc: "Mapa interativo com situação de cada lote em tempo real — disponível, reservado, vendido ou em obras." },
-      { icon: FileText, title: "Contratos digitais", desc: "Geração automática com assinatura eletrônica. Sem papel, sem deslocamento, com validade jurídica." },
+      { icon: FileText, title: "Contratos completos", desc: "Venda, locação e cessão com geração automática em PDF, parcelas, multas, juros e distrato com cálculo automático." },
       { icon: DollarSign, title: "Financeiro integrado", desc: "Parcelas, inadimplência, repasses e comissões com integração boleto e PIX via gateway bancário." },
-      { icon: Users, title: "CRM comercial", desc: "Funil visual com acompanhamento de leads, follow-ups automáticos e histórico completo de cada negociação." },
-      { icon: Globe, title: "Sites inteligentes", desc: "Portal próprio com listagem de imóveis e integração automática com portais como ZAP, OLX e VivaReal." },
+      { icon: Users, title: "Clientes e corretores", desc: "Cadastro completo de compradores, corretores e fornecedores, com registro de contatos e histórico de cada negociação." },
+      { icon: Globe, title: "Reajuste automático", desc: "Índices IGPM, IPCA e INPC buscados direto do Banco Central, com prévia do cálculo e histórico por contrato." },
       { icon: BarChart2, title: "Relatórios gerenciais", desc: "Dashboards com visão completa: vendas, inadimplência, estoque de lotes e performance do time comercial." },
     ],
   },
@@ -84,7 +84,7 @@ export const mobProduct: Product = {
     titlePre: "Implantação em",
     titleHighlight: "3 etapas simples",
     steps: [
-      { n: "01", icon: Key, title: "Escolha seu plano", desc: "Selecione conforme o tamanho da operação e inicie o trial gratuito de 14 dias." },
+      { n: "01", icon: Key, title: "Escolha seu plano", desc: "Selecione conforme o tamanho da operação e assine em minutos." },
       { n: "02", icon: Users, title: "Implantação guiada", desc: "Nosso time configura e treina sua equipe com foco na sua operação específica." },
       { n: "03", icon: TrendingUp, title: "Operação funcionando", desc: "Lotes, contratos e financeiro rodando. Foque em vender mais." },
     ],
@@ -101,7 +101,7 @@ export const mobProduct: Product = {
         price: 70,
         priceAnnual: 56,
         desc: "Para iniciar sua jornada",
-        features: ["Até 3 usuários", "1 módulo principal", "Financeiro básico", "Central do Cliente", "Infraestrutura em nuvem", "4h de treinamento", "Suporte WhatsApp comercial"],
+        features: ["Até 3 usuários", "Imóveis e contratos", "Financeiro básico", "Documentos em nuvem", "Infraestrutura em nuvem", "4h de treinamento", "Suporte WhatsApp comercial"],
       },
       {
         id: "profissional",
@@ -110,7 +110,7 @@ export const mobProduct: Product = {
         priceAnnual: 88,
         desc: "Para empresas em crescimento",
         hot: true,
-        features: ["Tudo do Essencial", "Até 10 usuários", "2 módulos + CRM", "Financeiro completo", "Sites inteligentes", "Integração boleto/PIX", "Integração com portais", "6h de treinamento"],
+        features: ["Tudo do Essencial", "Até 10 usuários", "Loteamentos + mapa de lotes", "Reajuste IGPM/IPCA automático", "Distrato com cálculo automático", "Boletos e PIX (Asaas)", "Vistorias e controle de chaves", "6h de treinamento"],
       },
       {
         id: "enterprise",
@@ -118,7 +118,7 @@ export const mobProduct: Product = {
         price: 170,
         priceAnnual: 136,
         desc: "Solução completa",
-        features: ["Tudo do Profissional", "Usuários ilimitados", "Todos os módulos", "Todas as integrações", "Customizações avançadas", "Suporte prioritário", "10h de treinamento"],
+        features: ["Tudo do Profissional", "Usuários ilimitados", "Boletos Itaú direto + borderô CNAB240", "Conciliação bancária (OFX)", "Múltiplas empresas/CNPJs", "Suporte prioritário", "10h de treinamento"],
       },
     ],
   },
@@ -127,17 +127,17 @@ export const mobProduct: Product = {
     badge: "FAQ",
     items: [
       { q: "Funciona para loteadoras e imobiliárias?", a: "Sim. O sistema possui módulos específicos para cada operação — loteamento, locação, venda e gestão de contratos." },
-      { q: "Posso integrar com portais imobiliários?", a: "Sim. Os planos Profissional e Enterprise incluem integração com ZAP Imóveis, OLX e VivaReal." },
-      { q: "Como funciona a assinatura eletrônica?", a: "Os contratos são gerados e enviados por e-mail para assinatura digital com validade jurídica, sem presença física." },
-      { q: "Tem período de teste gratuito?", a: "Sim, 14 dias no plano Profissional sem precisar de cartão de crédito." },
+      { q: "Consigo controlar mais de uma empresa?", a: "Sim. O plano Enterprise suporta múltiplas empresas/CNPJs na mesma conta, com permissões por usuário e perfil." },
+      { q: "Como funcionam os contratos?", a: "Contratos de venda, locação e cessão são gerados automaticamente em PDF com os dados do imóvel e do comprador, com parcelas, reajustes e distrato calculados pelo sistema." },
+      { q: "Posso ver o sistema antes de assinar?", a: "Sim. Oferecemos uma demonstração guiada pelo WhatsApp com a sua operação em mente. Período de teste gratuito está previsto em breve." },
       { q: "Como é feita a implantação?", a: "Nossa equipe realiza configuração e treinamento do time conforme o plano contratado — 4h, 6h ou 10h — de forma online." },
     ],
   },
 
   cta: {
     title: "Sua imobiliária merece tecnologia de ponta",
-    subtitle: "14 dias grátis. Implantação guiada. Suporte especializado.",
-    primaryCta: "Começar gratuitamente",
+    subtitle: "Implantação guiada. Suporte especializado. Cancele quando quiser.",
+    primaryCta: "Começar agora",
   },
 
   mockup: {

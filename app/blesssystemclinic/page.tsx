@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import Script from "next/script"
 import { SITE_NAME, SITE_URL } from "@/lib/constants"
 import { productJsonLd } from "@/lib/products/jsonLd"
 import { clinicProduct } from "./data"
@@ -32,6 +33,7 @@ export default function Page() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd(clinicProduct)) }}
       />
       <ClinicClientPage />
+      <Script src="/garbato-chat-widget.js" data-agent="lara" strategy="afterInteractive" />
     </>
   )
 }

@@ -357,7 +357,7 @@ function ProductNavbar({
     >
       <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
         {/* Logo */}
-        <div className="flex items-center gap-2">
+        <Link href="/" aria-label="Voltar para a página inicial" className="flex items-center gap-2">
           <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: t.primary }}>
             <LogoIcon className="w-3.5 h-3.5 text-white" />
           </div>
@@ -365,13 +365,14 @@ function ProductNavbar({
             Bless<span style={{ color: t.primary }}>System</span>
             <span style={{ color: t.accent }}>{product.logoSuffix}</span>
           </span>
-        </div>
+        </Link>
 
         {/* Nav */}
         <nav
           className="hidden md:flex items-center gap-5"
           style={{ "--nav-link": t.body, "--nav-link-hover": t.primary } as React.CSSProperties}
         >
+          <Link href="/" className="text-[13px] font-medium transition-colors text-[color:var(--nav-link)] hover:text-[color:var(--nav-link-hover)]">Início</Link>
           {[["#funcionalidades", "Funcionalidades"], ["#planos", "Planos"], ["#faq", "FAQ"]].map(([href, label]) => (
             <a
               key={label}

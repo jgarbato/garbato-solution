@@ -1,7 +1,7 @@
 "use client"
 
-import { useState } from "react"
-import { useRouter } from "next/navigation"
+import { Suspense, useState } from "react"
+import { useRouter, useSearchParams } from "next/navigation"
 import { motion } from "framer-motion"
 import { Check, ArrowRight, Stethoscope, Building2 } from "lucide-react"
 import Navbar from "@/components/Navbar"
@@ -25,10 +25,15 @@ const SISTEMAS = [
   },
 ]
 
-export default function ContratarPage() {
+function ContratarContent() {
   const router = useRouter()
-  const [sistema, setSistema] = useState<ProductSlug>("clinic")
-  const [periodo, setPeriodo] = useState<Periodo>("mensal")
+  const searchParams = useSearchParams()
+  const [sistema, setSistema] = useState<ProductSlug>(
+    searchParams.get("sistema") === "mob" ? "mob" : "clinic"
+  )
+  const [periodo, setPeriodo] = useState<Periodo>(
+    searchParams.get("periodo") === "anual" ? "anual" : "mensal"
+  )
 
   const product = PRODUCTS[sistema]
   const plans = product.pricing.plans
@@ -267,5 +272,13 @@ export default function ContratarPage() {
 
       <Footer />
     </main>
+  )
+}
+
+export default function ContratarPage() {
+  return (
+    <Suspense fallback={null}>
+      <ContratarContent />
+    </Suspense>
   )
 }

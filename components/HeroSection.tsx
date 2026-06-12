@@ -41,8 +41,8 @@ const FLOAT_CARDS = [
   {
     icon: CheckCircle2,
     color: "#06B6D4",
-    label: "98%",
-    sub: "satisfação dos clientes",
+    label: "24/7",
+    sub: "atendimento com IA",
   },
 ]
 
