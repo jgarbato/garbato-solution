@@ -11,9 +11,18 @@ import {
   Plug,
   LayoutDashboard,
   Database,
+  Sparkles,
 } from "lucide-react"
 
 const SERVICES = [
+  {
+    icon: Sparkles,
+    color: "#6366F1",
+    bg: "rgba(99,102,241,0.08)",
+    border: "rgba(99,102,241,0.20)",
+    title: "IA Aplicada",
+    desc: "Colocamos Inteligência Artificial de ponta para trabalhar dentro do seu negócio: atendimento automático, análise de dados, geração de conteúdo, qualificação de leads e decisões apoiadas por IA.",
+  },
   {
     icon: Settings2,
     color: "#3B82F6",
@@ -107,13 +116,14 @@ export default function ServicesGrid() {
             <span className="text-gradient-blue">do seu negócio</span>
           </h2>
           <p className="text-[#5B6478] text-lg max-w-xl mx-auto">
-            Da operação ao estratégico — desenvolvemos módulos integrados que
-            trabalham juntos ou individualmente, conforme a necessidade.
+            Da operação ao estratégico — ERP, automação, dashboards e muito mais,
+            tudo potencializado por Inteligência Artificial de ponta. Se dá para
+            fazer, a gente constrói.
           </p>
         </motion.div>
 
         {/* Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {SERVICES.map((s, i) => (
             <motion.div
               key={s.title}

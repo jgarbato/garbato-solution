@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, type Variants } from "framer-motion";
-import { Circle, ArrowRight, MessageCircle, Cpu } from "lucide-react";
+import { Circle, ArrowRight, MessageCircle, Cpu, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const WA_LINK =
@@ -158,11 +158,19 @@ function HeroGarbato({
                         variants={fadeUpVariants}
                         initial="hidden"
                         animate="visible"
-                        className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gs-surface border border-border mb-8 md:mb-12"
+                        className="flex flex-wrap items-center justify-center gap-2 mb-8 md:mb-12"
                     >
-                        <Cpu className="h-3.5 w-3.5 text-gs-blue" />
-                        <span className="text-sm text-gs-secondary tracking-wide">
-                            {badge}
+                        <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gs-surface border border-border">
+                            <Cpu className="h-3.5 w-3.5 text-gs-blue" />
+                            <span className="text-sm text-gs-secondary tracking-wide">
+                                {badge}
+                            </span>
+                        </span>
+                        <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[rgba(99,102,241,0.25)] bg-[rgba(99,102,241,0.06)]">
+                            <Sparkles className="h-3.5 w-3.5 text-[#6366F1]" />
+                            <span className="text-sm text-gs-secondary tracking-wide">
+                                Construído com IA de ponta
+                            </span>
                         </span>
                     </motion.div>
 
