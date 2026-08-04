@@ -97,7 +97,7 @@ export default function ServicesGrid() {
     <section
       id="solucoes"
       className="relative py-24 px-6"
-      style={{ background: "#F7F8FA" }}
+      style={{ background: "#0A0E1A" }}
     >
       <div className="max-w-7xl mx-auto" ref={ref}>
         {/* Header */}
@@ -109,13 +109,13 @@ export default function ServicesGrid() {
         >
           <span className="badge-blue mb-4 inline-flex">O que desenvolvemos</span>
           <h2
-            className="text-3xl sm:text-4xl xl:text-5xl font-bold text-[#0A0B14] mb-4"
+            className="text-3xl sm:text-4xl xl:text-5xl font-bold text-[#EEF1F8] mb-4"
             style={{ fontFamily: "var(--font-space-grotesk)" }}
           >
             Sistemas para cada área{" "}
             <span className="text-gradient-blue">do seu negócio</span>
           </h2>
-          <p className="text-[#5B6478] text-lg max-w-xl mx-auto">
+          <p className="text-[#AFB6CC] text-lg max-w-xl mx-auto">
             Da operação ao estratégico — ERP, automação, dashboards e muito mais,
             tudo potencializado por Inteligência Artificial de ponta. Se dá para
             fazer, a gente constrói.
@@ -134,7 +134,7 @@ export default function ServicesGrid() {
                 duration: 0.5,
                 ease: "easeOut",
               }}
-              className="group relative rounded-2xl p-6 card-hover cursor-default bg-white"
+              className="group relative rounded-2xl p-6 card-hover cursor-default bg-[#0E1320]"
               style={{
                 border: "1px solid var(--gs-border)",
                 boxShadow: "var(--gs-shadow-sm)",
@@ -156,12 +156,12 @@ export default function ServicesGrid() {
 
               {/* Content */}
               <h3
-                className="relative text-[15px] font-semibold text-[#0A0B14] mb-2"
+                className="relative text-[15px] font-semibold text-[#EEF1F8] mb-2"
                 style={{ fontFamily: "var(--font-space-grotesk)" }}
               >
                 {s.title}
               </h3>
-              <p className="relative text-[13px] text-[#5B6478] leading-relaxed">
+              <p className="relative text-[13px] text-[#AFB6CC] leading-relaxed">
                 {s.desc}
               </p>
 

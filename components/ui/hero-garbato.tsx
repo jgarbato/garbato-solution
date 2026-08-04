@@ -62,10 +62,10 @@ function ElegantShape({
                         "absolute inset-0 rounded-full",
                         "bg-gradient-to-r to-transparent",
                         gradient,
-                        "backdrop-blur-[2px] border-2 border-black/[0.04]",
-                        "shadow-[0_8px_32px_0_rgba(59,130,246,0.10)]",
+                        "backdrop-blur-[2px] border-2 border-white/[0.06]",
+                        "shadow-[0_8px_40px_0_rgba(47,224,208,0.18)]",
                         "after:absolute after:inset-0 after:rounded-full",
-                        "after:bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.65),transparent_70%)]"
+                        "after:bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.22),transparent_72%)]"
                     )}
                 />
             </motion.div>
@@ -102,7 +102,7 @@ function HeroGarbato({
             id="hero"
             className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-gs-bg pt-20"
         >
-            <div className="absolute inset-0 bg-gradient-to-br from-gs-blue/[0.06] via-transparent to-gs-cyan/[0.06] blur-3xl" />
+            <div className="absolute inset-0 bg-gradient-to-br from-gs-blue/[0.12] via-transparent to-gs-cyan/[0.10] blur-3xl" />
 
             <div className="absolute inset-0 overflow-hidden">
                 <ElegantShape
@@ -110,7 +110,7 @@ function HeroGarbato({
                     width={600}
                     height={140}
                     rotate={12}
-                    gradient="from-gs-blue/[0.18]"
+                    gradient="from-gs-blue/[0.32]"
                     className="left-[-10%] md:left-[-5%] top-[15%] md:top-[20%]"
                 />
 
@@ -119,7 +119,7 @@ function HeroGarbato({
                     width={500}
                     height={120}
                     rotate={-15}
-                    gradient="from-gs-cyan/[0.16]"
+                    gradient="from-gs-cyan/[0.30]"
                     className="right-[-5%] md:right-[0%] top-[70%] md:top-[75%]"
                 />
 
@@ -128,7 +128,7 @@ function HeroGarbato({
                     width={300}
                     height={80}
                     rotate={-8}
-                    gradient="from-gs-violet/[0.16]"
+                    gradient="from-gs-violet/[0.30]"
                     className="left-[5%] md:left-[10%] bottom-[5%] md:bottom-[10%]"
                 />
 
@@ -137,7 +137,7 @@ function HeroGarbato({
                     width={200}
                     height={60}
                     rotate={20}
-                    gradient="from-gs-amber/[0.16]"
+                    gradient="from-gs-amber/[0.28]"
                     className="right-[15%] md:right-[20%] top-[10%] md:top-[15%]"
                 />
 
@@ -146,7 +146,7 @@ function HeroGarbato({
                     width={150}
                     height={40}
                     rotate={-25}
-                    gradient="from-gs-green/[0.14]"
+                    gradient="from-gs-green/[0.26]"
                     className="left-[20%] md:left-[25%] top-[5%] md:top-[10%]"
                 />
             </div>
@@ -219,7 +219,7 @@ function HeroGarbato({
                                     .querySelector("#contato")
                                     ?.scrollIntoView({ behavior: "smooth" })
                             }
-                            className="flex items-center gap-2 px-6 py-3 bg-gs-blue hover:bg-gs-blue-dim text-white font-semibold rounded-xl transition-all shadow-[0_8px_24px_rgba(59,130,246,0.35)] hover:shadow-[0_12px_32px_rgba(59,130,246,0.45)] hover:-translate-y-0.5 cursor-pointer"
+                            className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#FF9A45] to-[#FF6A5A] text-[#2a0f06] font-semibold rounded-xl transition-all shadow-[0_8px_24px_rgba(255,122,69,0.40)] hover:shadow-[0_14px_36px_rgba(255,122,69,0.55)] hover:-translate-y-0.5 cursor-pointer"
                         >
                             Solicitar Projeto
                             <ArrowRight className="w-4 h-4" />

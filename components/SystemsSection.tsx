@@ -67,9 +67,9 @@ export default function SystemsSection() {
     <section
       id="sistemas"
       className="relative py-24 px-6"
-      style={{ background: "#FFFFFF" }}
+      style={{ background: "#060810" }}
     >
-      <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[rgba(15,22,36,0.10)] to-transparent" />
+      <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[rgba(255,255,255,0.10)] to-transparent" />
 
       <div className="max-w-7xl mx-auto" ref={ref}>
         {/* Header */}
@@ -81,13 +81,13 @@ export default function SystemsSection() {
         >
           <span className="badge-blue mb-4 inline-flex">Tipos de sistemas</span>
           <h2
-            className="text-3xl sm:text-4xl xl:text-5xl font-bold text-[#0A0B14] mb-4"
+            className="text-3xl sm:text-4xl xl:text-5xl font-bold text-[#EEF1F8] mb-4"
             style={{ fontFamily: "var(--font-space-grotesk)" }}
           >
             Plataformas completas para{" "}
             <span className="text-gradient-blue">cada realidade</span>
           </h2>
-          <p className="text-[#5B6478] text-lg max-w-xl mx-auto">
+          <p className="text-[#AFB6CC] text-lg max-w-xl mx-auto">
             Cada sistema é projetado para o segmento e a operação específica do
             cliente — personalização, não configuração.
           </p>
@@ -105,7 +105,7 @@ export default function SystemsSection() {
                 duration: 0.55,
                 ease: "easeOut",
               }}
-              className="group relative rounded-2xl p-7 card-hover flex flex-col bg-white"
+              className="group relative rounded-2xl p-7 card-hover flex flex-col bg-[#0E1320]"
               style={{
                 border: "1px solid var(--gs-border)",
                 boxShadow: "var(--gs-shadow-sm)",
@@ -136,7 +136,7 @@ export default function SystemsSection() {
 
               {/* Title */}
               <h3
-                className="text-xl font-bold text-[#0A0B14] mb-3"
+                className="text-xl font-bold text-[#EEF1F8] mb-3"
                 style={{ fontFamily: "var(--font-space-grotesk)" }}
               >
                 {s.title}
@@ -144,20 +144,20 @@ export default function SystemsSection() {
 
               {/* For who */}
               <div className="mb-3">
-                <div className="text-[11px] font-semibold text-[#8D95A8] uppercase tracking-wider mb-1.5">
+                <div className="text-[11px] font-semibold text-[#71789A] uppercase tracking-wider mb-1.5">
                   Para quem
                 </div>
-                <p className="text-[13.5px] text-[#5B6478] leading-relaxed">
+                <p className="text-[13.5px] text-[#AFB6CC] leading-relaxed">
                   {s.forWho}
                 </p>
               </div>
 
               {/* Value */}
               <div className="mb-5">
-                <div className="text-[11px] font-semibold text-[#8D95A8] uppercase tracking-wider mb-1.5">
+                <div className="text-[11px] font-semibold text-[#71789A] uppercase tracking-wider mb-1.5">
                   Valor entregue
                 </div>
-                <p className="text-[13.5px] text-[#5B6478] leading-relaxed">
+                <p className="text-[13.5px] text-[#AFB6CC] leading-relaxed">
                   {s.value}
                 </p>
               </div>
@@ -168,9 +168,9 @@ export default function SystemsSection() {
                   {s.features.map((f) => (
                     <span
                       key={f}
-                      className="text-[11px] px-2.5 py-1 rounded-lg text-[#5B6478]"
+                      className="text-[11px] px-2.5 py-1 rounded-lg text-[#AFB6CC]"
                       style={{
-                        background: "#F2F4F8",
+                        background: "#18223A",
                         border: "1px solid var(--gs-border)",
                       }}
                     >

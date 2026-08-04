@@ -137,7 +137,7 @@ export default function ProductLandingPage({ product }: Props) {
               animate={featInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: i * 0.07, duration: 0.5 }}
               className="rounded-xl p-5 transition-shadow hover:shadow-md"
-              style={{ background: "white", border: `1px solid ${t.border}` }}
+              style={{ background: t.card, border: `1px solid ${t.border}` }}
             >
               <div
                 className="w-9 h-9 rounded-lg flex items-center justify-center mb-3"
@@ -157,7 +157,7 @@ export default function ProductLandingPage({ product }: Props) {
         <SectionHeader
           theme={t}
           badge={howItWorks.badge}
-          badgeBg="white"
+          badgeBg={t.card}
           titlePre={howItWorks.titlePre}
           titleHighlight={howItWorks.titleHighlight}
         />
@@ -167,7 +167,7 @@ export default function ProductLandingPage({ product }: Props) {
             <div
               key={s.n}
               className="rounded-xl p-6 text-center"
-              style={{ background: "white", border: `1px solid ${t.border}` }}
+              style={{ background: t.card, border: `1px solid ${t.border}` }}
             >
               <div
                 className="w-10 h-10 rounded-xl flex items-center justify-center mx-auto mb-3"
@@ -207,7 +207,7 @@ export default function ProductLandingPage({ product }: Props) {
               transition={{ delay: i * 0.1, duration: 0.5 }}
               className="relative rounded-2xl p-6 flex flex-col"
               style={{
-                background: plan.hot ? t.primary : "white",
+                background: plan.hot ? t.primary : t.card,
                 border: plan.hot ? "none" : `1px solid ${t.border}`,
                 boxShadow: plan.hot ? `0 16px 48px rgba(${t.shadowRgba},0.22)` : "none",
               }}
@@ -215,7 +215,7 @@ export default function ProductLandingPage({ product }: Props) {
               {plan.hot && (
                 <div
                   className="absolute -top-3 left-1/2 -translate-x-1/2 text-[10px] font-bold px-3 py-0.5 rounded-full"
-                  style={{ background: t.accent, color: "white" }}
+                  style={{ background: t.accent, color: "#04140F" }}
                 >
                   Mais popular
                 </div>
@@ -325,7 +325,7 @@ export default function ProductLandingPage({ product }: Props) {
       {/* ── Footer ────────────────────────────────────────────────────────── */}
       <footer
         className="py-6 px-6 text-center text-[12px]"
-        style={{ background: "white", borderTop: `1px solid ${t.border}`, color: t.muted }}
+        style={{ background: t.bgSoft, borderTop: `1px solid ${t.border}`, color: t.muted }}
       >
         © {new Date().getFullYear()} {product.name} · desenvolvido por{" "}
         <Link href="/" style={{ color: t.primary, fontWeight: 600 }}>Garbato Solution</Link>
@@ -353,7 +353,7 @@ function ProductNavbar({
   return (
     <header
       className="fixed top-0 left-0 right-0 z-50"
-      style={{ background: "rgba(255,255,255,0.95)", backdropFilter: "blur(12px)", borderBottom: `1px solid ${t.border}` }}
+      style={{ background: "rgba(6,8,16,0.85)", backdropFilter: "blur(12px)", borderBottom: `1px solid ${t.border}` }}
     >
       <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
         {/* Logo */}
@@ -416,7 +416,7 @@ function FAQItem({ item, theme: t }: { item: FAQType; theme: ProductTheme }) {
       className="rounded-xl overflow-hidden transition-all"
       style={{
         border: `1px solid ${open ? t.primary + "40" : t.border}`,
-        background: open ? t.bgTinted : "white",
+        background: open ? t.bgTinted : t.card,
       }}
     >
       <button

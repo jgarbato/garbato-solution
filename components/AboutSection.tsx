@@ -42,10 +42,10 @@ export default function AboutSection() {
     <section
       id="sobre"
       className="relative py-24 px-6"
-      style={{ background: "#FFFFFF" }}
+      style={{ background: "#060810" }}
     >
       {/* Subtle border top */}
-      <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[rgba(15,22,36,0.10)] to-transparent" />
+      <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[rgba(255,255,255,0.10)] to-transparent" />
 
       <div className="max-w-7xl mx-auto" ref={ref}>
         {/* Header */}
@@ -57,13 +57,13 @@ export default function AboutSection() {
         >
           <span className="badge-blue mb-4 inline-flex">Quem somos</span>
           <h2
-            className="text-3xl sm:text-4xl xl:text-5xl font-bold text-[#0A0B14] mb-5"
+            className="text-3xl sm:text-4xl xl:text-5xl font-bold text-[#EEF1F8] mb-5"
             style={{ fontFamily: "var(--font-space-grotesk)" }}
           >
             Tecnologia com{" "}
             <span className="text-gradient-blue">visão de negócio</span>
           </h2>
-          <p className="text-[#5B6478] text-lg leading-relaxed">
+          <p className="text-[#AFB6CC] text-lg leading-relaxed">
             Desenvolvemos sistemas sob medida para empresas que precisam
             organizar processos, centralizar informações e ganhar produtividade
             com tecnologia. Entendemos que software é meio, não fim — o
@@ -83,7 +83,7 @@ export default function AboutSection() {
                 duration: 0.6,
                 ease: "easeOut",
               }}
-              className="group relative rounded-2xl p-7 card-hover bg-white"
+              className="group relative rounded-2xl p-7 card-hover bg-[#0E1320]"
               style={{
                 border: "1px solid var(--gs-border)",
                 boxShadow: "var(--gs-shadow-sm)",
@@ -104,14 +104,14 @@ export default function AboutSection() {
 
               {/* Title */}
               <h3
-                className="text-xl font-bold text-[#0A0B14] mb-3"
+                className="text-xl font-bold text-[#EEF1F8] mb-3"
                 style={{ fontFamily: "var(--font-space-grotesk)" }}
               >
                 {p.title}
               </h3>
 
               {/* Description */}
-              <p className="text-[#5B6478] text-sm leading-relaxed mb-5">
+              <p className="text-[#AFB6CC] text-sm leading-relaxed mb-5">
                 {p.desc}
               </p>
 
@@ -120,7 +120,7 @@ export default function AboutSection() {
                 {p.points.map((point) => (
                   <li
                     key={point}
-                    className="flex items-center gap-2.5 text-[13px] text-[#5B6478]"
+                    className="flex items-center gap-2.5 text-[13px] text-[#AFB6CC]"
                   >
                     <div
                       className="w-1.5 h-1.5 rounded-full flex-shrink-0"

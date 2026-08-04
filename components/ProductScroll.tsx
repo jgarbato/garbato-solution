@@ -170,19 +170,19 @@ function DashboardMockup() {
 
 export default function ProductScroll() {
   return (
-    <section className="relative overflow-hidden bg-white" id="produto">
+    <section className="relative overflow-hidden bg-[#060810]" id="produto">
       <ContainerScroll
         titleComponent={
           <div className="mb-4">
             <span className="badge-blue mb-4 inline-flex">Veja na prática</span>
             <h2
-              className="text-3xl sm:text-4xl xl:text-5xl font-bold text-[#0A0B14] mb-4"
+              className="text-3xl sm:text-4xl xl:text-5xl font-bold text-[#EEF1F8] mb-4"
               style={{ fontFamily: "var(--font-space-grotesk)" }}
             >
               Sistemas que sua equipe{" "}
               <span className="text-gradient-blue">realmente usa</span>
             </h2>
-            <p className="text-[#5B6478] text-lg max-w-xl mx-auto">
+            <p className="text-[#AFB6CC] text-lg max-w-xl mx-auto">
               Interfaces limpas, dados centralizados e visão gerencial em tempo
               real — desenhados para a operação do seu negócio.
             </p>

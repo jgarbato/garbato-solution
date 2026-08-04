@@ -15,7 +15,7 @@ export default function CTASection() {
   return (
     <section
       className="relative py-24 px-6 overflow-hidden"
-      style={{ background: "#F7F8FA" }}
+      style={{ background: "#0A0E1A" }}
     >
       {/* Background */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
@@ -50,7 +50,7 @@ export default function CTASection() {
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.1, duration: 0.6, ease: "easeOut" }}
-          className="text-3xl sm:text-5xl xl:text-6xl font-bold text-[#0A0B14] mb-4 leading-tight"
+          className="text-3xl sm:text-5xl xl:text-6xl font-bold text-[#EEF1F8] mb-4 leading-tight"
           style={{ fontFamily: "var(--font-space-grotesk)" }}
         >
           Sua empresa não precisa de{" "}
@@ -62,7 +62,7 @@ export default function CTASection() {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.2, duration: 0.6 }}
-          className="text-xl text-[#5B6478] mb-10 max-w-xl mx-auto leading-relaxed"
+          className="text-xl text-[#AFB6CC] mb-10 max-w-xl mx-auto leading-relaxed"
         >
           Precisa de um sistema que organize tudo em um único lugar — pensado
           para a operação real do seu negócio.
@@ -82,7 +82,7 @@ export default function CTASection() {
                 .querySelector("#contato")
                 ?.scrollIntoView({ behavior: "smooth" })
             }
-            className="text-[#0A0B14] font-semibold text-lg"
+            className="text-[#EEF1F8] font-semibold text-lg"
           >
             Vamos conversar sobre seu projeto
             <ArrowRight className="w-5 h-5" />
@@ -106,7 +106,7 @@ export default function CTASection() {
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ delay: 0.5, duration: 0.6 }}
-          className="mt-6 text-[13px] text-[#8D95A8]"
+          className="mt-6 text-[13px] text-[#71789A]"
         >
           Resposta em até 24h · Sem compromisso · Proposta personalizada
         </motion.p>

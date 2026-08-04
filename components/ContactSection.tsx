@@ -55,14 +55,14 @@ function InputField({
     <div>
       <label
         htmlFor={id}
-        className="block text-[12.5px] font-medium text-[#5B6478] mb-1.5"
+        className="block text-[12.5px] font-medium text-[#AFB6CC] mb-1.5"
       >
         {label}
         {required && <span className="text-[#3B82F6] ml-0.5">*</span>}
       </label>
       <div className="relative">
         <Icon
-          className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#8D95A8] pointer-events-none"
+          className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#71789A] pointer-events-none"
         />
         <input
           id={id}
@@ -71,9 +71,9 @@ function InputField({
           value={value}
           onChange={(e) => onChange(id, e.target.value)}
           required={required}
-          className="w-full pl-10 pr-4 py-3 rounded-xl text-[14px] text-[#0A0B14] placeholder-[#8D95A8] outline-none transition-all"
+          className="w-full pl-10 pr-4 py-3 rounded-xl text-[14px] text-[#EEF1F8] placeholder-[#71789A] outline-none transition-all"
           style={{
-            background: "#FFFFFF",
+            background: "#0A0E1A",
             border: "1px solid var(--gs-border)",
           }}
           onFocus={(e) => {
@@ -83,7 +83,7 @@ function InputField({
           }}
           onBlur={(e) => {
             e.currentTarget.style.borderColor = "var(--gs-border)"
-            e.currentTarget.style.background = "#FFFFFF"
+            e.currentTarget.style.background = "#0A0E1A"
             e.currentTarget.style.boxShadow = "none"
           }}
         />
@@ -116,9 +116,9 @@ export default function ContactSection() {
     <section
       id="contato"
       className="relative py-24 px-6"
-      style={{ background: "#FFFFFF" }}
+      style={{ background: "#060810" }}
     >
-      <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[rgba(15,22,36,0.10)] to-transparent" />
+      <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[rgba(255,255,255,0.10)] to-transparent" />
 
       <div className="max-w-7xl mx-auto" ref={ref}>
         {/* Header */}
@@ -132,13 +132,13 @@ export default function ContactSection() {
           <div>
             <span className="badge-blue mb-4 inline-flex">Contato</span>
             <h2
-              className="text-3xl sm:text-4xl xl:text-5xl font-bold text-[#0A0B14] mb-5"
+              className="text-3xl sm:text-4xl xl:text-5xl font-bold text-[#EEF1F8] mb-5"
               style={{ fontFamily: "var(--font-space-grotesk)" }}
             >
               Vamos construir seu{" "}
               <span className="text-gradient-blue">próximo sistema</span>
             </h2>
-            <p className="text-[#5B6478] text-lg leading-relaxed mb-8">
+            <p className="text-[#AFB6CC] text-lg leading-relaxed mb-8">
               Conte-nos sobre sua empresa e o que você precisa automatizar ou
               centralizar. Nossa equipe fará um levantamento inicial e retornará
               com uma proposta personalizada.
@@ -172,7 +172,7 @@ export default function ContactSection() {
                 <button
                   key={item.label}
                   onClick={item.action}
-                  className={`flex items-center gap-3 p-4 rounded-xl text-left transition-all bg-white ${
+                  className={`flex items-center gap-3 p-4 rounded-xl text-left transition-all bg-[#0E1320] ${
                     item.action ? "cursor-pointer hover:-translate-y-0.5" : "cursor-default"
                   }`}
                   style={{
@@ -187,8 +187,8 @@ export default function ContactSection() {
                     <item.icon className="w-4 h-4" style={{ color: item.color }} />
                   </div>
                   <div>
-                    <div className="text-[11px] text-[#8D95A8] font-medium">{item.label}</div>
-                    <div className="text-[13.5px] text-[#0A0B14] font-medium">{item.value}</div>
+                    <div className="text-[11px] text-[#71789A] font-medium">{item.label}</div>
+                    <div className="text-[13.5px] text-[#EEF1F8] font-medium">{item.value}</div>
                   </div>
                 </button>
               ))}
@@ -200,7 +200,7 @@ export default function ContactSection() {
             initial={{ opacity: 0, x: 24 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ delay: 0.15, duration: 0.6, ease: "easeOut" }}
-            className="relative rounded-2xl p-7 sm:p-8 bg-white"
+            className="relative rounded-2xl p-7 sm:p-8 bg-[#0E1320]"
             style={{
               border: "1px solid var(--gs-border)",
               boxShadow: "var(--gs-shadow-md)",
@@ -222,12 +222,12 @@ export default function ContactSection() {
                     <CheckCircle2 className="w-8 h-8 text-[#10B981]" />
                   </div>
                   <h3
-                    className="text-2xl font-bold text-[#0A0B14]"
+                    className="text-2xl font-bold text-[#EEF1F8]"
                     style={{ fontFamily: "var(--font-space-grotesk)" }}
                   >
                     Mensagem enviada!
                   </h3>
-                  <p className="text-[#5B6478] text-[14px] max-w-xs">
+                  <p className="text-[#AFB6CC] text-[14px] max-w-xs">
                     Recebemos sua solicitação. Entraremos em contato em até 24h
                     para dar continuidade à conversa.
                   </p>
@@ -248,12 +248,12 @@ export default function ContactSection() {
                 >
                   <div>
                     <h3
-                      className="text-xl font-bold text-[#0A0B14] mb-1"
+                      className="text-xl font-bold text-[#EEF1F8] mb-1"
                       style={{ fontFamily: "var(--font-space-grotesk)" }}
                     >
                       Envie sua solicitação
                     </h3>
-                    <p className="text-[13px] text-[#5B6478]">
+                    <p className="text-[13px] text-[#AFB6CC]">
                       Sem compromisso. Retornamos em até 24h.
                     </p>
                   </div>
@@ -302,20 +302,20 @@ export default function ContactSection() {
 
                   {/* Message */}
                   <div>
-                    <label className="block text-[12.5px] font-medium text-[#5B6478] mb-1.5">
+                    <label className="block text-[12.5px] font-medium text-[#AFB6CC] mb-1.5">
                       Mensagem <span className="text-[#3B82F6]">*</span>
                     </label>
                     <div className="relative">
-                      <FileText className="absolute left-3.5 top-3.5 w-4 h-4 text-[#8D95A8] pointer-events-none" />
+                      <FileText className="absolute left-3.5 top-3.5 w-4 h-4 text-[#71789A] pointer-events-none" />
                       <textarea
                         rows={4}
                         placeholder="Descreva brevemente o que sua empresa precisa..."
                         value={form.message}
                         onChange={(e) => handleChange("message", e.target.value)}
                         required
-                        className="w-full pl-10 pr-4 py-3 rounded-xl text-[14px] text-[#0A0B14] placeholder-[#8D95A8] outline-none resize-none transition-all"
+                        className="w-full pl-10 pr-4 py-3 rounded-xl text-[14px] text-[#EEF1F8] placeholder-[#71789A] outline-none resize-none transition-all"
                         style={{
-                          background: "#FFFFFF",
+                          background: "#0A0E1A",
                           border: "1px solid var(--gs-border)",
                         }}
                         onFocus={(e) => {
@@ -325,7 +325,7 @@ export default function ContactSection() {
                         }}
                         onBlur={(e) => {
                           e.currentTarget.style.borderColor = "var(--gs-border)"
-                          e.currentTarget.style.background = "#FFFFFF"
+                          e.currentTarget.style.background = "#0A0E1A"
                           e.currentTarget.style.boxShadow = "none"
                         }}
                       />

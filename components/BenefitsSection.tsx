@@ -56,9 +56,9 @@ export default function BenefitsSection() {
     <section
       id="beneficios"
       className="relative py-24 px-6"
-      style={{ background: "#FFFFFF" }}
+      style={{ background: "#060810" }}
     >
-      <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[rgba(15,22,36,0.10)] to-transparent" />
+      <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[rgba(255,255,255,0.10)] to-transparent" />
 
       <div className="max-w-7xl mx-auto" ref={ref}>
         {/* Header */}
@@ -71,14 +71,14 @@ export default function BenefitsSection() {
           <div>
             <span className="badge-blue mb-4 inline-flex">Benefícios concretos</span>
             <h2
-              className="text-3xl sm:text-4xl xl:text-5xl font-bold text-[#0A0B14]"
+              className="text-3xl sm:text-4xl xl:text-5xl font-bold text-[#EEF1F8]"
               style={{ fontFamily: "var(--font-space-grotesk)" }}
             >
               O que muda com um sistema{" "}
               <span className="text-gradient-blue">bem feito</span>
             </h2>
           </div>
-          <p className="text-[#5B6478] text-lg leading-relaxed">
+          <p className="text-[#AFB6CC] text-lg leading-relaxed">
             Sistemas sob medida não são apenas mais bonitos — eles entregam
             resultados mensuráveis para a operação, a equipe e os números do negócio.
           </p>
@@ -97,7 +97,7 @@ export default function BenefitsSection() {
                   duration: 0.55,
                   ease: "easeOut",
                 }}
-                className="group relative rounded-2xl p-7 card-hover bg-white"
+                className="group relative rounded-2xl p-7 card-hover bg-[#0E1320]"
                 style={{
                   border: "1px solid var(--gs-border)",
                   boxShadow: "var(--gs-shadow-sm)",
@@ -122,12 +122,12 @@ export default function BenefitsSection() {
                   >
                     <b.icon className="w-4 h-4" style={{ color: b.color }} />
                   </div>
-                  <span className="text-[15px] font-semibold text-[#0A0B14]">
+                  <span className="text-[15px] font-semibold text-[#EEF1F8]">
                     {b.label}
                   </span>
                 </div>
 
-                <p className="text-[13.5px] text-[#5B6478] leading-relaxed">
+                <p className="text-[13.5px] text-[#AFB6CC] leading-relaxed">
                   {b.desc}
                 </p>
               </motion.div>
@@ -145,7 +145,7 @@ export default function BenefitsSection() {
                   duration: 0.55,
                   ease: "easeOut",
                 }}
-                className="group relative rounded-2xl p-7 card-hover flex gap-6 items-start bg-white"
+                className="group relative rounded-2xl p-7 card-hover flex gap-6 items-start bg-[#0E1320]"
                 style={{
                   border: "1px solid var(--gs-border)",
                   boxShadow: "var(--gs-shadow-sm)",
@@ -170,11 +170,11 @@ export default function BenefitsSection() {
                     >
                       <b.icon className="w-3.5 h-3.5" style={{ color: b.color }} />
                     </div>
-                    <span className="text-[15px] font-semibold text-[#0A0B14]">
+                    <span className="text-[15px] font-semibold text-[#EEF1F8]">
                       {b.label}
                     </span>
                   </div>
-                  <p className="text-[13.5px] text-[#5B6478] leading-relaxed">
+                  <p className="text-[13.5px] text-[#AFB6CC] leading-relaxed">
                     {b.desc}
                   </p>
                 </div>

@@ -45,7 +45,7 @@ function PagamentoContent() {
   const price = plan ? (periodo === "anual" ? plan.priceAnnual : plan.price) : 0
   const planLabel = plan?.name ?? plano
   const sistemaLabel = product.name
-  const sistemaColor = sistema === "mob" ? "#06B6D4" : "#7C3AED"
+  const sistemaColor = sistema === "mob" ? "#22B8F5" : "#8B7CFF"
 
   const [metodo, setMetodo] = useState<MetodoPagamento>("pix")
   const [cadastro, setCadastro] = useState<Record<string, string> | null>(null)
@@ -122,7 +122,7 @@ function PagamentoContent() {
   if (!cadastro) return null
 
   return (
-    <main className="min-h-screen" style={{ background: "#FFFFFF" }}>
+    <main className="min-h-screen" style={{ background: "#060810" }}>
       <Navbar />
 
       <section className="relative pt-32 pb-24 px-6">
@@ -131,7 +131,7 @@ function PagamentoContent() {
         <div className="max-w-2xl mx-auto relative z-10">
           <button
             onClick={() => router.back()}
-            className="flex items-center gap-1.5 text-[13px] text-[#5B6478] hover:text-[#0A0B14] transition-colors mb-8 cursor-pointer"
+            className="flex items-center gap-1.5 text-[13px] text-[#AFB6CC] hover:text-[#EEF1F8] transition-colors mb-8 cursor-pointer"
             disabled={processando}
           >
             <ArrowLeft className="w-4 h-4" /> Voltar ao cadastro
@@ -156,18 +156,18 @@ function PagamentoContent() {
                 >
                   {sistemaLabel} — Plano {planLabel}
                 </div>
-                <div className="text-[13px] text-[#5B6478]">
+                <div className="text-[13px] text-[#AFB6CC]">
                   {cadastro.nome} · {cadastro.email}
                 </div>
               </div>
               <div className="text-right">
                 <div
-                  className="text-2xl font-bold text-[#0A0B14]"
+                  className="text-2xl font-bold text-[#EEF1F8]"
                   style={{ fontFamily: "var(--font-space-grotesk)" }}
                 >
                   R$ {price.toLocaleString("pt-BR")}
                 </div>
-                <div className="text-[11px] text-[#8D95A8]">
+                <div className="text-[11px] text-[#71789A]">
                   {periodo === "anual" ? `R$ ${(price * 12).toLocaleString("pt-BR")}/ano` : "por mês"}
                 </div>
               </div>
@@ -179,7 +179,7 @@ function PagamentoContent() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="rounded-2xl p-8 bg-white"
+            className="rounded-2xl p-8 bg-[#0E1320]"
             style={{
               border: "1px solid var(--gs-border)",
               boxShadow: "var(--gs-shadow-md)",
@@ -188,7 +188,7 @@ function PagamentoContent() {
             {!cobranca ? (
               <>
                 <h2
-                  className="text-2xl font-bold text-[#0A0B14] mb-6"
+                  className="text-2xl font-bold text-[#EEF1F8] mb-6"
                   style={{ fontFamily: "var(--font-space-grotesk)" }}
                 >
                   Forma de pagamento
@@ -209,12 +209,12 @@ function PagamentoContent() {
                       disabled={processando}
                       className="flex flex-col items-center gap-1.5 py-4 px-3 rounded-xl transition-all cursor-pointer disabled:opacity-60"
                       style={{
-                        background: metodo === m.id ? `${sistemaColor}10` : "#F7F8FA",
+                        background: metodo === m.id ? `${sistemaColor}18` : "#141B2B",
                         border:
                           metodo === m.id
                             ? `1px solid ${sistemaColor}45`
                             : "1px solid var(--gs-border)",
-                        color: metodo === m.id ? sistemaColor : "#5B6478",
+                        color: metodo === m.id ? sistemaColor : "#AFB6CC",
                       }}
                     >
                       <m.icon className="w-5 h-5" />
@@ -226,19 +226,19 @@ function PagamentoContent() {
 
                 {/* Info por método */}
                 {metodo === "pix" && (
-                  <p className="text-[12px] text-[#5B6478] text-center max-w-xs mx-auto">
+                  <p className="text-[12px] text-[#AFB6CC] text-center max-w-xs mx-auto">
                     Clique em &ldquo;Gerar QR Code PIX&rdquo; para criar a cobrança. O acesso é liberado
                     automaticamente após a confirmação do pagamento.
                   </p>
                 )}
                 {metodo === "boleto" && (
-                  <p className="text-[13px] text-[#5B6478] text-center max-w-xs mx-auto">
+                  <p className="text-[13px] text-[#AFB6CC] text-center max-w-xs mx-auto">
                     O boleto será gerado e exibido. Você também recebe por e-mail. Prazo de compensação:
                     até 3 dias úteis.
                   </p>
                 )}
                 {metodo === "cartao" && (
-                  <p className="text-[13px] text-[#5B6478] text-center max-w-xs mx-auto">
+                  <p className="text-[13px] text-[#AFB6CC] text-center max-w-xs mx-auto">
                     Você será redirecionado para o ambiente seguro do Asaas para inserir os dados do cartão.
                   </p>
                 )}
@@ -252,7 +252,7 @@ function PagamentoContent() {
                     }}
                   >
                     <AlertCircle className="w-4 h-4 text-red-500 flex-shrink-0" />
-                    <span className="text-[13px] text-red-600">{erro}</span>
+                    <span className="text-[13px] text-red-300">{erro}</span>
                   </div>
                 )}
 
@@ -282,7 +282,7 @@ function PagamentoContent() {
                   )}
                 </button>
 
-                <p className="text-[11px] text-[#8D95A8] text-center mt-3">
+                <p className="text-[11px] text-[#71789A] text-center mt-3">
                   🔒 Pagamento processado com segurança via Asaas
                 </p>
               </>
@@ -319,7 +319,7 @@ function CobrancaGerada({
     <div className="flex flex-col gap-5">
       <div className="text-center">
         <h2
-          className="text-2xl font-bold text-[#0A0B14] mb-1"
+          className="text-2xl font-bold text-[#EEF1F8] mb-1"
           style={{ fontFamily: "var(--font-space-grotesk)" }}
         >
           {cobranca.billingType === "PIX"
@@ -328,7 +328,7 @@ function CobrancaGerada({
             ? "Boleto gerado"
             : "Cartão"}
         </h2>
-        <p className="text-[13px] text-[#5B6478]">
+        <p className="text-[13px] text-[#AFB6CC]">
           Vencimento em{" "}
           {new Date(cobranca.dueDate).toLocaleDateString("pt-BR", { day: "2-digit", month: "long" })}
         </p>
@@ -347,11 +347,11 @@ function CobrancaGerada({
           {cobranca.pixPayload && (
             <button
               onClick={onCopiarPix}
-              className="w-full flex items-center justify-between gap-2 px-4 py-3 rounded-xl text-[12.5px] font-mono transition-all hover:bg-[#F2F4F8] cursor-pointer"
+              className="w-full flex items-center justify-between gap-2 px-4 py-3 rounded-xl text-[12.5px] font-mono transition-all hover:bg-[#1B2540] cursor-pointer"
               style={{
-                background: "#F7F8FA",
+                background: "#141B2B",
                 border: "1px solid var(--gs-border)",
-                color: "#0A0B14",
+                color: "#EEF1F8",
               }}
             >
               <span className="truncate text-left">{cobranca.pixPayload}</span>
@@ -364,7 +364,7 @@ function CobrancaGerada({
               </span>
             </button>
           )}
-          <p className="text-[12px] text-[#5B6478] text-center max-w-xs">
+          <p className="text-[12px] text-[#AFB6CC] text-center max-w-xs">
             Abra o app do seu banco, escolha PIX, escaneie o QR Code ou cole o código copia-e-cola.
           </p>
         </div>
@@ -375,10 +375,10 @@ function CobrancaGerada({
         <div className="flex flex-col items-center gap-3">
           <div
             className="w-full rounded-xl p-5 flex flex-col items-center gap-3"
-            style={{ background: "#F7F8FA", border: "1px solid var(--gs-border)" }}
+            style={{ background: "#141B2B", border: "1px solid var(--gs-border)" }}
           >
-            <FileText className="w-12 h-12 text-[#8D95A8]" />
-            <p className="text-[13px] text-[#5B6478] text-center">
+            <FileText className="w-12 h-12 text-[#71789A]" />
+            <p className="text-[13px] text-[#AFB6CC] text-center">
               Boleto gerado. Clique abaixo para abrir o PDF e pagar.
             </p>
           </div>
@@ -403,10 +403,10 @@ function CobrancaGerada({
         <div className="flex flex-col items-center gap-3">
           <div
             className="w-full rounded-xl p-5 flex flex-col items-center gap-3"
-            style={{ background: "#F7F8FA", border: "1px solid var(--gs-border)" }}
+            style={{ background: "#141B2B", border: "1px solid var(--gs-border)" }}
           >
-            <CreditCard className="w-12 h-12 text-[#8D95A8]" />
-            <p className="text-[13px] text-[#5B6478] text-center">
+            <CreditCard className="w-12 h-12 text-[#71789A]" />
+            <p className="text-[13px] text-[#AFB6CC] text-center">
               Uma nova aba foi aberta com o ambiente seguro do Asaas para inserir os dados do cartão.
               Se não abriu, clique no botão abaixo.
             </p>
@@ -431,10 +431,10 @@ function CobrancaGerada({
 
       <button
         onClick={onIrParaConfirmacao}
-        className="mt-2 w-full py-3 rounded-xl text-[14px] font-semibold transition-all cursor-pointer hover:bg-[#F2F4F8]"
+        className="mt-2 w-full py-3 rounded-xl text-[14px] font-semibold transition-all cursor-pointer hover:bg-[#1B2540]"
         style={{
-          background: "#F7F8FA",
-          color: "#0A0B14",
+          background: "#141B2B",
+          color: "#EEF1F8",
           border: "1px solid var(--gs-border)",
         }}
       >

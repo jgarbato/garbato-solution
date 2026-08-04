@@ -47,11 +47,11 @@ function FAQItem({ faq, index }: { faq: typeof FAQS[0]; index: number }) {
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.06, duration: 0.45, ease: "easeOut" }}
-      className="rounded-xl overflow-hidden bg-white"
+      className="rounded-xl overflow-hidden bg-[#0E1320]"
       style={{
-        background: open ? "#F5F8FE" : "#FFFFFF",
-        border: open ? "1px solid rgba(59,130,246,0.30)" : "1px solid var(--gs-border)",
-        boxShadow: open ? "0 4px 12px rgba(59,130,246,0.10)" : "var(--gs-shadow-sm)",
+        background: open ? "#101A2E" : "#0E1320",
+        border: open ? "1px solid rgba(91,155,255,0.35)" : "1px solid var(--gs-border)",
+        boxShadow: open ? "0 4px 16px rgba(59,110,246,0.18)" : "var(--gs-shadow-sm)",
         transition: "background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease",
       }}
     >
@@ -60,7 +60,7 @@ function FAQItem({ faq, index }: { faq: typeof FAQS[0]; index: number }) {
         className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left cursor-pointer"
       >
         <span
-          className="text-[15px] font-semibold text-[#0A0B14] leading-snug"
+          className="text-[15px] font-semibold text-[#EEF1F8] leading-snug"
           style={{ fontFamily: "var(--font-space-grotesk)" }}
         >
           {faq.q}
@@ -70,13 +70,13 @@ function FAQItem({ faq, index }: { faq: typeof FAQS[0]; index: number }) {
           transition={{ duration: 0.25 }}
           className="flex-shrink-0 w-7 h-7 rounded-lg flex items-center justify-center"
           style={{
-            background: open ? "rgba(59,130,246,0.10)" : "#F2F4F8",
+            background: open ? "rgba(91,155,255,0.16)" : "#18223A",
             border: open ? "1px solid rgba(59,130,246,0.30)" : "1px solid var(--gs-border)",
           }}
         >
           <ChevronDown
             className="w-3.5 h-3.5 transition-colors"
-            style={{ color: open ? "#3B82F6" : "#5B6478" }}
+            style={{ color: open ? "#3B82F6" : "#AFB6CC" }}
           />
         </motion.div>
       </button>
@@ -91,8 +91,8 @@ function FAQItem({ faq, index }: { faq: typeof FAQS[0]; index: number }) {
             className="overflow-hidden"
           >
             <div className="px-6 pb-5">
-              <div className="h-[1px] bg-[rgba(15,22,36,0.06)] mb-4" />
-              <p className="text-[14px] text-[#5B6478] leading-relaxed">{faq.a}</p>
+              <div className="h-[1px] bg-[rgba(255,255,255,0.06)] mb-4" />
+              <p className="text-[14px] text-[#AFB6CC] leading-relaxed">{faq.a}</p>
             </div>
           </motion.div>
         )}
@@ -109,9 +109,9 @@ export default function FAQSection() {
     <section
       id="faq"
       className="relative py-24 px-6"
-      style={{ background: "#FFFFFF" }}
+      style={{ background: "#060810" }}
     >
-      <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[rgba(15,22,36,0.10)] to-transparent" />
+      <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[rgba(255,255,255,0.10)] to-transparent" />
 
       <div className="max-w-4xl mx-auto" ref={ref}>
         {/* Header */}
@@ -123,13 +123,13 @@ export default function FAQSection() {
         >
           <span className="badge-blue mb-4 inline-flex">Dúvidas frequentes</span>
           <h2
-            className="text-3xl sm:text-4xl xl:text-5xl font-bold text-[#0A0B14] mb-4"
+            className="text-3xl sm:text-4xl xl:text-5xl font-bold text-[#EEF1F8] mb-4"
             style={{ fontFamily: "var(--font-space-grotesk)" }}
           >
             Perguntas{" "}
             <span className="text-gradient-blue">frequentes</span>
           </h2>
-          <p className="text-[#5B6478] text-lg max-w-lg mx-auto">
+          <p className="text-[#AFB6CC] text-lg max-w-lg mx-auto">
             Tudo que você precisa saber antes de dar o próximo passo.
           </p>
         </motion.div>

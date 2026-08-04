@@ -14,14 +14,14 @@ const SISTEMAS = [
     label: PRODUCTS.clinic.name,
     sub: "Clínicas odontológicas e estética",
     icon: Stethoscope,
-    color: "#7C3AED",
+    color: "#8B7CFF",
   },
   {
     id: "mob" as const,
     label: PRODUCTS.mob.name,
     sub: "Imóveis, loteamento e contratos",
     icon: Building2,
-    color: "#06B6D4",
+    color: "#22B8F5",
   },
 ]
 
@@ -44,7 +44,7 @@ function ContratarContent() {
   }
 
   return (
-    <main className="min-h-screen" style={{ background: "#FFFFFF" }}>
+    <main className="min-h-screen" style={{ background: "#060810" }}>
       <Navbar />
 
       <section className="relative pt-32 pb-24 px-6">
@@ -64,13 +64,13 @@ function ContratarContent() {
           >
             <span className="badge-blue mb-4 inline-flex">Planos e preços</span>
             <h1
-              className="text-4xl sm:text-5xl font-bold text-[#0A0B14] mb-4"
+              className="text-4xl sm:text-5xl font-bold text-[#EEF1F8] mb-4"
               style={{ fontFamily: "var(--font-space-grotesk)" }}
             >
               Escolha o plano ideal{" "}
               <span className="text-gradient-blue">para o seu negócio</span>
             </h1>
-            <p className="text-[#5B6478] text-lg max-w-xl mx-auto">
+            <p className="text-[#AFB6CC] text-lg max-w-xl mx-auto">
               Soluções completas para clínicas e gestão imobiliária. Sem contrato de fidelidade no plano mensal.
             </p>
           </motion.div>
@@ -83,7 +83,7 @@ function ContratarContent() {
             className="flex justify-center mb-8 relative z-10"
           >
             <div
-              className="flex rounded-xl p-1 gap-1 bg-white"
+              className="flex rounded-xl p-1 gap-1 bg-[#0E1320]"
               style={{
                 border: "1px solid var(--gs-border)",
                 boxShadow: "var(--gs-shadow-sm)",
@@ -98,7 +98,7 @@ function ContratarContent() {
                     className="px-6 py-3 rounded-lg text-sm font-semibold transition-all flex items-center gap-2.5"
                     style={{
                       background: active ? `${s.color}12` : "transparent",
-                      color: active ? s.color : "#5B6478",
+                      color: active ? s.color : "#AFB6CC",
                       border: active ? `1px solid ${s.color}35` : "1px solid transparent",
                     }}
                   >
@@ -120,13 +120,13 @@ function ContratarContent() {
             transition={{ duration: 0.5, delay: 0.15 }}
             className="flex items-center justify-center gap-3 mb-12 relative z-10"
           >
-            <span className={`text-sm font-medium ${periodo === "mensal" ? "text-[#0A0B14]" : "text-[#8D95A8]"}`}>
+            <span className={`text-sm font-medium ${periodo === "mensal" ? "text-[#EEF1F8]" : "text-[#71789A]"}`}>
               Mensal
             </span>
             <button
               onClick={() => setPeriodo((p) => (p === "mensal" ? "anual" : "mensal"))}
               className="relative w-12 h-6 rounded-full transition-colors"
-              style={{ background: periodo === "anual" ? "#3B82F6" : "rgba(15,22,36,0.15)" }}
+              style={{ background: periodo === "anual" ? "#5B9BFF" : "rgba(255,255,255,0.15)" }}
             >
               <div
                 className="absolute top-1 w-4 h-4 rounded-full bg-white transition-all duration-200 shadow-[0_1px_3px_rgba(15,22,36,0.20)]"
@@ -134,7 +134,7 @@ function ContratarContent() {
               />
             </button>
             <div className="flex items-center gap-2">
-              <span className={`text-sm font-medium ${periodo === "anual" ? "text-[#0A0B14]" : "text-[#8D95A8]"}`}>
+              <span className={`text-sm font-medium ${periodo === "anual" ? "text-[#EEF1F8]" : "text-[#71789A]"}`}>
                 Anual
               </span>
               <span
@@ -158,7 +158,7 @@ function ContratarContent() {
                   transition={{ delay: i * 0.1 + 0.2, duration: 0.55 }}
                   className="relative rounded-2xl p-7 flex flex-col"
                   style={{
-                    background: plan.hot ? `${sistemaInfo.color}06` : "#FFFFFF",
+                    background: plan.hot ? `${sistemaInfo.color}12` : "#0E1320",
                     border: plan.hot
                       ? `1.5px solid ${sistemaInfo.color}50`
                       : "1px solid var(--gs-border)",
@@ -186,31 +186,31 @@ function ContratarContent() {
 
                   <div className="mb-5">
                     <h3
-                      className="text-xl font-bold text-[#0A0B14] mb-1"
+                      className="text-xl font-bold text-[#EEF1F8] mb-1"
                       style={{ fontFamily: "var(--font-space-grotesk)" }}
                     >
                       {plan.name}
                     </h3>
-                    <p className="text-[13px] text-[#5B6478]">{plan.desc}</p>
+                    <p className="text-[13px] text-[#AFB6CC]">{plan.desc}</p>
                   </div>
 
                   <div className="mb-6">
                     <div className="flex items-end gap-1">
-                      <span className="text-[13px] text-[#5B6478] mb-1">R$</span>
+                      <span className="text-[13px] text-[#AFB6CC] mb-1">R$</span>
                       <span
-                        className="text-4xl font-bold text-[#0A0B14]"
+                        className="text-4xl font-bold text-[#EEF1F8]"
                         style={{ fontFamily: "var(--font-space-grotesk)" }}
                       >
                         {price.toLocaleString("pt-BR")}
                       </span>
-                      <span className="text-[13px] text-[#5B6478] mb-1">/mês</span>
+                      <span className="text-[13px] text-[#AFB6CC] mb-1">/mês</span>
                     </div>
                     {periodo === "anual" ? (
                       <p className="text-[12px] text-[#059669] mt-1">
                         Cobrado R$ {(plan.priceAnnual * 12).toLocaleString("pt-BR")}/ano
                       </p>
                     ) : (
-                      <p className="text-[12px] text-[#8D95A8] mt-1">Pagamento mensal recorrente</p>
+                      <p className="text-[12px] text-[#71789A] mt-1">Pagamento mensal recorrente</p>
                     )}
                   </div>
 
@@ -225,8 +225,8 @@ function ContratarContent() {
                             boxShadow: `0 8px 24px ${sistemaInfo.color}40`,
                           }
                         : {
-                            background: "#F2F4F8",
-                            color: "#0A0B14",
+                            background: "#18223A",
+                            color: "#EEF1F8",
                             border: "1px solid var(--gs-border)",
                           }
                     }
@@ -239,7 +239,7 @@ function ContratarContent() {
                     {plan.features.map((f) => (
                       <li key={f} className="flex items-start gap-2.5">
                         <Check className="w-4 h-4 mt-0.5 flex-shrink-0 text-[#10B981]" />
-                        <span className="text-[13px] text-[#5B6478] leading-snug">{f}</span>
+                        <span className="text-[13px] text-[#AFB6CC] leading-snug">{f}</span>
                       </li>
                     ))}
                   </ul>
@@ -255,14 +255,14 @@ function ContratarContent() {
             transition={{ delay: 0.6 }}
             className="text-center mt-12 relative z-10"
           >
-            <p className="text-[14px] text-[#5B6478] mb-3">
+            <p className="text-[14px] text-[#AFB6CC] mb-3">
               Ainda com dúvidas? Nossa equipe está pronta para te ajudar.
             </p>
             <a
               href="https://wa.me/5543988720576?text=Olá, quero saber mais sobre os planos"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-[13px] font-semibold text-[#3B82F6] hover:text-[#1D4ED8] transition-colors"
+              className="inline-flex items-center gap-2 text-[13px] font-semibold text-[#5B9BFF] hover:text-[#8FBEFF] transition-colors"
             >
               Falar no WhatsApp <ArrowRight className="w-3.5 h-3.5" />
             </a>

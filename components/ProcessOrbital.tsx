@@ -92,22 +92,22 @@ export default function ProcessOrbital() {
     <section
       id="processo"
       className="relative py-24 px-6 overflow-hidden"
-      style={{ background: "#FFFFFF" }}
+      style={{ background: "#060810" }}
     >
-      <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[rgba(15,22,36,0.10)] to-transparent" />
+      <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[rgba(255,255,255,0.10)] to-transparent" />
 
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
           <span className="badge-blue mb-4 inline-flex">Como trabalhamos</span>
           <h2
-            className="text-3xl sm:text-4xl xl:text-5xl font-bold text-[#0A0B14] mb-4"
+            className="text-3xl sm:text-4xl xl:text-5xl font-bold text-[#EEF1F8] mb-4"
             style={{ fontFamily: "var(--font-space-grotesk)" }}
           >
             Do levantamento à{" "}
             <span className="text-gradient-blue">evolução contínua</span>
           </h2>
-          <p className="text-[#5B6478] text-lg max-w-xl mx-auto">
+          <p className="text-[#AFB6CC] text-lg max-w-xl mx-auto">
             Um processo estruturado em órbita. Clique em cada etapa para ver os
             detalhes e as conexões entre as fases do projeto.
           </p>

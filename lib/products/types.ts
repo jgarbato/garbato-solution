@@ -7,6 +7,7 @@ export type ProductTheme = {
   bg: string
   bgSoft: string
   bgTinted: string
+  card: string
   border: string
   dark: string
   body: string

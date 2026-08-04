@@ -59,11 +59,11 @@ export default function Navbar() {
         transition={{ duration: 0.6, ease: "easeOut" }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled
-            ? "border-b border-[rgba(15,22,36,0.08)] shadow-[0_8px_24px_rgba(15,22,36,0.06)]"
+            ? "border-b border-[rgba(255,255,255,0.09)] shadow-[0_8px_24px_rgba(0,0,0,0.5)]"
             : ""
         }`}
         style={{
-          backgroundColor: scrolled ? "rgba(255,255,255,0.85)" : "transparent",
+          backgroundColor: scrolled ? "rgba(6,8,16,0.8)" : "transparent",
           backdropFilter: scrolled ? "blur(20px)" : "none",
           WebkitBackdropFilter: scrolled ? "blur(20px)" : "none",
         }}
@@ -74,14 +74,14 @@ export default function Navbar() {
             onClick={handleLogo}
             className="flex items-center gap-2.5 group cursor-pointer"
           >
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#3B82F6] to-[#7C3AED] flex items-center justify-center flex-shrink-0 shadow-[0_4px_14px_rgba(59,130,246,0.30)]">
-              <Zap className="w-4 h-4 text-white" strokeWidth={2.5} />
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#3B6EF6] to-[#2FE0D0] flex items-center justify-center flex-shrink-0 shadow-[0_4px_16px_rgba(47,224,208,0.40)]">
+              <Zap className="w-4 h-4 text-[#071018]" strokeWidth={2.5} />
             </div>
             <span
-              className="text-[15px] font-semibold tracking-tight text-[#0A0B14]"
+              className="text-[15px] font-semibold tracking-tight text-[#EEF1F8]"
               style={{ fontFamily: "var(--font-space-grotesk)" }}
             >
-              Garbato<span className="text-[#3B82F6]"> Solution</span>
+              Garbato<span className="text-[#2FE0D0]"> Solution</span>
             </span>
           </button>
 
@@ -91,7 +91,7 @@ export default function Navbar() {
               <button
                 key={link.href}
                 onClick={() => handleNav(link.href)}
-                className="px-4 py-2 text-[13.5px] font-medium text-[#5B6478] hover:text-[#0A0B14] transition-colors rounded-lg hover:bg-[rgba(15,22,36,0.04)] cursor-pointer"
+                className="px-4 py-2 text-[13.5px] font-medium text-[#AFB6CC] hover:text-white transition-colors rounded-lg hover:bg-[rgba(255,255,255,0.06)] cursor-pointer"
               >
                 {link.label}
               </button>
@@ -102,7 +102,7 @@ export default function Navbar() {
           <div className="hidden md:flex items-center gap-2.5">
             <button
               onClick={() => handleNav("#contato")}
-              className="px-4 py-2 text-[13px] font-medium text-[#0A0B14] border border-[rgba(15,22,36,0.12)] hover:border-[rgba(15,22,36,0.22)] hover:bg-[rgba(15,22,36,0.03)] rounded-lg transition-all cursor-pointer"
+              className="px-4 py-2 text-[13px] font-medium text-[#EEF1F8] border border-[rgba(255,255,255,0.14)] hover:border-[rgba(255,255,255,0.26)] hover:bg-[rgba(255,255,255,0.05)] rounded-lg transition-all cursor-pointer"
             >
               Solicitar Projeto
             </button>
@@ -120,7 +120,7 @@ export default function Navbar() {
           {/* Mobile hamburger */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="md:hidden w-9 h-9 flex items-center justify-center rounded-lg border border-[rgba(15,22,36,0.12)] text-[#5B6478] hover:text-[#0A0B14] hover:bg-[rgba(15,22,36,0.04)] transition-all"
+            className="md:hidden w-9 h-9 flex items-center justify-center rounded-lg border border-[rgba(255,255,255,0.14)] text-[#AFB6CC] hover:text-white hover:bg-[rgba(255,255,255,0.06)] transition-all"
           >
             {menuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
           </button>
@@ -135,9 +135,9 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2 }}
-            className="fixed top-16 left-0 right-0 z-40 md:hidden border-b border-[rgba(15,22,36,0.08)]"
+            className="fixed top-16 left-0 right-0 z-40 md:hidden border-b border-[rgba(255,255,255,0.09)]"
             style={{
-              backgroundColor: "rgba(255,255,255,0.96)",
+              backgroundColor: "rgba(10,14,26,0.96)",
               backdropFilter: "blur(20px)",
             }}
           >
@@ -146,15 +146,15 @@ export default function Navbar() {
                 <button
                   key={link.href}
                   onClick={() => handleNav(link.href)}
-                  className="w-full text-left px-4 py-3 text-[14px] font-medium text-[#5B6478] hover:text-[#0A0B14] hover:bg-[rgba(15,22,36,0.04)] rounded-lg transition-all cursor-pointer"
+                  className="w-full text-left px-4 py-3 text-[14px] font-medium text-[#AFB6CC] hover:text-white hover:bg-[rgba(255,255,255,0.06)] rounded-lg transition-all cursor-pointer"
                 >
                   {link.label}
                 </button>
               ))}
-              <div className="border-t border-[rgba(15,22,36,0.08)] mt-2 pt-3 flex flex-col gap-2">
+              <div className="border-t border-[rgba(255,255,255,0.09)] mt-2 pt-3 flex flex-col gap-2">
                 <button
                   onClick={() => handleNav("#contato")}
-                  className="flex items-center justify-center gap-2 w-full px-4 py-2.5 text-[13.5px] font-medium text-[#0A0B14] border border-[rgba(15,22,36,0.14)] rounded-lg hover:bg-[rgba(15,22,36,0.03)] transition-all cursor-pointer"
+                  className="flex items-center justify-center gap-2 w-full px-4 py-2.5 text-[13.5px] font-medium text-[#EEF1F8] border border-[rgba(255,255,255,0.16)] rounded-lg hover:bg-[rgba(255,255,255,0.05)] transition-all cursor-pointer"
                 >
                   Solicitar Projeto
                   <ArrowRight className="w-3.5 h-3.5" />

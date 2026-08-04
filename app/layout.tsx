@@ -53,7 +53,7 @@ export default function RootLayout({
       lang="pt-BR"
       className={`${spaceGrotesk.variable} ${dmSans.variable}`}
     >
-      <body className="min-h-screen antialiased bg-white text-[#0A0B14] overflow-x-hidden">
+      <body className="min-h-screen antialiased bg-[#060810] text-[#EEF1F8] overflow-x-hidden">
         {children}
       </body>
     </html>

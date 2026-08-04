@@ -40,7 +40,7 @@ function ConfirmacaoContent() {
   const plan = getPlan(sistema, plano)
   const planLabel = plan?.name ?? plano
   const sistemaLabel = product.name
-  const sistemaColor = sistema === "mob" ? "#06B6D4" : "#7C3AED"
+  const sistemaColor = sistema === "mob" ? "#22B8F5" : "#8B7CFF"
   const appUrl = product.appUrl
 
   const [status, setStatus] = useState<PaymentStatusResponse | null>(null)
@@ -81,7 +81,7 @@ function ConfirmacaoContent() {
   const aguardando = !!paymentId && !confirmado
 
   return (
-    <main className="min-h-screen" style={{ background: "#FFFFFF" }}>
+    <main className="min-h-screen" style={{ background: "#060810" }}>
       <Navbar />
 
       <section className="relative pt-32 pb-24 px-6">
@@ -100,7 +100,7 @@ function ConfirmacaoContent() {
             className="flex justify-center mb-6"
           >
             <div
-              className="w-20 h-20 rounded-full flex items-center justify-center bg-white"
+              className="w-20 h-20 rounded-full flex items-center justify-center bg-[#0E1320]"
               style={{
                 border: aguardando
                   ? "2px solid rgba(245,158,11,0.45)"
@@ -124,12 +124,12 @@ function ConfirmacaoContent() {
             transition={{ delay: 0.2 }}
           >
             <h1
-              className="text-3xl sm:text-4xl font-bold text-[#0A0B14] mb-3"
+              className="text-3xl sm:text-4xl font-bold text-[#EEF1F8] mb-3"
               style={{ fontFamily: "var(--font-space-grotesk)" }}
             >
               {aguardando ? "Aguardando pagamento" : "Pagamento confirmado!"}
             </h1>
-            <p className="text-[#5B6478] text-lg mb-8">
+            <p className="text-[#AFB6CC] text-lg mb-8">
               {aguardando
                 ? `Estamos monitorando seu pagamento via ${METODO_LABELS[metodo]}. Esta página atualiza sozinha quando confirmar.`
                 : `Sua assinatura do ${sistemaLabel} — Plano ${planLabel} está ativa.`}
@@ -141,7 +141,7 @@ function ConfirmacaoContent() {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="flex items-center justify-center gap-2 mb-6 text-[12px] text-[#8D95A8]"
+              className="flex items-center justify-center gap-2 mb-6 text-[12px] text-[#71789A]"
             >
               <div className="w-3 h-3 border-2 border-[#F59E0B] border-t-transparent rounded-full animate-spin" />
               Verificando status do pagamento...
@@ -153,13 +153,13 @@ function ConfirmacaoContent() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="rounded-2xl p-6 text-left mb-8 bg-white"
+            className="rounded-2xl p-6 text-left mb-8 bg-[#0E1320]"
             style={{
               border: "1px solid var(--gs-border)",
               boxShadow: "var(--gs-shadow-sm)",
             }}
           >
-            <div className="text-[11px] font-bold text-[#8D95A8] uppercase tracking-wider mb-4">
+            <div className="text-[11px] font-bold text-[#71789A] uppercase tracking-wider mb-4">
               Resumo do pedido
             </div>
             <div className="flex flex-col gap-3">
@@ -178,11 +178,11 @@ function ConfirmacaoContent() {
                   : []),
               ].map((item) => (
                 <div key={item.label} className="flex items-center justify-between">
-                  <span className="text-[13px] text-[#5B6478]">{item.label}</span>
+                  <span className="text-[13px] text-[#AFB6CC]">{item.label}</span>
                   <span
                     className="text-[13px] font-semibold"
                     style={{
-                      color: item.label === "Status" && confirmado ? "#059669" : "#0A0B14",
+                      color: item.label === "Status" && confirmado ? "#059669" : "#EEF1F8",
                     }}
                   >
                     {item.value}
@@ -200,7 +200,7 @@ function ConfirmacaoContent() {
             className="flex flex-col gap-3 mb-8"
           >
             <div
-              className="rounded-xl p-4 flex items-center gap-3 text-left bg-white"
+              className="rounded-xl p-4 flex items-center gap-3 text-left bg-[#0E1320]"
               style={{
                 border: "1px solid var(--gs-border)",
                 boxShadow: "var(--gs-shadow-sm)",
@@ -208,10 +208,10 @@ function ConfirmacaoContent() {
             >
               <Mail className="w-5 h-5 text-[#3B82F6] flex-shrink-0" />
               <div>
-                <div className="text-[13px] font-semibold text-[#0A0B14]">
+                <div className="text-[13px] font-semibold text-[#EEF1F8]">
                   {confirmado ? "Confira seu e-mail" : "Você receberá instruções por e-mail"}
                 </div>
-                <div className="text-[12px] text-[#5B6478]">
+                <div className="text-[12px] text-[#AFB6CC]">
                   {confirmado
                     ? "Enviamos as instruções de acesso para o e-mail cadastrado."
                     : "Assim que o pagamento for confirmado, o acesso vai direto para o seu e-mail."}
@@ -219,7 +219,7 @@ function ConfirmacaoContent() {
               </div>
             </div>
             <div
-              className="rounded-xl p-4 flex items-center gap-3 text-left bg-white"
+              className="rounded-xl p-4 flex items-center gap-3 text-left bg-[#0E1320]"
               style={{
                 border: "1px solid var(--gs-border)",
                 boxShadow: "var(--gs-shadow-sm)",
@@ -227,8 +227,8 @@ function ConfirmacaoContent() {
             >
               <MessageCircle className="w-5 h-5 text-[#10B981] flex-shrink-0" />
               <div>
-                <div className="text-[13px] font-semibold text-[#0A0B14]">Nossa equipe vai entrar em contato</div>
-                <div className="text-[12px] text-[#5B6478]">Em até 24h úteis para agendar a implantação e treinamento.</div>
+                <div className="text-[13px] font-semibold text-[#EEF1F8]">Nossa equipe vai entrar em contato</div>
+                <div className="text-[12px] text-[#AFB6CC]">Em até 24h úteis para agendar a implantação e treinamento.</div>
               </div>
             </div>
           </motion.div>
@@ -246,8 +246,8 @@ function ConfirmacaoContent() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-[14px] font-bold transition-all hover:opacity-90"
               style={{
-                background: confirmado ? sistemaColor : "#F2F4F8",
-                color: confirmado ? "white" : "#5B6478",
+                background: confirmado ? sistemaColor : "#18223A",
+                color: confirmado ? "white" : "#AFB6CC",
                 border: confirmado ? "none" : "1px solid var(--gs-border)",
                 boxShadow: confirmado ? `0 8px 24px ${sistemaColor}40` : "none",
                 pointerEvents: confirmado ? "auto" : "none",
@@ -263,8 +263,8 @@ function ConfirmacaoContent() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-[14px] font-semibold transition-all hover:opacity-90"
               style={{
-                background: "#F2F4F8",
-                color: "#0A0B14",
+                background: "#18223A",
+                color: "#EEF1F8",
                 border: "1px solid var(--gs-border)",
               }}
             >
@@ -277,7 +277,7 @@ function ConfirmacaoContent() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}
-            className="text-[12px] text-[#8D95A8] mt-4"
+            className="text-[12px] text-[#71789A] mt-4"
           >
             {confirmado
               ? "Pode acessar o sistema agora ou usar o link que enviamos por e-mail."

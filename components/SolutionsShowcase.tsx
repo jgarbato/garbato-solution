@@ -20,15 +20,15 @@ import {
 } from "lucide-react"
 
 const MOCKUP_OUTER =
-  "w-full h-[180px] bg-[#F7F8FA] rounded-xl border border-[rgba(15,22,36,0.06)] overflow-hidden"
+  "w-full h-[180px] bg-[#0A0E1A] rounded-xl border border-[rgba(255,255,255,0.06)] overflow-hidden"
 const MOCKUP_CARD =
-  "bg-white rounded-lg border border-[rgba(15,22,36,0.06)] shadow-[0_1px_2px_rgba(15,22,36,0.03)]"
+  "bg-[#0E1320] rounded-lg border border-[rgba(255,255,255,0.06)] shadow-[0_1px_2px_rgba(255,255,255,0.03)]"
 
 function ERPMockup() {
   return (
     <div className={`${MOCKUP_OUTER} p-3 flex flex-col gap-2`}>
       <div className="flex items-center justify-between mb-1">
-        <div className="text-[9px] font-semibold text-[#0A0B14]">ERP Imobiliário</div>
+        <div className="text-[9px] font-semibold text-[#EEF1F8]">ERP Imobiliário</div>
         <div className="w-2 h-2 rounded-full bg-[#10B981]" />
       </div>
       <div className="grid grid-cols-3 gap-1.5">
@@ -39,23 +39,23 @@ function ERPMockup() {
         ].map((m) => (
           <div key={m.l} className={`${MOCKUP_CARD} p-2 text-center`}>
             <div className="text-[11px] font-bold" style={{ color: m.c }}>{m.v}</div>
-            <div className="text-[8px] text-[#8D95A8]">{m.l}</div>
+            <div className="text-[8px] text-[#71789A]">{m.l}</div>
           </div>
         ))}
       </div>
       <div className="flex-1 flex gap-1.5">
         <div className={`${MOCKUP_CARD} flex-1 p-2`}>
-          <div className="text-[8px] text-[#5B6478] font-semibold mb-1.5">Vencimentos</div>
+          <div className="text-[8px] text-[#AFB6CC] font-semibold mb-1.5">Vencimentos</div>
           {["Contrato #122 — R$2.400", "Contrato #87 — R$3.100"].map((c) => (
-            <div key={c} className="text-[7.5px] text-[#5B6478] py-0.5 border-b border-[rgba(15,22,36,0.05)] truncate">{c}</div>
+            <div key={c} className="text-[7.5px] text-[#AFB6CC] py-0.5 border-b border-[rgba(255,255,255,0.05)] truncate">{c}</div>
           ))}
         </div>
         <div className={`${MOCKUP_CARD} w-20 p-2`}>
-          <div className="text-[8px] text-[#5B6478] font-semibold mb-1.5">Status</div>
+          <div className="text-[8px] text-[#AFB6CC] font-semibold mb-1.5">Status</div>
           {[["Ocupado", "#10B981", "71%"], ["Vago", "#F59E0B", "18%"], ["Em obras", "#EC4899", "11%"]].map(([l, c, p]) => (
             <div key={l} className="flex items-center gap-1 mb-1">
               <div className="w-1.5 h-1.5 rounded-full" style={{ background: c as string }} />
-              <div className="text-[7px] text-[#5B6478] flex-1">{l}</div>
+              <div className="text-[7px] text-[#AFB6CC] flex-1">{l}</div>
               <div className="text-[7px] font-medium" style={{ color: c as string }}>{p}</div>
             </div>
           ))}
@@ -77,7 +77,7 @@ function ClinicMockup() {
       <div className="flex items-center justify-between mb-1">
         <div className="flex items-center gap-1.5">
           <Calendar className="w-3 h-3 text-[#3B82F6]" />
-          <div className="text-[9px] font-semibold text-[#0A0B14]">Agenda do dia</div>
+          <div className="text-[9px] font-semibold text-[#EEF1F8]">Agenda do dia</div>
         </div>
         <div className="flex items-center gap-1">
           <div className="w-1.5 h-1.5 rounded-full bg-[#10B981] animate-pulse" />
@@ -87,10 +87,10 @@ function ClinicMockup() {
       <div className="flex-1 space-y-1 overflow-hidden">
         {appointments.map((a) => (
           <div key={a.time} className={`${MOCKUP_CARD} flex items-center gap-2 px-2 py-1.5`}>
-            <div className="text-[8px] font-medium text-[#8D95A8] w-8 flex-shrink-0">{a.time}</div>
+            <div className="text-[8px] font-medium text-[#71789A] w-8 flex-shrink-0">{a.time}</div>
             <div className="flex-1 min-w-0">
-              <div className="text-[8px] font-semibold text-[#0A0B14] truncate">{a.patient}</div>
-              <div className="text-[7px] text-[#8D95A8]">{a.type}</div>
+              <div className="text-[8px] font-semibold text-[#EEF1F8] truncate">{a.patient}</div>
+              <div className="text-[7px] text-[#71789A]">{a.type}</div>
             </div>
             <div
               className="text-[7px] px-1.5 py-0.5 rounded-full flex-shrink-0 font-medium"
@@ -114,7 +114,7 @@ function AdminMockup() {
           <div
             key={i}
             className={`w-7 h-7 rounded-lg flex items-center justify-center ${
-              i === 0 ? "bg-white/20 text-white" : "text-white/60"
+              i === 0 ? "bg-[#0E1320]/20 text-white" : "text-white/60"
             }`}
           >
             <Icon className="w-3.5 h-3.5" />
@@ -122,7 +122,7 @@ function AdminMockup() {
         ))}
       </div>
       <div className="flex-1 p-3 flex flex-col gap-2">
-        <div className="text-[9px] font-semibold text-[#0A0B14]">Portal Admin</div>
+        <div className="text-[9px] font-semibold text-[#EEF1F8]">Portal Admin</div>
         <div className="grid grid-cols-2 gap-1.5">
           {[
             { l: "Usuários", v: "48", c: "#3B82F6" },
@@ -132,14 +132,14 @@ function AdminMockup() {
           ].map((m) => (
             <div key={m.l} className={`${MOCKUP_CARD} p-1.5 flex items-center gap-1.5`}>
               <div className="text-[11px] font-bold" style={{ color: m.c }}>{m.v}</div>
-              <div className="text-[7.5px] text-[#5B6478]">{m.l}</div>
+              <div className="text-[7.5px] text-[#AFB6CC]">{m.l}</div>
             </div>
           ))}
         </div>
         <div className={`${MOCKUP_CARD} flex-1 p-2`}>
-          <div className="text-[8px] text-[#5B6478] font-semibold mb-1">Atividade recente</div>
+          <div className="text-[8px] text-[#AFB6CC] font-semibold mb-1">Atividade recente</div>
           {["Admin acessou módulo financeiro", "3 usuários criados hoje", "Backup executado com sucesso"].map((a) => (
-            <div key={a} className="text-[7px] text-[#5B6478] py-0.5 border-b border-[rgba(15,22,36,0.05)] truncate">{a}</div>
+            <div key={a} className="text-[7px] text-[#AFB6CC] py-0.5 border-b border-[rgba(255,255,255,0.05)] truncate">{a}</div>
           ))}
         </div>
       </div>
@@ -151,7 +151,7 @@ function BankingMockup() {
   return (
     <div className={`${MOCKUP_OUTER} p-3`}>
       <div className="flex items-center justify-between mb-2">
-        <div className="text-[9px] font-semibold text-[#0A0B14]">Integração Bancária</div>
+        <div className="text-[9px] font-semibold text-[#EEF1F8]">Integração Bancária</div>
         <div className="flex items-center gap-1">
           <div className="w-1.5 h-1.5 rounded-full bg-[#10B981] animate-pulse" />
           <div className="text-[8px] text-[#059669] font-medium">Conectado</div>
@@ -163,20 +163,20 @@ function BankingMockup() {
           { l: "A receber", v: "R$ 87.340", c: "#3B82F6" },
         ].map((m) => (
           <div key={m.l} className={`${MOCKUP_CARD} p-2`}>
-            <div className="text-[8px] text-[#8D95A8]">{m.l}</div>
+            <div className="text-[8px] text-[#71789A]">{m.l}</div>
             <div className="text-[11px] font-bold mt-0.5" style={{ color: m.c }}>{m.v}</div>
           </div>
         ))}
       </div>
       <div className="flex-1 space-y-1">
-        <div className="text-[8px] text-[#5B6478] font-semibold mb-1.5">Últimas transações</div>
+        <div className="text-[8px] text-[#AFB6CC] font-semibold mb-1.5">Últimas transações</div>
         {[
           { desc: "Pagamento recebido — Cliente XY", v: "+R$8.400", c: "#10B981" },
           { desc: "Boleto pago — Fornecedor AB", v: "-R$2.100", c: "#EC4899" },
           { desc: "TED recebida — Obra #07", v: "+R$15.000", c: "#10B981" },
         ].map((t) => (
           <div key={t.desc} className={`${MOCKUP_CARD} flex items-center gap-2 px-2 py-1`}>
-            <div className="flex-1 text-[7.5px] text-[#5B6478] truncate">{t.desc}</div>
+            <div className="flex-1 text-[7.5px] text-[#AFB6CC] truncate">{t.desc}</div>
             <div className="text-[8px] font-medium" style={{ color: t.c }}>{t.v}</div>
           </div>
         ))}
@@ -230,7 +230,7 @@ export default function SolutionsShowcase() {
     <section
       id="projetos"
       className="relative py-24 px-6"
-      style={{ background: "#F7F8FA" }}
+      style={{ background: "#0A0E1A" }}
     >
       <div className="max-w-7xl mx-auto" ref={ref}>
         {/* Header */}
@@ -242,13 +242,13 @@ export default function SolutionsShowcase() {
         >
           <span className="badge-blue mb-4 inline-flex">Exemplos de solução</span>
           <h2
-            className="text-3xl sm:text-4xl xl:text-5xl font-bold text-[#0A0B14] mb-4"
+            className="text-3xl sm:text-4xl xl:text-5xl font-bold text-[#EEF1F8] mb-4"
             style={{ fontFamily: "var(--font-space-grotesk)" }}
           >
             Sistemas que{" "}
             <span className="text-gradient-blue">resolvem na prática</span>
           </h2>
-          <p className="text-[#5B6478] text-lg max-w-xl mx-auto">
+          <p className="text-[#AFB6CC] text-lg max-w-xl mx-auto">
             Cada projeto é único. Veja alguns exemplos de plataformas que
             desenvolvemos para operações reais.
           </p>
@@ -266,7 +266,7 @@ export default function SolutionsShowcase() {
                 duration: 0.6,
                 ease: "easeOut",
               }}
-              className="group relative rounded-2xl overflow-hidden card-hover bg-white"
+              className="group relative rounded-2xl overflow-hidden card-hover bg-[#0E1320]"
               style={{
                 border: "1px solid var(--gs-border)",
                 boxShadow: "var(--gs-shadow-sm)",
@@ -299,12 +299,12 @@ export default function SolutionsShowcase() {
 
                 {/* Title + desc */}
                 <h3
-                  className="text-xl font-bold text-[#0A0B14] mb-2"
+                  className="text-xl font-bold text-[#EEF1F8] mb-2"
                   style={{ fontFamily: "var(--font-space-grotesk)" }}
                 >
                   {s.title}
                 </h3>
-                <p className="text-[13.5px] text-[#5B6478] leading-relaxed mb-5">
+                <p className="text-[13.5px] text-[#AFB6CC] leading-relaxed mb-5">
                   {s.desc}
                 </p>
 

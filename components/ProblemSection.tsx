@@ -54,7 +54,7 @@ export default function ProblemSection() {
     <section
       id="problema"
       className="relative py-24 px-6 overflow-hidden"
-      style={{ background: "#F7F8FA" }}
+      style={{ background: "#0A0E1A" }}
     >
       {/* Background accent */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[1px] bg-gradient-to-r from-transparent via-[#3B82F6]/30 to-transparent" />
@@ -71,7 +71,7 @@ export default function ProblemSection() {
             Reconhece essa realidade?
           </span>
           <h2
-            className="text-3xl sm:text-4xl xl:text-5xl font-bold text-[#0A0B14] mb-5"
+            className="text-3xl sm:text-4xl xl:text-5xl font-bold text-[#EEF1F8] mb-5"
             style={{ fontFamily: "var(--font-space-grotesk)" }}
           >
             Sua operação não pode depender{" "}
@@ -79,7 +79,7 @@ export default function ProblemSection() {
               de gambiarras
             </span>
           </h2>
-          <p className="text-[#5B6478] text-lg max-w-xl mx-auto">
+          <p className="text-[#AFB6CC] text-lg max-w-xl mx-auto">
             A maioria das empresas cresce mais rápido que seus processos. O
             resultado é uma operação frágil, dependente de pessoas e impossível
             de escalar.
@@ -99,10 +99,10 @@ export default function ProblemSection() {
               <div className="w-10 h-10 rounded-xl bg-red-50 border border-red-200/60 flex items-center justify-center mb-4 group-hover:bg-red-100 transition-colors">
                 <p.icon className="w-5 h-5 text-red-500" />
               </div>
-              <h3 className="text-[15px] font-semibold text-[#0A0B14] mb-2">
+              <h3 className="text-[15px] font-semibold text-[#EEF1F8] mb-2">
                 {p.title}
               </h3>
-              <p className="text-[13px] text-[#5B6478] leading-relaxed">
+              <p className="text-[13px] text-[#AFB6CC] leading-relaxed">
                 {p.desc}
               </p>
             </motion.div>
@@ -114,10 +114,10 @@ export default function ProblemSection() {
           initial={{ opacity: 0, y: 32, scale: 0.98 }}
           animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
           transition={{ delay: 0.5, duration: 0.7, ease: "easeOut" }}
-          className="relative rounded-2xl overflow-hidden bg-white"
+          className="relative rounded-2xl overflow-hidden bg-[#0E1320]"
           style={{
             border: "1px solid rgba(59,130,246,0.25)",
-            boxShadow: "0 20px 50px rgba(15,22,36,0.06), 0 0 60px rgba(59,130,246,0.06)",
+            boxShadow: "0 20px 50px rgba(255,255,255,0.06), 0 0 60px rgba(59,130,246,0.06)",
           }}
         >
           {/* Glow accent */}
@@ -132,14 +132,14 @@ export default function ProblemSection() {
                   A solução
                 </div>
                 <h3
-                  className="text-2xl sm:text-3xl font-bold text-[#0A0B14] mb-4"
+                  className="text-2xl sm:text-3xl font-bold text-[#EEF1F8] mb-4"
                   style={{ fontFamily: "var(--font-space-grotesk)" }}
                 >
                   Centralizamos a operação em um{" "}
                   <span className="text-gradient-blue">sistema único</span>,
                   pensado para o seu negócio
                 </h3>
-                <p className="text-[#5B6478] text-base leading-relaxed max-w-xl">
+                <p className="text-[#AFB6CC] text-base leading-relaxed max-w-xl">
                   Em vez de adaptar a empresa a um software genérico, desenvolvemos
                   a plataforma conforme a realidade, os processos e os objetivos
                   de cada cliente — do fluxo operacional à experiência do usuário.
@@ -154,7 +154,7 @@ export default function ProblemSection() {
                 ].map((item) => (
                   <div key={item} className="flex items-center gap-3">
                     <CheckCircle2 className="w-4 h-4 text-[#10B981] flex-shrink-0" />
-                    <span className="text-[14px] text-[#0A0B14] font-medium">
+                    <span className="text-[14px] text-[#EEF1F8] font-medium">
                       {item}
                     </span>
                   </div>

@@ -26,7 +26,7 @@ export default function DashboardMockup({ mockup, theme }: Props) {
         <span className="w-2.5 h-2.5 rounded-full bg-green-400" />
         <span
           className="flex-1 mx-3 rounded text-[10px] text-center py-0.5 px-2"
-          style={{ background: "white", color: theme.muted }}
+          style={{ background: theme.bg, color: theme.muted }}
         >
           {domain}
         </span>
@@ -74,7 +74,7 @@ export default function DashboardMockup({ mockup, theme }: Props) {
               <div
                 key={s.label}
                 className="rounded-lg p-2"
-                style={{ background: "white", border: `1px solid ${theme.border}` }}
+                style={{ background: theme.card, border: `1px solid ${theme.border}` }}
               >
                 <p className="text-[13px] font-bold leading-none" style={{ color: s.color }}>{s.value}</p>
                 <p className="text-[9px] mt-0.5" style={{ color: theme.muted }}>{s.label}</p>
@@ -88,7 +88,7 @@ export default function DashboardMockup({ mockup, theme }: Props) {
               <div
                 key={it.leftBadge + it.title}
                 className="flex items-center gap-2 rounded-lg px-2.5 py-1.5"
-                style={{ background: "white", border: `1px solid ${theme.border}` }}
+                style={{ background: theme.card, border: `1px solid ${theme.border}` }}
               >
                 <span
                   className={`text-[9px] font-semibold flex-shrink-0 ${
