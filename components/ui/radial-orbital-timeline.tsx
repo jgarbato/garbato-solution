@@ -157,6 +157,8 @@ export default function RadialOrbitalTimeline({
     }
   };
 
+  const activeItem = timelineData.find((i) => expandedItems[i.id]) ?? null;
+
   return (
     <div
       className="w-full h-full min-h-[640px] flex flex-col items-center justify-center overflow-hidden"
@@ -172,7 +174,11 @@ export default function RadialOrbitalTimeline({
             transform: `translate(${centerOffset.x}px, ${centerOffset.y}px)`,
           }}
         >
-          <div className="absolute w-16 h-16 rounded-full bg-gradient-to-br from-gs-violet via-gs-blue to-gs-cyan animate-pulse flex items-center justify-center z-10 shadow-[0_8px_32px_rgba(59,130,246,0.35)]">
+          <div
+            className={`absolute w-16 h-16 rounded-full bg-gradient-to-br from-gs-violet via-gs-blue to-gs-cyan animate-pulse flex items-center justify-center z-10 shadow-[0_8px_32px_rgba(59,130,246,0.35)] transition-opacity duration-300 ${
+              activeItem ? "opacity-0 pointer-events-none" : "opacity-100"
+            }`}
+          >
             <div className="absolute w-20 h-20 rounded-full border border-gs-blue/30 animate-ping opacity-70"></div>
             <div
               className="absolute w-24 h-24 rounded-full border border-gs-blue/20 animate-ping opacity-50"
@@ -242,7 +248,7 @@ export default function RadialOrbitalTimeline({
                       : "border-white/15"
                   }
                   transition-all duration-300 transform
-                  ${isExpanded ? "scale-150" : ""}
+                  ${isExpanded ? "scale-125" : ""}
                   shadow-[0_2px_8px_rgba(15,22,36,0.08)]
                 `}
                 >
@@ -251,101 +257,109 @@ export default function RadialOrbitalTimeline({
 
                 <div
                   className={`
-                  absolute top-12 whitespace-nowrap
+                  absolute top-12 left-1/2 -translate-x-1/2 whitespace-nowrap
                   text-xs font-semibold tracking-wider
                   transition-all duration-300
-                  ${isExpanded ? "text-gs-text scale-125" : "text-gs-secondary"}
+                  ${
+                    isExpanded
+                      ? "text-gs-text scale-110"
+                      : activeItem
+                      ? "text-gs-secondary/45"
+                      : "text-gs-secondary"
+                  }
                 `}
                 >
                   {item.title}
                 </div>
 
-                {isExpanded && (
-                  <Card className="absolute top-20 left-1/2 -translate-x-1/2 w-64 bg-[#0E1320]/95 backdrop-blur-lg border-white/10 shadow-xl shadow-black/10 overflow-visible">
-                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-px h-3 bg-white/20"></div>
-                    <CardHeader className="pb-2 p-4">
-                      <div className="flex justify-between items-center">
-                        <Badge
-                          className={`px-2 text-xs ${getStatusStyles(
-                            item.status
-                          )}`}
-                        >
-                          {item.status === "completed"
-                            ? "CONCLUÍDO"
-                            : item.status === "in-progress"
-                            ? "EM ANDAMENTO"
-                            : "PRÓXIMO"}
-                        </Badge>
-                        <span className="text-xs font-mono text-gs-muted">
-                          {item.date}
-                        </span>
-                      </div>
-                      <CardTitle className="text-sm mt-2 text-gs-text">
-                        {item.title}
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent className="text-xs text-gs-secondary p-4 pt-0">
-                      <p>{item.content}</p>
-
-                      <div className="mt-4 pt-3 border-t border-white/10">
-                        <div className="flex justify-between items-center text-xs mb-1">
-                          <span className="flex items-center text-gs-secondary">
-                            <Zap size={10} className="mr-1 text-gs-blue" />
-                            Progresso
-                          </span>
-                          <span className="font-mono text-gs-text">
-                            {item.energy}%
-                          </span>
-                        </div>
-                        <div className="w-full h-1 bg-white/10 rounded-full overflow-hidden">
-                          <div
-                            className="h-full bg-gradient-to-r from-gs-blue to-gs-violet"
-                            style={{ width: `${item.energy}%` }}
-                          ></div>
-                        </div>
-                      </div>
-
-                      {item.relatedIds.length > 0 && (
-                        <div className="mt-4 pt-3 border-t border-white/10">
-                          <div className="flex items-center mb-2">
-                            <Link size={10} className="text-gs-secondary mr-1" />
-                            <h4 className="text-xs uppercase tracking-wider font-medium text-gs-secondary">
-                              Etapas conectadas
-                            </h4>
-                          </div>
-                          <div className="flex flex-wrap gap-1">
-                            {item.relatedIds.map((relatedId) => {
-                              const relatedItem = timelineData.find(
-                                (i) => i.id === relatedId
-                              );
-                              return (
-                                <Button
-                                  key={relatedId}
-                                  variant="outline"
-                                  size="sm"
-                                  className="flex items-center h-6 px-2 py-0 text-xs rounded border-white/15 bg-transparent hover:bg-white/10 text-gs-secondary hover:text-gs-text transition-all"
-                                  onClick={(e) => {
-                                    e.stopPropagation();
-                                    toggleItem(relatedId);
-                                  }}
-                                >
-                                  {relatedItem?.title}
-                                  <ArrowRight
-                                    size={8}
-                                    className="ml-1 text-gs-muted"
-                                  />
-                                </Button>
-                              );
-                            })}
-                          </div>
-                        </div>
-                      )}
-                    </CardContent>
-                  </Card>
-                )}
               </div>
             );
           })}
+
+          {/* Card de detalhe — centralizado na órbita (não acompanha o nó,
+              evitando que estoure o container ou colida com os vizinhos). */}
+          {activeItem && (
+            <Card
+              onClick={(e) => e.stopPropagation()}
+              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[19rem] max-w-[calc(100%-2rem)] z-[300] bg-[#0E1320]/95 backdrop-blur-lg border-white/10 shadow-2xl shadow-black/50 overflow-visible animate-in fade-in zoom-in-95 duration-300"
+            >
+              <CardHeader className="pb-2 p-4">
+                <div className="flex justify-between items-center">
+                  <Badge
+                    className={`px-2 text-xs ${getStatusStyles(
+                      activeItem.status
+                    )}`}
+                  >
+                    {activeItem.status === "completed"
+                      ? "CONCLUÍDO"
+                      : activeItem.status === "in-progress"
+                      ? "EM ANDAMENTO"
+                      : "PRÓXIMO"}
+                  </Badge>
+                  <span className="text-xs font-mono text-gs-muted">
+                    {activeItem.date}
+                  </span>
+                </div>
+                <CardTitle className="text-sm mt-2 text-gs-text">
+                  {activeItem.title}
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="text-xs text-gs-secondary p-4 pt-0">
+                <p>{activeItem.content}</p>
+
+                <div className="mt-4 pt-3 border-t border-white/10">
+                  <div className="flex justify-between items-center text-xs mb-1">
+                    <span className="flex items-center text-gs-secondary">
+                      <Zap size={10} className="mr-1 text-gs-blue" />
+                      Progresso
+                    </span>
+                    <span className="font-mono text-gs-text">
+                      {activeItem.energy}%
+                    </span>
+                  </div>
+                  <div className="w-full h-1 bg-white/10 rounded-full overflow-hidden">
+                    <div
+                      className="h-full bg-gradient-to-r from-gs-blue to-gs-violet transition-all duration-500"
+                      style={{ width: `${activeItem.energy}%` }}
+                    ></div>
+                  </div>
+                </div>
+
+                {activeItem.relatedIds.length > 0 && (
+                  <div className="mt-4 pt-3 border-t border-white/10">
+                    <div className="flex items-center mb-2">
+                      <Link size={10} className="text-gs-secondary mr-1" />
+                      <h4 className="text-xs uppercase tracking-wider font-medium text-gs-secondary">
+                        Etapas conectadas
+                      </h4>
+                    </div>
+                    <div className="flex flex-wrap gap-1">
+                      {activeItem.relatedIds.map((relatedId) => {
+                        const relatedItem = timelineData.find(
+                          (i) => i.id === relatedId
+                        );
+                        return (
+                          <Button
+                            key={relatedId}
+                            variant="outline"
+                            size="sm"
+                            className="flex items-center h-6 px-2 py-0 text-xs rounded border-white/15 bg-transparent hover:bg-white/10 text-gs-secondary hover:text-gs-text transition-all"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              toggleItem(relatedId);
+                            }}
+                          >
+                            {relatedItem?.title}
+                            <ArrowRight size={8} className="ml-1 text-gs-muted" />
+                          </Button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          )}
         </div>
       </div>
     </div>
