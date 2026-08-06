@@ -29,6 +29,28 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
+## SEO
+
+O SEO on-page está configurado em código:
+
+- **Metadata** (título, description, keywords, Open Graph, Twitter, robots, canonical): `app/layout.tsx`
+- **Dados estruturados JSON-LD** (Organization + WebSite + Service): `app/layout.tsx`
+- **Sitemap**: `app/sitemap.ts` → servido em `/sitemap.xml`
+- **Robots**: `app/robots.ts` → servido em `/robots.txt` (aponta pro sitemap)
+- **llms.txt** (para IAs entenderem/recomendarem o negócio): `public/llms.txt` → servido em `/llms.txt`
+
+### Google Search Console (verificação)
+
+1. Acesse [search.google.com/search-console](https://search.google.com/search-console) e adicione a propriedade `https://garbatosolution.com.br`.
+2. Escolha o método **"Tag HTML"** e copie apenas o valor do atributo `content` (o código de verificação).
+3. Defina a variável de ambiente no Vercel (e no `.env.local` para dev):
+   ```bash
+   NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION=cole_o_codigo_aqui
+   ```
+   O `app/layout.tsx` injeta a meta tag automaticamente quando essa env existe.
+4. Faça o deploy, volte ao Search Console e clique em **Verificar**.
+5. Em **Sitemaps**, envie `https://garbatosolution.com.br/sitemap.xml`.
+
 ## Deploy on Vercel
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
