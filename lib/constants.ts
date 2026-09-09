@@ -1,4 +1,4 @@
-export const WHATSAPP_NUMBER = "5543988720576"
+export const WHATSAPP_NUMBER = "5543988585127"
 export const SITE_URL = "https://garbatosolution.com.br"
 export const SITE_NAME = "Garbato Solution"
 

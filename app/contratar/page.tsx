@@ -259,7 +259,7 @@ function ContratarContent() {
               Ainda com dúvidas? Nossa equipe está pronta para te ajudar.
             </p>
             <a
-              href="https://wa.me/5543988720576?text=Olá, quero saber mais sobre os planos"
+              href="https://wa.me/5543988585127?text=Olá, quero saber mais sobre os planos"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 text-[13px] font-semibold text-[#5B9BFF] hover:text-[#8FBEFF] transition-colors"

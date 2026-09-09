@@ -258,7 +258,7 @@ function ConfirmacaoContent() {
               <ExternalLink className="w-4 h-4" />
             </a>
             <a
-              href="https://wa.me/5543988720576?text=Olá, acabei de contratar o plano e quero mais informações"
+              href="https://wa.me/5543988585127?text=Olá, acabei de contratar o plano e quero mais informações"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-[14px] font-semibold transition-all hover:opacity-90"
