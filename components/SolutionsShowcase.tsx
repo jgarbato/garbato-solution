@@ -252,6 +252,14 @@ export default function SolutionsShowcase() {
             Cada projeto é único. Veja alguns exemplos de plataformas que
             desenvolvemos para operações reais.
           </p>
+          {/* Os números das telas abaixo são fictícios, para ilustrar a
+              interface. Deixar isso explícito protege a confiança: visitante
+              que acredita num dado e depois descobre que era enfeite
+              desconfia do site inteiro. */}
+          <p className="text-[13px] text-[#6B7490] mt-3">
+            As telas são demonstrações da interface — os números exibidos são
+            fictícios.
+          </p>
         </motion.div>
 
         {/* Cards */}
