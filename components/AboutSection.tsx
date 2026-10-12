@@ -20,7 +20,7 @@ const PILLARS = [
     gradient: "from-blue-100 to-blue-50",
     border: "border-blue-200/60",
     title: "Soluções Sob Medida",
-    desc: "Cada projeto é pensado de acordo com a realidade e os objetivos do negócio do cliente. Nada é copiado, adaptado ou encaixado à força — é construído do zero para funcionar.",
+    desc: "Cada projeto é pensado de acordo com a realidade e os objetivos do negócio do cliente. Nada é encaixado à força num software genérico — o sistema se adapta à operação, não o contrário.",
     points: ["Personalização total", "Interface profissional", "Adaptado ao time"],
   },
   {

@@ -26,6 +26,11 @@ function DashboardMockup() {
             app.garbatosolution.com.br/dashboard
           </div>
         </div>
+        {/* Mesma regra do Hero e dos mockups de soluções: tela de demonstração
+            avisa que é demonstração, no lugar que não some. */}
+        <span className="text-[9px] md:text-[10px] uppercase tracking-wider text-[#8D95A8] whitespace-nowrap">
+          dados fictícios
+        </span>
       </div>
 
       {/* Dashboard layout */}

@@ -25,24 +25,32 @@ const BADGES = [
   "Foco em operação real",
 ]
 
+/**
+ * Os três cartões flutuantes descrevem a oferta, não contam feitos.
+ *
+ * A versão anterior trazia "+47 processos automatizados", "100% sob medida" e
+ * "24/7 atendimento com IA". Nenhum dos três tinha fonte no site, e o "100%"
+ * ainda brigava com vender BlessSystem e ERP Imobiliário como plataforma
+ * pronta. Número que o visitante não pode conferir não é prova — é risco.
+ */
 const FLOAT_CARDS = [
-  {
-    icon: TrendingUp,
-    color: "#10B981",
-    label: "+47",
-    sub: "processos automatizados",
-  },
   {
     icon: Layers,
     color: "#3B82F6",
-    label: "100%",
-    sub: "sob medida",
+    label: "Um sistema",
+    sub: "no lugar de planilhas soltas",
+  },
+  {
+    icon: TrendingUp,
+    color: "#10B981",
+    label: "Sob medida",
+    sub: "construído na sua operação",
   },
   {
     icon: CheckCircle2,
     color: "#06B6D4",
-    label: "24/7",
-    sub: "atendimento com IA",
+    label: "IA embarcada",
+    sub: "atendimento e análise",
   },
 ]
 
@@ -61,6 +69,11 @@ function DashboardMockup() {
             app.garbatosolution.com.br/dashboard
           </div>
         </div>
+        {/* A tela é demonstração. O aviso mora na barra da janela porque é o
+            único lugar que não some quando o conteúdo do mockup muda. */}
+        <span className="text-[9px] uppercase tracking-wider text-[#8D95A8] whitespace-nowrap">
+          dados fictícios
+        </span>
       </div>
 
       {/* Dashboard layout */}
@@ -367,7 +380,7 @@ export default function HeroSection() {
                       ease: "easeInOut",
                       delay: i * 0.4,
                     }}
-                    className="rounded-xl px-3 py-2.5 flex items-center gap-2.5 min-w-[130px] bg-white"
+                    className="rounded-xl px-3 py-2.5 flex items-center gap-2.5 min-w-[164px] bg-white"
                     style={{
                       border: "1px solid var(--gs-border)",
                       boxShadow: "var(--gs-shadow-md)",

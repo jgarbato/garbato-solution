@@ -7,11 +7,11 @@ import { ChevronDown } from "lucide-react"
 const FAQS = [
   {
     q: "Que tipo de sistema vocês desenvolvem?",
-    a: "Desenvolvemos sistemas web sob medida: ERPs, CRMs, portais administrativos, sistemas financeiros, imobiliários, dashboards gerenciais, APIs e integrações. Cada projeto é único — construído a partir do zero com base na operação específica do cliente.",
+    a: "Sistemas web: ERPs, CRMs, portais administrativos, sistemas financeiros, imobiliários, dashboards gerenciais, APIs e integrações. A maior parte é construída a partir do zero sobre a operação do cliente; para clínicas e imobiliárias já temos plataforma própria pronta para ajustar.",
   },
   {
-    q: "O projeto é realmente sob medida?",
-    a: "Sim. Nenhum sistema é copiado de outro projeto ou baseado em templates. Começamos pelo levantamento da operação, estruturamos os fluxos e desenvolvemos cada funcionalidade conforme a necessidade real do negócio do cliente.",
+    q: "O projeto é sob medida ou vocês têm sistema pronto?",
+    a: "Os dois caminhos existem, e dizemos qual faz sentido no diagnóstico, antes da proposta. No projeto sob medida começamos pelo levantamento da operação, estruturamos os fluxos e desenvolvemos cada funcionalidade conforme a necessidade do negócio — nada vem de template de terceiro. Também temos plataformas próprias já construídas para alguns segmentos, como clínicas e imobiliárias: elas nascem prontas e são ajustadas à sua operação, o que sai mais rápido e mais barato do que reconstruir o que já existe.",
   },
   {
     q: "Vocês atendem empresas de diferentes segmentos?",

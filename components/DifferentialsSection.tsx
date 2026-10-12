@@ -16,7 +16,7 @@ const DIFFS = [
     icon: SlidersHorizontal,
     color: "#3B82F6",
     title: "Sob medida",
-    desc: "Nenhum sistema é copiado de outro. Cada projeto começa do zero com o entendimento da operação específica do cliente.",
+    desc: "Nada vem de template de terceiro. O projeto começa pelo entendimento da operação — e quando já temos plataforma própria para o segmento, dizemos, porque ajustar o que existe sai mais rápido que reconstruir.",
   },
   {
     icon: Brain,
