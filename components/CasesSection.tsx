@@ -18,9 +18,9 @@ import { Factory, Stethoscope, Building2, ArrowRight } from "lucide-react"
  *    "RLS" ou "não-conformidade": se o leitor precisa traduzir, a frase falhou.
  *
  * `status` é opcional de propósito. Só existe quando há um fato verificável
- * para pôr ali. Enquanto não houver confirmação de cliente ativo nas
- * plataformas próprias, elas não exibem status — ausência é melhor que
- * alegação.
+ * para pôr ali — ausência é melhor que alegação. Cliente ativo no BlessSystem
+ * Clinic e no ERP Imobiliário confirmado pelo Juan em 12/10/2026; se um deles
+ * sair do ar, tire o status em vez de deixar envelhecer.
  */
 
 type Caso = {
@@ -62,6 +62,7 @@ const CASOS: Caso[] = [
       "Financeiro ligado ao atendimento",
       "Relatórios clínicos e gerenciais",
     ],
+    status: "Em operação",
   },
   {
     icon: Building2,
@@ -76,6 +77,7 @@ const CASOS: Caso[] = [
       "Portal do locatário",
       "Visão financeira consolidada",
     ],
+    status: "Em operação",
   },
 ]
 
