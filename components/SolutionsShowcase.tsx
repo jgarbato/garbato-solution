@@ -20,13 +20,36 @@ import {
 } from "lucide-react"
 
 const MOCKUP_OUTER =
-  "w-full h-[180px] bg-[#0A0E1A] rounded-xl border border-[rgba(255,255,255,0.06)] overflow-hidden"
+  "relative w-full h-[180px] bg-[#0A0E1A] rounded-xl border border-[rgba(255,255,255,0.06)] overflow-hidden"
+
+/** Etiqueta dentro da moldura. O aviso do cabeçalho não acompanha quem rola
+ *  até o quarto card no celular.
+ *
+ *  É uma faixa, não um chip: a moldura tem altura fixa e o conteúdo de alguns
+ *  mockups passa por baixo dela. Um chip solto caía em cima de um número; a
+ *  faixa com degradê apaga o que estiver atrás e a etiqueta sempre se lê. */
+function SeloFicticio() {
+  return (
+    <div
+      className="absolute inset-x-0 bottom-0 z-10 flex justify-end items-end h-7 px-2 pb-1 pointer-events-none"
+      style={{
+        background:
+          "linear-gradient(to top, #0A0E1A 45%, rgba(10,14,26,0.85) 75%, transparent 100%)",
+      }}
+    >
+      <span className="text-[9px] uppercase tracking-wider text-[#8B94B0]">
+        dados fictícios
+      </span>
+    </div>
+  )
+}
 const MOCKUP_CARD =
   "bg-[#0E1320] rounded-lg border border-[rgba(255,255,255,0.06)] shadow-[0_1px_2px_rgba(255,255,255,0.03)]"
 
 function ERPMockup() {
   return (
     <div className={`${MOCKUP_OUTER} p-3 flex flex-col gap-2`}>
+      <SeloFicticio />
       <div className="flex items-center justify-between mb-1">
         <div className="text-[9px] font-semibold text-[#EEF1F8]">ERP Imobiliário</div>
         <div className="w-2 h-2 rounded-full bg-[#10B981]" />
@@ -74,6 +97,7 @@ function ClinicMockup() {
   ]
   return (
     <div className={`${MOCKUP_OUTER} p-3 flex flex-col gap-2`}>
+      <SeloFicticio />
       <div className="flex items-center justify-between mb-1">
         <div className="flex items-center gap-1.5">
           <Calendar className="w-3 h-3 text-[#3B82F6]" />
@@ -108,6 +132,7 @@ function ClinicMockup() {
 function AdminMockup() {
   return (
     <div className={`${MOCKUP_OUTER} flex`}>
+      <SeloFicticio />
       {/* Sidebar em brand color pra contraste */}
       <div className="w-12 bg-gradient-to-b from-[#3B82F6] to-[#7C3AED] flex flex-col items-center py-3 gap-2.5">
         {[LayoutGrid, Users2, Package, FileText].map((Icon, i) => (
@@ -150,6 +175,7 @@ function AdminMockup() {
 function BankingMockup() {
   return (
     <div className={`${MOCKUP_OUTER} p-3`}>
+      <SeloFicticio />
       <div className="flex items-center justify-between mb-2">
         <div className="text-[9px] font-semibold text-[#EEF1F8]">Integração Bancária</div>
         <div className="flex items-center gap-1">
@@ -256,9 +282,9 @@ export default function SolutionsShowcase() {
               interface. Deixar isso explícito protege a confiança: visitante
               que acredita num dado e depois descobre que era enfeite
               desconfia do site inteiro. */}
-          <p className="text-[13px] text-[#6B7490] mt-3">
-            As telas são demonstrações da interface — os números exibidos são
-            fictícios.
+          <p className="text-[14px] text-[#8B94B0] mt-3">
+            As telas são demonstrações da interface — todos os dados exibidos
+            são fictícios.
           </p>
         </motion.div>
 

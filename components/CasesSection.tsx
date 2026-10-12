@@ -8,46 +8,49 @@ import { Factory, Stethoscope, Building2, ArrowRight } from "lucide-react"
  * Prova social. Vem ANTES do TrustSection de propósito: primeiro o que já foi
  * entregue, depois os princípios. Princípio sem entrega é promessa.
  *
- * Regra desta seção: nada aqui pode ser alegação sem lastro. Todo item descreve
- * trabalho que existe. Onde não há número real, não há número — preferimos a
- * descrição honesta a uma métrica inventada.
+ * Duas regras desta seção, nascidas de uma revisão que reprovou a primeira
+ * versão:
  *
- * Os clientes corporativos aparecem por descrição genérica porque a permissão
- * contratual para nomeá-los ainda não foi verificada. Quando for, troque
- * `cliente` pelo nome e o peso da seção sobe muito.
+ * 1. O título não pode afirmar mais do que os cards sustentam. A v1 dizia
+ *    "sistemas em produção" com um card marcado "em QA" — a própria seção se
+ *    desmentia.
+ * 2. O texto é para dono de PME, não para engenheiro. Nada de "cutover",
+ *    "RLS" ou "não-conformidade": se o leitor precisa traduzir, a frase falhou.
+ *
+ * `status` é opcional de propósito. Só existe quando há um fato verificável
+ * para pôr ali. Enquanto não houver confirmação de cliente ativo nas
+ * plataformas próprias, elas não exibem status — ausência é melhor que
+ * alegação.
  */
 
 type Caso = {
   icon: typeof Factory
-  color: string
   tipo: "Cliente corporativo" | "Plataforma própria"
   cliente: string
   titulo: string
   desafio: string
   entrega: string[]
-  status: string
+  status?: string
 }
 
 const CASOS: Caso[] = [
   {
     icon: Factory,
-    color: "#3B82F6",
     tipo: "Cliente corporativo",
-    cliente: "Fabricante global de equipamentos",
+    cliente: "Indústria multinacional",
     titulo: "Portal de peças e pedidos",
     desafio:
-      "Requisições de peças espalhadas entre planilha e e-mail, sem rastreabilidade do que foi pedido, por quem e em que estágio — e sem separar o que cada perfil podia ver.",
+      "Pedidos de peças espalhados entre planilha e e-mail, sem ninguém saber ao certo o que foi pedido, por quem, e em que pé estava.",
     entrega: [
-      "Fila de requisições com estágio e responsável",
-      "Fluxo de negociação e cancelamento com trilha de decisão",
-      "Controle de acesso por papel aplicado no próprio banco",
-      "Relatórios de não-conformidade e telas de extração",
+      "Fila de pedidos com situação e responsável",
+      "Negociação e cancelamento com registro de cada decisão",
+      "Cada pessoa vê apenas o que o cargo dela permite",
+      "Relatórios de problemas e exportação de dados",
     ],
-    status: "Em QA e cutover",
+    status: "Em implantação",
   },
   {
     icon: Stethoscope,
-    color: "#10B981",
     tipo: "Plataforma própria",
     cliente: "BlessSystem Clinic",
     titulo: "Gestão completa para clínicas",
@@ -56,28 +59,29 @@ const CASOS: Caso[] = [
     entrega: [
       "Agenda com confirmação e remarcação",
       "Prontuário eletrônico e histórico do paciente",
-      "Financeiro integrado ao atendimento",
+      "Financeiro ligado ao atendimento",
       "Relatórios clínicos e gerenciais",
     ],
-    status: "Em operação",
   },
   {
     icon: Building2,
-    color: "#F59E0B",
     tipo: "Plataforma própria",
     cliente: "ERP Imobiliário e Financeiro",
     titulo: "Da captação à rescisão, num sistema só",
     desafio:
-      "Imobiliária com imóvel numa planilha, contrato numa pasta, repasse no banco e nenhuma visão do conjunto.",
+      "Imobiliária com o imóvel numa planilha, o contrato numa pasta, o repasse no banco e nenhuma visão do conjunto.",
     entrega: [
-      "Gestão de imóveis, contratos e locação",
+      "Imóveis, contratos e locação num lugar só",
       "Repasses e conciliação bancária",
       "Portal do locatário",
       "Visão financeira consolidada",
     ],
-    status: "Em operação",
   },
 ]
+
+/** Cor só no ícone e nas setas. O selo é neutro de propósito: cores
+ *  diferentes sugeriam categorias que não existem. */
+const ACENTO = ["#3B82F6", "#10B981", "#F59E0B"]
 
 export default function CasesSection() {
   const ref = useRef(null)
@@ -98,103 +102,113 @@ export default function CasesSection() {
           transition={{ duration: 0.6 }}
           className="max-w-2xl mb-14"
         >
-          <span className="badge-blue mb-4 inline-flex">O que já está rodando</span>
+          <span className="badge-blue mb-4 inline-flex">Nosso trabalho</span>
           <h2
             className="text-3xl sm:text-4xl xl:text-5xl font-bold text-[#EEF1F8] mb-5"
             style={{ fontFamily: "var(--font-space-grotesk)" }}
           >
-            Sistemas em produção,{" "}
-            <span className="text-gradient-blue">não em slide</span>
+            O que construímos,{" "}
+            <span className="text-gradient-blue">e para quem</span>
           </h2>
           <p className="text-[#AFB6CC] text-lg leading-relaxed">
-            De portal corporativo a plataforma de assinatura. Abaixo, o que
-            construímos, para quem, e o problema que cada um resolveu.
+            De portal para indústria a plataforma para clínica e imobiliária.
+            Abaixo, o problema que cada um resolveu — e em que estágio está.
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-3 gap-5">
-          {CASOS.map((caso, i) => (
-            <motion.article
-              key={caso.titulo}
-              initial={{ opacity: 0, y: 28 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: i * 0.1, duration: 0.55, ease: "easeOut" }}
-              className="group relative flex flex-col rounded-2xl p-6 card-hover overflow-hidden bg-[#0E1320]"
-              style={{
-                border: "1px solid var(--gs-border)",
-                boxShadow: "var(--gs-shadow-sm)",
-              }}
-            >
-              <div
-                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {CASOS.map((caso, i) => {
+            const cor = ACENTO[i % ACENTO.length]
+            return (
+              <motion.article
+                key={caso.titulo}
+                initial={{ opacity: 0, y: 28 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ delay: i * 0.1, duration: 0.55, ease: "easeOut" }}
+                className={`group relative flex flex-col rounded-2xl p-6 overflow-hidden bg-[#0E1320] ${
+                  i === 2 ? "sm:col-span-2 lg:col-span-1" : ""
+                }`}
                 style={{
-                  background: `radial-gradient(ellipse at top left, ${caso.color}08 0%, transparent 65%)`,
+                  border: "1px solid var(--gs-border)",
+                  boxShadow: "var(--gs-shadow-sm)",
                 }}
-              />
-
-              <div className="relative flex items-start justify-between gap-3 mb-5">
+              >
                 <div
-                  className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                   style={{
-                    background: `${caso.color}12`,
-                    border: `1px solid ${caso.color}25`,
+                    background: `radial-gradient(ellipse at top left, ${cor}08 0%, transparent 65%)`,
                   }}
-                >
-                  <caso.icon className="w-5 h-5" style={{ color: caso.color }} />
-                </div>
-                <span
-                  className="text-[10px] uppercase tracking-wider font-semibold px-2 py-1 rounded-md whitespace-nowrap"
-                  style={{
-                    color: caso.color,
-                    background: `${caso.color}10`,
-                    border: `1px solid ${caso.color}20`,
-                  }}
-                >
-                  {caso.tipo}
-                </span>
-              </div>
-
-              <p className="relative text-[11px] uppercase tracking-wider text-[#6B7490] mb-1.5">
-                {caso.cliente}
-              </p>
-              <h3
-                className="relative text-lg font-semibold text-[#EEF1F8] mb-3 leading-snug"
-                style={{ fontFamily: "var(--font-space-grotesk)" }}
-              >
-                {caso.titulo}
-              </h3>
-
-              <p className="relative text-[13px] text-[#AFB6CC] leading-relaxed mb-5">
-                {caso.desafio}
-              </p>
-
-              <ul className="relative space-y-2 mb-6">
-                {caso.entrega.map((item) => (
-                  <li
-                    key={item}
-                    className="flex gap-2.5 text-[13px] text-[#C7CEE2] leading-snug"
-                  >
-                    <ArrowRight
-                      className="w-3.5 h-3.5 mt-[3px] shrink-0"
-                      style={{ color: caso.color }}
-                    />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-
-              <div
-                className="relative mt-auto pt-4 flex items-center gap-2"
-                style={{ borderTop: "1px solid var(--gs-border)" }}
-              >
-                <span
-                  className="w-1.5 h-1.5 rounded-full"
-                  style={{ background: caso.color }}
                 />
-                <span className="text-[12px] text-[#AFB6CC]">{caso.status}</span>
-              </div>
-            </motion.article>
-          ))}
+
+                <div className="relative flex items-start justify-between gap-3 mb-5">
+                  <div
+                    className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
+                    style={{
+                      background: `${cor}12`,
+                      border: `1px solid ${cor}25`,
+                    }}
+                  >
+                    <caso.icon className="w-5 h-5" style={{ color: cor }} />
+                  </div>
+                  <span
+                    className="text-[11px] uppercase tracking-wider font-semibold px-2 py-1 rounded-md whitespace-nowrap text-[#AFB6CC]"
+                    style={{
+                      background: "rgba(255,255,255,0.04)",
+                      border: "1px solid var(--gs-border)",
+                    }}
+                  >
+                    {caso.tipo}
+                  </span>
+                </div>
+
+                <p className="relative text-[11px] uppercase tracking-wider text-[#8B94B0] mb-1.5">
+                  {caso.cliente}
+                </p>
+                <h3
+                  className="relative text-lg font-semibold text-[#EEF1F8] mb-3 leading-snug"
+                  style={{ fontFamily: "var(--font-space-grotesk)" }}
+                >
+                  {caso.titulo}
+                </h3>
+
+                <p className="relative text-[13px] text-[#AFB6CC] leading-relaxed mb-5">
+                  {caso.desafio}
+                </p>
+
+                <ul className="relative space-y-2">
+                  {caso.entrega.map((item) => (
+                    <li
+                      key={item}
+                      className="flex gap-2.5 text-[13px] text-[#C7CEE2] leading-snug"
+                    >
+                      <ArrowRight
+                        className="w-3.5 h-3.5 mt-[3px] shrink-0"
+                        style={{ color: cor }}
+                        aria-hidden="true"
+                      />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+
+                {caso.status && (
+                  <div
+                    className="relative mt-6 pt-4 flex items-center gap-2"
+                    style={{ borderTop: "1px solid var(--gs-border)" }}
+                  >
+                    <span
+                      className="w-1.5 h-1.5 rounded-full"
+                      style={{ background: cor }}
+                      aria-hidden="true"
+                    />
+                    <span className="text-[12px] text-[#AFB6CC]">
+                      {caso.status}
+                    </span>
+                  </div>
+                )}
+              </motion.article>
+            )
+          })}
         </div>
       </div>
     </section>

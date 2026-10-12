@@ -34,17 +34,19 @@ export default function FounderSection() {
       className="relative py-24 px-6"
       style={{ background: "#0A0E1A" }}
     >
+      <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[rgba(255,255,255,0.10)] to-transparent" />
+
       <div className="max-w-7xl mx-auto" ref={ref}>
-        <div className="grid lg:grid-cols-[320px_1fr] gap-12 lg:gap-16 items-start">
+        <div className="grid lg:grid-cols-[240px_1fr] gap-12 lg:gap-16 items-start">
           {/* Foto / identidade */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
-            className="mx-auto lg:mx-0"
+            className="mx-auto lg:mx-0 order-2 lg:order-1"
           >
             <div
-              className="w-[240px] h-[280px] rounded-2xl overflow-hidden flex items-center justify-center"
+              className="w-full max-w-[240px] h-[240px] sm:h-[280px] rounded-2xl overflow-hidden flex items-center justify-center"
               style={{
                 background:
                   "linear-gradient(145deg, #121829 0%, #0E1320 100%)",
@@ -54,6 +56,7 @@ export default function FounderSection() {
             >
               {/* Troque por <img src="/juan-garbato.jpg" alt="Juan Garbato" className="w-full h-full object-cover" /> */}
               <span
+                aria-hidden="true"
                 className="text-5xl font-bold text-gradient-blue"
                 style={{ fontFamily: "var(--font-space-grotesk)" }}
               >
@@ -74,8 +77,9 @@ export default function FounderSection() {
             initial={{ opacity: 0, y: 24 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.12 }}
+            className="order-1 lg:order-2"
           >
-            <span className="badge-blue mb-4 inline-flex">Quem está por trás</span>
+            <span className="badge-blue mb-4 inline-flex">O fundador</span>
             <h2
               className="text-3xl sm:text-4xl xl:text-5xl font-bold text-[#EEF1F8] mb-6 leading-tight"
               style={{ fontFamily: "var(--font-space-grotesk)" }}
@@ -89,9 +93,8 @@ export default function FounderSection() {
                 Passei quase duas décadas implantando ERP em corporação — boa
                 parte em Oracle E-Business Suite, o tipo de sistema que leva
                 meses para entrar e tem orçamento que PME nenhuma alcança.
-                Sigo nesse mundo: hoje também faço auditoria técnica de
-                customização de Contas a Pagar para uma construtora de grande
-                porte.
+                Sigo nesse mundo: hoje também presto consultoria em ERP
+                corporativo.
               </p>
               <p>
                 O que mais me chamou atenção ao começar a atender empresa
@@ -143,7 +146,7 @@ export default function FounderSection() {
               initial={{ opacity: 0 }}
               animate={inView ? { opacity: 1 } : {}}
               transition={{ delay: 0.5, duration: 0.5 }}
-              className="inline-flex items-center gap-2.5 mt-6 text-sm text-[#AFB6CC] hover:text-[#EEF1F8] transition-colors"
+              className="inline-flex items-center gap-2.5 mt-6 py-2 text-sm text-[#AFB6CC] hover:text-[#EEF1F8] transition-colors"
             >
               <BookOpen className="w-4 h-4" />
               <span>
@@ -151,6 +154,7 @@ export default function FounderSection() {
                 <span className="text-gradient-blue font-medium">
                   ler na Amazon
                 </span>
+                <span className="sr-only"> (abre em nova aba)</span>
               </span>
             </motion.a>
           </motion.div>
