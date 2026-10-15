@@ -1,0 +1,163 @@
+/*
+ * Tema claro, escopado em .gs-light, para não vazar no site dark.
+ * A escala de cor e a tipografia seguem a referência medida em
+ * bellosoft.com.br/pt/start: fundo quase branco levemente frio, faixa
+ * alternada um tom abaixo, tinta azul-marinho em vez de preto, e um único
+ * acento quente no CTA. O acento é o token da Garbato (--color-gs-amber).
+ */
+.gs-light {
+  --bg:        #F7F9FB;
+  --bg-tint:   #EDF1F5;
+  --surface:   #FFFFFF;
+  --ink:       #16233A;
+  --ink-soft:  #4A5872;
+  --ink-faint: #6B7A93;
+  --ink-deep:  #0A1220;
+  --accent:    #FF7A45;
+  --blue:      #3B6EF6;
+  --line:      rgba(22, 35, 58, 0.10);
+  --line-soft: rgba(22, 35, 58, 0.06);
+
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-nunito), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.gs-light ::selection { background: var(--accent); color: var(--ink); }
+
+/* ── blocos ──────────────────────────────────────────────────────── */
+.gs-light .wrap   { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+.gs-light .narrow { max-width: 820px; }
+.gs-light section { padding: 88px 0; }
+.gs-light .tint   { background: var(--bg-tint); }
+
+/* ── tipografia ──────────────────────────────────────────────────── */
+.gs-light .eyebrow {
+  font-size: 13px; font-weight: 500; letter-spacing: 0.4em;
+  text-transform: uppercase; color: var(--ink-faint); margin-bottom: 20px;
+}
+/* o globals.css do site dark força color e font-family em h1..h6;
+   reafirmamos aqui em vez de depender de herança */
+.gs-light h1, .gs-light h2, .gs-light h3 {
+  color: var(--ink);
+  font-family: var(--font-nunito), system-ui, sans-serif;
+}
+.gs-light h1 {
+  font-size: clamp(38px, 6.2vw, 70px); font-weight: 600;
+  line-height: 1.06; letter-spacing: -0.02em; margin: 0 0 24px;
+}
+.gs-light h1 .mark {
+  color: var(--ink);
+  box-shadow: inset 0 -0.14em 0 var(--accent);
+}
+.gs-light h2 {
+  font-size: clamp(27px, 3.6vw, 40px); font-weight: 500;
+  line-height: 1.15; letter-spacing: -0.015em; margin: 0 0 40px;
+}
+.gs-light h3 { font-size: 19px; font-weight: 600; margin: 0 0 8px; }
+.gs-light p  { color: var(--ink-soft); line-height: 1.65; margin: 0; }
+.gs-light .lead { font-size: clamp(16px, 1.6vw, 19px); max-width: 560px; }
+
+/* ── botões ──────────────────────────────────────────────────────── */
+.gs-light .btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  border-radius: 100px; font-weight: 600; font-size: 15px;
+  padding: 14px 24px; text-decoration: none; border: 0; cursor: pointer;
+  transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+}
+.gs-light .btn-accent { background: var(--accent); color: var(--ink); }
+.gs-light .btn-accent:hover { transform: translateY(-1px); box-shadow: 0 10px 24px rgba(255,122,69,.32); }
+.gs-light .btn-dark { background: var(--ink-deep); color: #FAFCFE; font-size: 14px; padding: 11px 20px; }
+.gs-light .btn-dark:hover { transform: translateY(-1px); }
+
+/* ── navegação ───────────────────────────────────────────────────── */
+.gs-light .nav {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(247,249,251,.82); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line-soft);
+}
+.gs-light .nav-inner { display: flex; align-items: center; gap: 32px; height: 68px; }
+.gs-light .nav a.link {
+  color: var(--ink-soft); text-decoration: none; font-size: 15px; font-weight: 500;
+}
+.gs-light .nav a.link:hover { color: var(--ink); }
+
+/* ── cartões ─────────────────────────────────────────────────────── */
+.gs-light .card {
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: 18px; padding: 28px;
+}
+.gs-light .step-num {
+  width: 34px; height: 34px; border-radius: 50%;
+  display: grid; place-items: center; font-size: 14px; font-weight: 700;
+  background: var(--ink-deep); color: #FAFCFE; margin-bottom: 18px;
+}
+.gs-light .chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12px; font-weight: 600; letter-spacing: .02em;
+  padding: 5px 11px; border-radius: 100px;
+  background: rgba(59,110,246,.10); color: var(--blue);
+}
+.gs-light .chip-live { background: rgba(255,122,69,.14); color: #B4441B; }
+
+/* ── grades ──────────────────────────────────────────────────────── */
+.gs-light .grid3 { display: grid; gap: 22px; grid-template-columns: repeat(3, 1fr); }
+.gs-light .hero-grid {
+  display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 56px; align-items: center;
+}
+/* moldura de produto: formas de interface, sem número nenhum —
+   evita mockup com dado inventado (regra do marketing/DESIGN.md) */
+.gs-light .mock {
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: 20px; padding: 16px; display: flex; gap: 14px;
+  box-shadow: 0 28px 60px -30px rgba(22,35,58,.38);
+}
+.gs-light .mock-side { width: 58px; display: flex; flex-direction: column; gap: 9px; flex: none; }
+.gs-light .mock-main { flex: 1; display: flex; flex-direction: column; gap: 12px; }
+.gs-light .bar { height: 9px; border-radius: 100px; background: var(--bg-tint); }
+.gs-light .tile { border: 1px solid var(--line-soft); border-radius: 12px; padding: 13px; display: grid; gap: 7px; }
+.gs-light .cols { display: flex; align-items: flex-end; gap: 7px; height: 76px; }
+.gs-light .col { flex: 1; border-radius: 5px 5px 0 0; background: var(--bg-tint); }
+.gs-light .col.on { background: var(--blue); opacity: .82; }
+
+.gs-light .grid2 { display: grid; gap: 44px; grid-template-columns: 1fr 1fr; align-items: start; }
+
+/* ── faq ─────────────────────────────────────────────────────────── */
+.gs-light .faq-item { border-bottom: 1px solid var(--line); }
+.gs-light .faq-q {
+  width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 20px;
+  background: none; border: 0; cursor: pointer; text-align: left;
+  padding: 22px 0; font-size: 17px; font-weight: 600; color: var(--ink);
+  font-family: inherit;
+}
+.gs-light .faq-a { padding: 0 0 22px; max-width: 72ch; }
+
+/* ── formulário ──────────────────────────────────────────────────── */
+.gs-light label { display: block; font-size: 13px; font-weight: 600; color: var(--ink-soft); margin-bottom: 7px; }
+.gs-light input, .gs-light select, .gs-light textarea {
+  width: 100%; background: var(--surface); border: 1px solid var(--line);
+  border-radius: 12px; padding: 12px 14px; font-size: 15px; color: var(--ink);
+  font-family: inherit; outline: none;
+}
+.gs-light input:focus, .gs-light select:focus, .gs-light textarea:focus {
+  border-color: var(--blue); box-shadow: 0 0 0 3px rgba(59,110,246,.14);
+}
+.gs-light .field { margin-bottom: 16px; }
+
+/* ── rodapé ──────────────────────────────────────────────────────── */
+.gs-light footer { border-top: 1px solid var(--line); padding: 28px 0; }
+.gs-light footer, .gs-light .small { font-size: 14px; color: var(--ink-faint); }
+
+@media (max-width: 860px) {
+  .gs-light section { padding: 56px 0; }
+  .gs-light .grid3,
+  .gs-light .grid2,
+  .gs-light .hero-grid { grid-template-columns: 1fr; gap: 22px; }
+  .gs-light .mock { display: none; }
+  .gs-light .nav a.link { display: none; }
+  .gs-light .nav-inner { gap: 12px; }
+  .gs-light .btn { font-size: 14px; padding: 13px 20px; }
+  .gs-light h1 { letter-spacing: -0.015em; }
+  .gs-light .lead { font-size: 16px; }
+}
