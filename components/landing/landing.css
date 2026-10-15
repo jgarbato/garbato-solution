@@ -215,3 +215,11 @@ body:has(.gs-light) { background: #F7F9FB !important; }
   .gs-light h1 { letter-spacing: -0.015em; }
   .gs-light .lead { font-size: 16px; }
 }
+
+/* confirmação do formulário */
+.gs-light .ok {
+  font-size: 13.5px; line-height: 1.5; color: #0F6B46;
+  background: rgba(18, 146, 95, .09); border: 1px solid rgba(18, 146, 95, .2);
+  border-radius: 10px; padding: 11px 13px; margin-bottom: 14px;
+}
+.gs-light .ok a { color: inherit; font-weight: 600; }

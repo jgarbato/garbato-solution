@@ -65,6 +65,7 @@ const FAQ = [
 
 export default function Start() {
   const [aberta, setAberta] = useState<number | null>(0)
+  const [enviado, setEnviado] = useState(false)
   const [form, setForm] = useState({
     nome: "", empresa: "", whatsapp: "", email: "", assunto: "", tamanho: "", problema: "",
   })
@@ -86,6 +87,12 @@ export default function Start() {
       form.problema && `O que quero resolver: ${form.problema}`,
     ].filter(Boolean).join("\n")
     window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`, "_blank")
+
+    // Campo limpo sem aviso parece erro: some o que a pessoa escreveu e ela
+    // não sabe se foi. Limpa e confirma, e o aviso sai sozinho em 6s.
+    setForm({ nome: "", empresa: "", whatsapp: "", email: "", assunto: "", tamanho: "", problema: "" })
+    setEnviado(true)
+    window.setTimeout(() => setEnviado(false), 6000)
   }
 
   return (
@@ -305,6 +312,15 @@ export default function Start() {
               <label htmlFor="problema">O que você quer resolver?</label>
               <textarea id="problema" rows={3} value={form.problema} onChange={set("problema")} />
             </div>
+            {enviado && (
+              <p className="ok" role="status">
+                Pronto — o WhatsApp abriu com a sua mensagem escrita. Se não abriu,
+                o seu navegador bloqueou a janela: chama direto no{" "}
+                <a href={`https://wa.me/${WHATSAPP}`} target="_blank" rel="noopener noreferrer">
+                  (43) 98858-5127
+                </a>.
+              </p>
+            )}
             <button className="btn btn-accent" type="submit" style={{ width: "100%", justifyContent: "center" }}>
               Quero meu diagnóstico gratuito <ArrowRight size={17} />
             </button>
