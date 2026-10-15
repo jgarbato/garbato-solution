@@ -203,18 +203,55 @@ body:has(.gs-light) { background: #F7F9FB !important; }
 .gs-light footer { border-top: 1px solid var(--line); padding: 28px 0; }
 .gs-light footer, .gs-light .small { font-size: 14px; color: var(--ink-faint); }
 
-@media (max-width: 860px) {
-  .gs-light section { padding: 56px 0; }
-  .gs-light .grid3,
-  .gs-light .grid2,
-  .gs-light .hero-grid { grid-template-columns: 1fr; gap: 22px; }
-  .gs-light .shot-wrap { display: none; }
-  .gs-light .nav a.link { display: none; }
-  .gs-light .nav-inner { gap: 12px; }
-  .gs-light .btn { font-size: 14px; padding: 13px 20px; }
-  .gs-light h1 { letter-spacing: -0.015em; }
-  .gs-light .lead { font-size: 16px; }
+
+
+/* confirmação do formulário */
+.gs-light .ok {
+  font-size: 13.5px; line-height: 1.5; color: #0F6B46;
+  background: rgba(18, 146, 95, .09); border: 1px solid rgba(18, 146, 95, .2);
+  border-radius: 10px; padding: 11px 13px; margin-bottom: 14px;
 }
+.gs-light .ok a { color: inherit; font-weight: 600; }
+
+/* ── galeria de sistemas ─────────────────────────────────────────
+   Imagem grande + informação embaixo + trilho de miniaturas à direita.
+   As imagens são screenshots do produto rodando, com dados de
+   demonstração — não há dado de cliente nenhum nelas. */
+.gs-light .gal { display: grid; grid-template-columns: 1fr 212px; gap: 18px; align-items: start; }
+.gs-light .gal-main { min-width: 0; }
+.gs-light .gal-main img {
+  width: 100%; display: block; border-radius: 12px; border: 1px solid var(--line);
+  box-shadow: 0 24px 50px -28px rgba(22,35,58,.4);
+}
+.gs-light .gal-info { margin-top: 20px; }
+.gs-light .gal-head { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; }
+.gs-light .gal-head h3 { font-size: 22px; margin: 0; }
+.gs-light .gal-info p { max-width: 62ch; }
+
+.gs-light .gal-rail { display: flex; flex-direction: column; gap: 10px; }
+.gs-light .gal-thumb {
+  padding: 0; border: 1px solid var(--line); border-radius: 10px; overflow: hidden;
+  background: #fff; cursor: pointer; text-align: left; font-family: inherit;
+  transition: border-color .18s ease, box-shadow .18s ease;
+}
+.gs-light .gal-thumb img { width: 100%; display: block; }
+.gs-light .gal-thumb b {
+  display: block; font-size: 11.5px; font-weight: 600; color: var(--ink-soft);
+  padding: 7px 9px; border-top: 1px solid var(--line-soft);
+}
+.gs-light .gal-thumb:hover { border-color: #B9C6DA; }
+.gs-light .gal-thumb[aria-current="true"] {
+  border-color: var(--blue); box-shadow: 0 0 0 2px rgba(59,110,246,.16);
+}
+.gs-light .gal-thumb[aria-current="true"] b { color: var(--ink); }
+
+/* os sistemas que ainda não têm print publicável */
+.gs-light .outros {
+  margin-top: 34px; padding-top: 24px; border-top: 1px solid var(--line);
+  display: grid; grid-template-columns: 1fr 1fr; gap: 26px;
+}
+.gs-light .outros h4 { font-size: 16px; font-weight: 600; margin: 8px 0 6px; color: var(--ink); }
+.gs-light .outros p { font-size: 14px; }
 
 /* confirmação do formulário */
 .gs-light .ok {
@@ -271,3 +308,23 @@ body:has(.gs-light) { background: #F7F9FB !important; }
 .gs-light .cal .c.b { background: rgba(59,110,246,.75); }
 .gs-light .cal .c.b2 { background: rgba(110,85,232,.6); }
 .gs-light .cal .c.b3 { background: rgba(255,122,69,.6); }
+
+/* ── telas estreitas (sempre por último, para vencer as regras acima) ── */
+@media (max-width: 860px) {
+  .gs-light section { padding: 56px 0; }
+  .gs-light .grid3,
+  .gs-light .grid2,
+  .gs-light .hero-grid,
+  .gs-light .outros { grid-template-columns: 1fr; gap: 22px; }
+  /* galeria vira imagem grande + trilho deitado embaixo */
+  .gs-light .gal { grid-template-columns: 1fr; gap: 14px; }
+  .gs-light .gal-rail { flex-direction: row; overflow-x: auto; gap: 10px; padding-bottom: 4px; }
+  .gs-light .gal-rail .gal-thumb { flex: 0 0 168px; }
+  .gs-light .gal-head h3 { font-size: 19px; }
+  .gs-light .shot-wrap { display: none; }
+  .gs-light .nav a.link { display: none; }
+  .gs-light .nav-inner { gap: 12px; }
+  .gs-light .btn { font-size: 14px; padding: 13px 20px; }
+  .gs-light h1 { letter-spacing: -0.015em; }
+  .gs-light .lead { font-size: 16px; }
+}

@@ -64,81 +64,48 @@ const FAQ = [
 ]
 
 
-/* ── miniaturas dos sistemas ────────────────────────────────────────
- * Não são screenshots: são representações da tela de cada sistema.
- * Por isso cada janela carrega "dados fictícios" na barra, igual ao
- * ProductScroll do site completo. Trocar por print real quando houver
- * um ambiente de demonstração sem dado de cliente.
+/* ── galeria ────────────────────────────────────────────────────────
+ * Screenshots do produto rodando, capturados num ambiente local com
+ * dados de demonstração. Nenhum dado de cliente aparece neles.
+ * Quando houver print autorizado do portal da indústria e do ERP
+ * imobiliário, eles entram aqui e saem de TAMBEM_EM_OPERACAO.
  * ───────────────────────────────────────────────────────────────── */
-function Janela({ nome, children }: { nome: string; children: React.ReactNode }) {
-  return (
-    <div className="thumb">
-      <div className="win">
-        <div className="win-bar">
-          <span className="d" /><span className="d" /><span className="d" />
-          <span className="n">{nome}</span>
-          <span className="f">dados fictícios</span>
-        </div>
-        <div className="win-body">{children}</div>
-      </div>
-    </div>
-  )
-}
+const GALERIA = [
+  {
+    img: "/sistemas/blesssystem-agenda.webp",
+    aba: "Agenda da semana",
+    titulo: "BlessSystem Clinic",
+    tag: "Plataforma própria · Em operação",
+    texto:
+      "A semana inteira numa tela, com o status de cada consulta: confirmada, agendada, concluída. A confirmação sai pelo WhatsApp que a secretária já usa, no lugar do caderno e da ligação uma a uma.",
+  },
+  {
+    img: "/sistemas/blesssystem-pacientes.webp",
+    aba: "Base de pacientes",
+    titulo: "BlessSystem Clinic",
+    tag: "Plataforma própria · Em operação",
+    texto:
+      "Paciente, telefone, e-mail e histórico num lugar só — com busca por nome, CPF ou telefone. É o que substitui a planilha que só uma pessoa da clínica sabe mexer.",
+  },
+]
 
-const TELAS: Record<string, React.ReactNode> = {
-  "Portal de peças e pedidos": (
-    <>
-      {[
-        ["Rolamento 6204-2RS", "128 un", "ok", "Aprovado"],
-        ["Correia dentada HTD", "36 un", "go", "Em cotação"],
-        ["Retentor 35×52×7", "240 un", "wa", "Aguardando"],
-        ["Mancal SN 510", "12 un", "ok", "Aprovado"],
-      ].map(([item, qtd, cls, tag]) => (
-        <div className="row" key={item}>
-          <span className="g">{item}</span>
-          <span className="v">{qtd}</span>
-          <span className={`tag ${cls}`}>{tag}</span>
-        </div>
-      ))}
-    </>
-  ),
-  "Gestão completa para clínicas": (
-    <div className="cal">
-      <span className="h" />
-      {["Seg", "Ter", "Qua", "Qui"].map((d) => <span className="h" key={d}>{d}</span>)}
-      {["08h", "09h", "10h", "11h", "14h"].map((hora, li) => (
-        <React.Fragment key={hora}>
-          <span className="h">{hora}</span>
-          {[0, 1, 2, 3].map((ci) => {
-            const k = (li * 4 + ci) % 7
-            const cls = k === 0 ? " b" : k === 3 ? " b2" : k === 5 ? " b3" : ""
-            return <span className={`c${cls}`} key={ci} />
-          })}
-        </React.Fragment>
-      ))}
-    </div>
-  ),
-  "Da captação à rescisão, num sistema só": (
-    <>
-      {[
-        ["Contrato 2041 · Locação", "R$ 2.400", "ok", "Em dia"],
-        ["Contrato 2039 · Venda", "R$ 318k", "go", "Assinatura"],
-        ["Contrato 2033 · Locação", "R$ 1.850", "wa", "Vence hoje"],
-        ["Contrato 2028 · Locação", "R$ 3.100", "ok", "Em dia"],
-      ].map(([item, valor, cls, tag]) => (
-        <div className="row" key={item}>
-          <span className="g">{item}</span>
-          <span className="v">{valor}</span>
-          <span className={`tag ${cls}`}>{tag}</span>
-        </div>
-      ))}
-    </>
-  ),
-}
+const TAMBEM_EM_OPERACAO = [
+  {
+    titulo: "Portal de peças e pedidos",
+    cliente: "Indústria multinacional · Em implantação",
+    texto: "Pedido, negociação e acompanhamento de peças num portal só, no lugar de planilha e e-mail solto.",
+  },
+  {
+    titulo: "ERP Imobiliário e Financeiro",
+    cliente: "Plataforma própria · Em operação",
+    texto: "O ciclo inteiro do contrato, da captação à rescisão, com o financeiro conversando com a operação.",
+  },
+]
 
 export default function Start() {
   const [aberta, setAberta] = useState<number | null>(0)
   const [enviado, setEnviado] = useState(false)
+  const [tela, setTela] = useState(0)
   const [form, setForm] = useState({
     nome: "", empresa: "", whatsapp: "", email: "", assunto: "", tamanho: "", problema: "",
   })
@@ -278,19 +245,45 @@ export default function Start() {
         <div className="wrap">
           <p className="eyebrow">Sistemas selecionados</p>
           <h2>Software que a gente construiu, rodando de verdade.</h2>
-          <div className="grid3">
-            {SISTEMAS.map((s) => (
-              <div key={s.cliente} className="card" style={{ overflow: "hidden" }}>
-                <Janela nome={s.cliente}>{TELAS[s.titulo]}</Janela>
-                <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 16 }}>
-                  <span className="chip">{s.tipo}</span>
-                  {s.status && <span className="chip chip-live">{s.status}</span>}
+
+          <div className="gal">
+            <div className="gal-main">
+              <img
+                src={GALERIA[tela].img}
+                alt={`${GALERIA[tela].titulo} — ${GALERIA[tela].aba}`}
+                width={800}
+                height={470}
+              />
+              <div className="gal-info">
+                <div className="gal-head">
+                  <h3>{GALERIA[tela].titulo}</h3>
+                  <span className="chip">{GALERIA[tela].tag}</span>
                 </div>
-                <h3>{s.titulo}</h3>
-                <p style={{ fontSize: 14, fontWeight: 600, color: "var(--ink-faint)", marginBottom: 10 }}>
-                  {s.cliente}
-                </p>
-                <p style={{ fontSize: 15 }}>{s.desc}</p>
+                <p>{GALERIA[tela].texto}</p>
+              </div>
+            </div>
+
+            <div className="gal-rail">
+              {GALERIA.map((g, i) => (
+                <button
+                  key={g.img}
+                  className="gal-thumb"
+                  aria-current={i === tela}
+                  onClick={() => setTela(i)}
+                >
+                  <img src={g.img} alt="" width={800} height={470} />
+                  <b>{g.aba}</b>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="outros">
+            {TAMBEM_EM_OPERACAO.map((o) => (
+              <div key={o.titulo}>
+                <span className="chip">{o.cliente}</span>
+                <h4>{o.titulo}</h4>
+                <p>{o.texto}</p>
               </div>
             ))}
           </div>
