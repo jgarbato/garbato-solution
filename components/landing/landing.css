@@ -1,3 +1,7 @@
+/* o layout raiz pinta o body de #060810; quando a landing clara está
+   na página, o fundo do body acompanha (evita faixa escura no overscroll) */
+body:has(.gs-light) { background: #F7F9FB !important; }
+
 /*
  * Tema claro, escopado em .gs-light, para não vazar no site dark.
  * A escala de cor e a tipografia seguem a referência medida em

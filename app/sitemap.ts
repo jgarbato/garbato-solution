@@ -14,6 +14,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 1,
     },
+    {
+      // a home antiga, com as 16 seções, continua viva aqui
+      url: `${SITE_URL}/completo`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
     ...products.map((p) => ({
       url: `${SITE_URL}${p.path}`,
       lastModified,
