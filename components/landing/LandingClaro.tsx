@@ -192,7 +192,7 @@ export default function Start() {
             {[
               ["Diagnóstico gratuito de uma hora", "Eu olho como a sua operação funciona hoje e te digo onde está o gargalo e quanto ele custa por mês."],
               ["Proposta com escopo e telas", "Você vê as telas principais e o escopo antes de assumir qualquer compromisso."],
-              ["Construção acompanhada", "Você acompanha o que está sendo feito em vez de esperar a entrega final para descobrir."],
+              ["Construção com demo semanal", "Toda semana você vê funcionando o que foi feito — não um relatório, a tela rodando."],
             ].map(([t, d], i) => (
               <div key={t} className="card">
                 <div className="step-num">{i + 1}</div>
