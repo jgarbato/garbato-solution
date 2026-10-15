@@ -64,41 +64,37 @@ const FAQ = [
 ]
 
 
-/* ── galeria ────────────────────────────────────────────────────────
- * Screenshots do produto rodando, capturados num ambiente local com
- * dados de demonstração. Nenhum dado de cliente aparece neles.
- * Quando houver print autorizado do portal da indústria e do ERP
- * imobiliário, eles entram aqui e saem de TAMBEM_EM_OPERACAO.
+/* ── galeria de sistemas ────────────────────────────────────────────
+ * As imagens são ILUSTRAÇÕES geradas, não capturas dos sistemas — por
+ * isso a legenda e o título da seção não afirmam que são telas reais.
+ * Os prints de verdade do BlessSystem estão em
+ * public/sistemas/blesssystem-*.webp, para quando houver uma página de
+ * produto onde eles caibam grandes.
  * ───────────────────────────────────────────────────────────────── */
 const GALERIA = [
   {
-    img: "/sistemas/blesssystem-agenda.webp",
-    aba: "Agenda da semana",
+    img: "/sistemas/sis-clinica.webp",
+    aba: "Gestão para clínicas",
     titulo: "BlessSystem Clinic",
     tag: "Plataforma própria · Em operação",
     texto:
-      "A semana inteira numa tela, com o status de cada consulta: confirmada, agendada, concluída. A confirmação sai pelo WhatsApp que a secretária já usa, no lugar do caderno e da ligação uma a uma.",
+      "Agenda, confirmação por WhatsApp, prontuário e financeiro no mesmo lugar — para a clínica que hoje marca no caderno, confirma no WhatsApp e fecha o mês no Excel. A confirmação sai do número que a secretária já usa.",
   },
   {
-    img: "/sistemas/blesssystem-pacientes.webp",
-    aba: "Base de pacientes",
-    titulo: "BlessSystem Clinic",
-    tag: "Plataforma própria · Em operação",
-    texto:
-      "Paciente, telefone, e-mail e histórico num lugar só — com busca por nome, CPF ou telefone. É o que substitui a planilha que só uma pessoa da clínica sabe mexer.",
-  },
-]
-
-const TAMBEM_EM_OPERACAO = [
-  {
+    img: "/sistemas/sis-portal-pecas.webp",
+    aba: "Portal de peças e pedidos",
     titulo: "Portal de peças e pedidos",
-    cliente: "Indústria multinacional · Em implantação",
-    texto: "Pedido, negociação e acompanhamento de peças num portal só, no lugar de planilha e e-mail solto.",
+    tag: "Cliente corporativo · Em implantação",
+    texto:
+      "Pedido, cotação, negociação e acompanhamento de peças num portal só, no lugar de planilha e e-mail solto. Cada pedido tem status e histórico, e quem pediu enxerga em que pé está.",
   },
   {
+    img: "/sistemas/sis-erp-imobiliario.webp",
+    aba: "ERP Imobiliário",
     titulo: "ERP Imobiliário e Financeiro",
-    cliente: "Plataforma própria · Em operação",
-    texto: "O ciclo inteiro do contrato, da captação à rescisão, com o financeiro conversando com a operação.",
+    tag: "Plataforma própria · Em operação",
+    texto:
+      "O ciclo inteiro do contrato, da captação à rescisão, com o financeiro conversando com a operação: vencimento, repasse e inadimplência saem do mesmo lugar onde o contrato vive.",
   },
 ]
 
@@ -170,52 +166,20 @@ export default function Start() {
             </a>
           </div>
 
-          {/* Moldura de produto. A barra do navegador avisa "dados fictícios",
-              mesma convenção do ProductScroll — é o que permite número aqui. */}
-          <div className="shot-wrap" style={{ position: "relative" }} aria-hidden="true">
-            <div className="shot">
-              <div className="chrome">
-                <span className="dot" style={{ background: "#FF5F57" }} />
-                <span className="dot" style={{ background: "#FEBC2E" }} />
-                <span className="dot" style={{ background: "#28C840" }} />
-                <span className="url">app.garbatosolution.com.br/dashboard</span>
-                <span className="fict">dados fictícios</span>
-              </div>
-
-              <div className="app">
-                <div className="rail">
-                  <div className="mk">Garbato</div>
-                  <span className="sel">Dashboard</span>
-                  <span>Pedidos</span>
-                  <span>Clientes</span>
-                  <span>Financeiro</span>
-                  <span>Estoque</span>
-                </div>
-
-                <div className="board">
-                  <div className="kpis">
-                    <div className="kpi"><i>Receita</i><b>R$ 284k</b><em>+12%</em></div>
-                    <div className="kpi"><i>Contratos</i><b>142</b><em>+8</em></div>
-                    <div className="kpi"><i>Pendências</i><b>23</b><em>−5</em></div>
-                  </div>
-                  <div className="panel">
-                    <h4>Faturamento por mês</h4>
-                    <div className="cols">
-                      {[44, 58, 50, 71, 63, 86, 74].map((h, i) => (
-                        <div key={i} className={`col${i === 5 ? " on" : ""}`} style={{ height: `${h}%` }} />
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="float">
-              <div className="t">Tempo no fechamento</div>
-              <div className="v">1h 20min</div>
-              <div className="s">−68% vs. planilha</div>
-            </div>
-          </div>
+          {/* Imagem ilustrativa do topo. Render de painéis de vidro com
+              interfaces genéricas — não é captura de nenhum sistema da
+              Garbato, por isso a legenda diz "ilustrativa". Os prints
+              reais ficam na seção Sistemas. */}
+          <figure className="hero-img">
+            <img
+              src="/sistemas/hero-painel.webp"
+              alt="Painéis de vidro flutuantes exibindo interfaces de dashboard"
+              width={1200}
+              height={806}
+              fetchPriority="high"
+            />
+            <figcaption>Imagem ilustrativa</figcaption>
+          </figure>
         </div>
       </section>
 
@@ -244,7 +208,7 @@ export default function Start() {
       <section id="sistemas" className="tint">
         <div className="wrap">
           <p className="eyebrow">Sistemas selecionados</p>
-          <h2>Software que a gente construiu, rodando de verdade.</h2>
+          <h2>Os sistemas que a gente já construiu.</h2>
 
           <div className="gal">
             <div className="gal-main">
@@ -260,6 +224,9 @@ export default function Start() {
                   <span className="chip">{GALERIA[tela].tag}</span>
                 </div>
                 <p>{GALERIA[tela].texto}</p>
+                <p className="small" style={{ marginTop: 12 }}>
+                  Imagem ilustrativa — a tela real a gente mostra no diagnóstico.
+                </p>
               </div>
             </div>
 
@@ -278,15 +245,6 @@ export default function Start() {
             </div>
           </div>
 
-          <div className="outros">
-            {TAMBEM_EM_OPERACAO.map((o) => (
-              <div key={o.titulo}>
-                <span className="chip">{o.cliente}</span>
-                <h4>{o.titulo}</h4>
-                <p>{o.texto}</p>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
