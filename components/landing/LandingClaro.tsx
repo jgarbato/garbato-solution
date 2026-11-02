@@ -6,6 +6,20 @@ import { ArrowRight, Plus, Minus } from "lucide-react"
 
 const WHATSAPP = "5543988585127"
 
+// Demos do garbato-labs (rewrite /labs em next.config.ts). Mesma ordem da vitrine.
+const LABS = [
+  "Busca IA com fontes",
+  "Ditado por voz",
+  "Leitor de Nota Fiscal",
+  "Radar de Feedback",
+  "Propostas em PDF",
+  "Assistente do Setor",
+  "Construtor de Formulários",
+  "API de IA",
+  "Micro-SaaS",
+  "Editor de sites",
+]
+
 /* ───────────────────────────────────────────────────────────────────
  * Sistemas: só entra o que é verificável. `status` é opcional de
  * propósito — se um sistema sair do ar, tire o status, não deixe
@@ -142,6 +156,7 @@ export default function Start() {
           <div style={{ display: "flex", gap: 26, marginLeft: "auto" }}>
             <a className="link" href="#como">Como funciona</a>
             <a className="link" href="#sistemas">Sistemas</a>
+            <a className="link" href="/labs">Teste agora</a>
             <a className="link" href="#faq">Perguntas</a>
           </div>
           <a className="btn btn-dark" href="#contato">Diagnóstico gratuito</a>
@@ -245,6 +260,26 @@ export default function Start() {
             </div>
           </div>
 
+        </div>
+      </section>
+
+      {/* ── 3b. labs: demos ao vivo (projeto garbato-labs, servido em /labs) ── */}
+      <section id="labs">
+        <div className="wrap">
+          <p className="eyebrow">Teste agora</p>
+          <h2>Dez sistemas com IA que você testa no navegador.</h2>
+          <p className="lead" style={{ marginBottom: 28 }}>
+            Não é slide. Cada um mostra o problema, a solução e uma demonstração pra você
+            clicar — é a base do que eu adapto para a sua operação.
+          </p>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginBottom: 32 }}>
+            {LABS.map((nome) => (
+              <span key={nome} className="chip">{nome}</span>
+            ))}
+          </div>
+          <a className="btn btn-accent" href="/labs">
+            Abrir os sistemas <ArrowRight size={17} />
+          </a>
         </div>
       </section>
 
