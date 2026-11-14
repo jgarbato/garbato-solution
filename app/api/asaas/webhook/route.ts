@@ -14,6 +14,7 @@
  *   Token (header "asaas-access-token"): valor de ASAAS_WEBHOOK_TOKEN
  */
 
+import { timingSafeEqual } from "node:crypto"
 import { NextResponse } from "next/server"
 import { eq } from "drizzle-orm"
 import { db } from "@/lib/db"
@@ -38,6 +39,27 @@ const ACCESS_GRANT_EVENTS = new Set([
   "PAYMENT_RECEIVED",  // dinheiro recebido de fato (PIX, boleto compensado)
 ])
 
+// Eventos em que o dinheiro voltou ou está sendo contestado: a assinatura
+// deixa de valer. O produto deve checar `subscriptions.status` para barrar.
+const REVOKE_EVENTS = new Set([
+  "PAYMENT_REFUNDED",
+  "PAYMENT_CHARGEBACK_REQUESTED",
+  "PAYMENT_CHARGEBACK_DISPUTE",
+])
+// PAYMENT_DELETED fica de fora de propósito: apagar uma cobrança que não foi
+// paga (um boleto trocado por PIX, por exemplo) não pode derrubar a assinatura.
+
+// Cobrança vencida sem pagamento: assinatura fica suspensa até regularizar.
+const SUSPEND_EVENTS = new Set(["PAYMENT_OVERDUE"])
+
+/** Compara o token em tempo constante, sem vazar onde a diferença começa. */
+function tokenConfere(recebido: string | null, esperado: string): boolean {
+  if (!recebido) return false
+  const a = Buffer.from(recebido)
+  const b = Buffer.from(esperado)
+  return a.length === b.length && timingSafeEqual(a, b)
+}
+
 // Mapeamento de eventos -> status local. Eventos não listados só atualizam
 // `payments.status` com o `payment.status` que veio no payload.
 const EVENT_TO_STATUS: Record<string, AsaasPaymentStatus | undefined> = {
@@ -55,7 +77,7 @@ export async function POST(req: Request) {
   const expected = process.env.ASAAS_WEBHOOK_TOKEN
   if (expected) {
     const got = req.headers.get("asaas-access-token")
-    if (got !== expected) {
+    if (!tokenConfere(got, expected)) {
       console.warn("[asaas-webhook] token inválido", { gotPrefix: got?.slice(0, 6) })
       return NextResponse.json({ error: "unauthorized" }, { status: 401 })
     }
@@ -109,7 +131,22 @@ export async function POST(req: Request) {
     })
     .where(eq(payments.id, paymentRow.id))
 
-  // ── 5. Se evento não libera acesso, encerra aqui ──────────────────────────
+  // ── 5. Estorno, contestação ou atraso: rebaixa a assinatura ───────────────
+  if (REVOKE_EVENTS.has(eventName) || SUSPEND_EVENTS.has(eventName)) {
+    const novoStatus = REVOKE_EVENTS.has(eventName) ? "INACTIVE" : "OVERDUE"
+    await db
+      .update(subscriptions)
+      .set({ status: novoStatus, updatedAt: new Date() })
+      .where(eq(subscriptions.id, paymentRow.subscriptionId))
+    console.info("[asaas-webhook] assinatura rebaixada", {
+      eventName,
+      subscriptionId: paymentRow.subscriptionId,
+      novoStatus,
+    })
+    return NextResponse.json({ ok: true, status: mappedStatus, subscription: novoStatus })
+  }
+
+  // ── 5b. Se evento não libera acesso, encerra aqui ─────────────────────────
   if (!ACCESS_GRANT_EVENTS.has(eventName)) {
     return NextResponse.json({ ok: true, status: mappedStatus })
   }
@@ -128,7 +165,15 @@ export async function POST(req: Request) {
   }
 
   if (subscriptionRow.accessGranted) {
-    // Já liberado — webhook reentregue. Responde 200 mas não envia email de novo.
+    // Já liberado antes: não reenvia o e-mail. Se a assinatura estava suspensa
+    // ou inativa e o pagamento entrou, ela volta a valer.
+    if (subscriptionRow.status !== "ACTIVE") {
+      await db
+        .update(subscriptions)
+        .set({ status: "ACTIVE", updatedAt: new Date() })
+        .where(eq(subscriptions.id, subscriptionRow.id))
+      return NextResponse.json({ ok: true, alreadyGranted: true, reactivated: true })
+    }
     return NextResponse.json({ ok: true, alreadyGranted: true })
   }
 
