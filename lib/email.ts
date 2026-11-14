@@ -9,6 +9,16 @@ const resend = process.env.RESEND_API_KEY
 // usar "onboarding@resend.dev" como fallback (só envia para email da conta).
 const FROM_EMAIL = process.env.RESEND_FROM_EMAIL ?? "Garbato Solution <onboarding@resend.dev>"
 
+/** Escapa texto antes de colocá-lo dentro do HTML do e-mail. */
+function escaparHtml(valor: string): string {
+  return valor
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;")
+}
+
 type WelcomeEmailParams = {
   to: string
   customerName: string
@@ -25,7 +35,11 @@ export async function sendWelcomeEmail(params: WelcomeEmailParams) {
     return { skipped: true as const }
   }
 
-  const { to, customerName, systemName, appUrl, planName } = params
+  const { to, appUrl } = params
+  // O nome vem do formulário público; nada dele pode virar HTML no e-mail.
+  const customerName = escaparHtml(params.customerName)
+  const systemName = escaparHtml(params.systemName)
+  const planName = escaparHtml(params.planName)
 
   const html = `
     <!DOCTYPE html>
@@ -60,7 +74,7 @@ export async function sendWelcomeEmail(params: WelcomeEmailParams) {
   const result = await resend.emails.send({
     from: FROM_EMAIL,
     to,
-    subject: `Bem-vindo ao ${systemName} — Acesso liberado`,
+    subject: `Bem-vindo ao ${params.systemName} — Acesso liberado`,
     html,
   })
 
