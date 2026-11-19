@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { Nunito_Sans } from "next/font/google"
 import LandingClaro from "@/components/landing/LandingClaro"
+import Montagem from "@/components/landing/Montagem"
 import "@/components/landing/landing.css"
 
 const nunito = Nunito_Sans({
@@ -19,8 +20,12 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <div className={`${nunito.variable} gs-light`}>
+    <div className={`${nunito.variable} gs-light mt-ssr`}>
+      <noscript>
+        <style>{".gs-light.mt-ssr > section:first-of-type * { opacity: 1 !important; animation: none !important; }"}</style>
+      </noscript>
       <LandingClaro />
+      <Montagem />
     </div>
   )
 }
