@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <div className={`${anton.variable} ${caveat.variable} gs-noir mt-ssr`} data-montagem>
+    <div className={`${anton.variable} ${caveat.variable} gs-noir mt-ssr`} data-montagem data-tema="marinho">
       <noscript>
         <style>{".gs-noir.mt-ssr .n-hero [data-b] { opacity: 1 !important; animation: none !important; }"}</style>
       </noscript>

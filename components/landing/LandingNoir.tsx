@@ -107,7 +107,7 @@ export default function LandingNoir() {
     <>
       <nav className="n-nav">
         <div className="n-wrap n-nav-in">
-          <Link href="/" className="n-logo"><i aria-hidden="true" />GARBATO<span>.</span></Link>
+          <Link href="/" className="n-logo"><i aria-hidden="true" />GARBATO SOLUTION<span>.</span></Link>
           <div className="n-links">
             <a href="#projetos">Projetos</a>
             <a href="#como">Como funciona</a>
@@ -125,11 +125,11 @@ export default function LandingNoir() {
         <div className="n-wrap n-hero-grid">
           <div className="n-hero-txt">
             <p className="n-rotulo" data-b><b>Software sob medida</b><br />Automação · Sistemas</p>
-            <p className="n-ola" data-b>Olá, eu sou</p>
-            <h1 data-b>Juan<span>.</span></h1>
+            <p className="n-ola" data-b>Prazer, aqui é a</p>
+            <h1 data-b>Garbato<br />Solution<span>.</span></h1>
             <p className="n-cargo" data-b>Sistemas sob medida<br />&amp; automação</p>
             <p className="n-lead" data-b>
-              Construo o sistema da sua operação do zero: ERP, CRM, financeiro, dashboards e
+              O sistema da sua operação, construído do zero: ERP, CRM, financeiro, dashboards e
               automação feitos para o jeito que a sua empresa já trabalha. Nada vem de template.
             </p>
             <a className="n-btn" href="#contato" data-b>Quero meu diagnóstico gratuito <ArrowRight size={16} /></a>
@@ -313,7 +313,7 @@ export default function LandingNoir() {
 
       <footer className="n-rodape">
         <div className="n-wrap">
-          <span className="n-logo"><i aria-hidden="true" />GARBATO<span>.</span></span>
+          <span className="n-logo"><i aria-hidden="true" />GARBATO SOLUTION<span>.</span></span>
           <span>© {new Date().getFullYear()} Garbato Solution · Londrina, PR</span>
           <Link href="/completo">Ver o site completo</Link>
         </div>
