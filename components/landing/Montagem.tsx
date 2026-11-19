@@ -234,7 +234,22 @@ export function MontagemTitulos() {
   const caminho = usePathname()
   useEffect(() => {
     if (document.querySelector("[data-montagem]")) return
-    return ligar(document.body, "titulos")
+    // Este componente fica no layout, que termina de carregar antes da página.
+    // Mexer nas classes dos títulos nesse intervalo faz o React acusar diferença
+    // entre o HTML do servidor e o do navegador. Então espera a página carregar
+    // e mais um instante. Não se nota: só títulos fora da tela são escondidos.
+    let desligar = () => {}
+    let espera = 0
+    const iniciar = () => {
+      espera = window.setTimeout(() => { desligar = ligar(document.body, "titulos") }, 450)
+    }
+    if (document.readyState === "complete") iniciar()
+    else window.addEventListener("load", iniciar, { once: true })
+    return () => {
+      window.removeEventListener("load", iniciar)
+      window.clearTimeout(espera)
+      desligar()
+    }
   }, [caminho])
   return null
 }
