@@ -1,14 +1,10 @@
 import type { Metadata } from "next"
-import { Nunito_Sans } from "next/font/google"
-import LandingClaro from "@/components/landing/LandingClaro"
-import "@/components/landing/landing.css"
+import { Caveat } from "next/font/google"
+import LandingNoir from "@/components/landing/LandingNoir"
+import Montagem from "@/components/landing/Montagem"
+import "@/components/landing/noir.css"
 
-const nunito = Nunito_Sans({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-nunito",
-  display: "swap",
-})
+const caveat = Caveat({ subsets: ["latin"], weight: ["600"], variable: "--font-caveat", display: "swap" })
 
 export const metadata: Metadata = {
   title: "Sistema sob medida para a sua operação | Garbato Solution",
@@ -19,8 +15,12 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <div className={`${nunito.variable} gs-light`}>
-      <LandingClaro />
+    <div className={`${caveat.variable} gs-noir mt-ssr`} data-montagem data-tema="marinho">
+      <noscript>
+        <style>{".gs-noir.mt-ssr .n-hero [data-b] { opacity: 1 !important; animation: none !important; }"}</style>
+      </noscript>
+      <LandingNoir />
+      <Montagem />
     </div>
   )
 }

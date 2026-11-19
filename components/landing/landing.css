@@ -271,3 +271,41 @@ body:has(.gs-light) { background: #F7F9FB !important; }
   .gs-light h1 { letter-spacing: -0.015em; }
   .gs-light .lead { font-size: 16px; }
 }
+
+/* ── montagem ────────────────────────────────────────────────────────
+   Efeito "o site se monta" (components/landing/Montagem.tsx): pontinhos,
+   molduras de rascunho e, por fim, o conteúdo. As classes mt-* só existem
+   enquanto a animação roda; depois são removidas e a página volta ao normal. */
+.gs-light .mt-sec { position: relative; }
+.gs-light .mt-b   { opacity: 0; }
+.gs-light .mt-b.mt-in { opacity: 1; transition: opacity .5s ease; }
+
+.gs-light .mt-camada { position: absolute; inset: 0; pointer-events: none; z-index: 5; overflow: hidden; }
+.gs-light .mt-fio {
+  position: absolute; box-sizing: border-box; opacity: 0;
+  border: 1px solid rgba(59, 110, 246, .8);
+  background-color: rgba(59, 110, 246, .06);
+  border-radius: 3px;
+  animation: mt-fio 1.5s cubic-bezier(.2, .7, .2, 1) both;
+}
+.gs-light .mt-fio::after {           /* a "alça" aqua, como numa ferramenta de desenho */
+  content: ""; position: absolute; left: 50%; bottom: -3px; width: 26px; height: 5px; margin-left: -13px;
+  background: #2FE0D0; border-radius: 2px;
+}
+.gs-light .mt-fio-g {                /* blocos altos ganham linhas de texto de rascunho */
+  background-image: repeating-linear-gradient(180deg, rgba(22, 35, 58, .11) 0 9px, transparent 9px 22px);
+  background-size: 62% calc(100% - 28px); background-position: 14px 14px; background-repeat: no-repeat;
+}
+@keyframes mt-fio {
+  0%   { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(.9); }
+  34%  { opacity: 1; transform: none; }
+  62%  { opacity: 1; transform: none; }
+  100% { opacity: 0; transform: none; }
+}
+
+/* Antes do JavaScript carregar, o topo fica escondido para não piscar
+   (aparece → some → monta). Se o JavaScript não rodar, volta sozinho em 4s. */
+.gs-light.mt-ssr > section:first-of-type :is(.eyebrow, h1, .lead, .btn, .hero-img) {
+  opacity: 0; animation: mt-socorro .4s 4s forwards;
+}
+@keyframes mt-socorro { to { opacity: 1; } }

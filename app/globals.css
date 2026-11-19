@@ -115,6 +115,17 @@
     color: #EEF1F8;
   }
 
+  /* Títulos principais condensados em caixa alta em todo o site, como na
+     página inicial. !important porque vários componentes fixam a fonte no
+     próprio elemento (style) e o peso por classe. */
+  h1, h2 {
+    font-family: var(--font-anton), Impact, sans-serif !important;
+    font-weight: 400 !important;
+    text-transform: uppercase;
+    letter-spacing: .005em !important;
+    line-height: 1.02 !important;
+  }
+
   /* Scrollbar */
   ::-webkit-scrollbar {
     width: 8px;
@@ -244,3 +255,51 @@
     border-color: var(--gs-border-hover);
   }
 }
+
+/* Logo de texto usado no menu e no rodapé das páginas institucionais. */
+.gs-logo { display: inline-flex; align-items: center; gap: 10px; white-space: nowrap; font-family: var(--font-anton), Impact, sans-serif; font-size: 21px; letter-spacing: .03em; color: #EEF1F8; line-height: 1; }
+.gs-logo i { width: 12px; height: 12px; background: #3B6EF6; clip-path: polygon(0 0, 100% 0, 50% 100%); }
+.gs-logo b { color: #3B6EF6; font-weight: 400; margin-left: -10px; }
+
+/* ── montagem ────────────────────────────────────────────────────────
+   Efeito "o site se monta" (Montagem.tsx): cursores com nome desenham a
+   moldura de cada bloco e o conteúdo aparece. Na página inicial montam tudo;
+   nas outras, digitam os títulos. As classes mt-* só existem
+   enquanto a animação roda; depois são removidas e a página volta ao normal. */
+.mt-b { opacity: 0; }
+.mt-b.mt-in { opacity: 1; transition: opacity .32s ease; }
+.mt-b.mt-pop { animation: mt-pop .28s cubic-bezier(.2, 1.4, .4, 1) both; }
+@keyframes mt-pop { from { transform: scale(.8); } to { transform: none; } }
+
+.mt-camada { position: absolute; inset: 0; pointer-events: none; z-index: 30; overflow: hidden; }
+.mt-fio {
+  position: absolute; box-sizing: border-box; transform-origin: 0 0; transform: scale(0);
+  border: 1px solid var(--cor, #4C8DFF);
+  background-color: color-mix(in srgb, var(--cor, #4C8DFF) 9%, transparent);
+  transition: transform .3s cubic-bezier(.3, .8, .3, 1), opacity .45s ease;
+}
+.mt-fio.mt-abre { transform: none; }
+.mt-fio.mt-some { opacity: 0; }
+.mt-fio::before, .mt-fio::after {   /* alças nos cantos, como numa ferramenta de desenho */
+  content: ""; position: absolute; width: 7px; height: 7px; background: #fff; border: 1px solid var(--cor, #4C8DFF);
+}
+.mt-fio::before { left: -4px; top: -4px; }
+.mt-fio::after  { right: -4px; bottom: -4px; }
+.mt-fio-g {                 /* blocos altos ganham linhas de texto de rascunho */
+  background-image: repeating-linear-gradient(180deg, rgba(160, 175, 205, .22) 0 9px, transparent 9px 22px);
+  background-size: 62% calc(100% - 28px); background-position: 14px 14px; background-repeat: no-repeat;
+}
+
+.mt-cursor {
+  position: absolute; left: 0; top: 0; z-index: 2; opacity: 0; will-change: transform;
+  transition: transform .3s cubic-bezier(.4, .1, .2, 1), opacity .35s ease;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, .6));
+}
+.mt-vai .mt-cursor { opacity: 1; }
+.mt-vai .mt-cursor.mt-sai { opacity: 0; }
+.mt-cursor svg { display: block; }
+.mt-cursor span {
+  position: absolute; left: 14px; top: 16px; padding: 2px 7px; border-radius: 3px; white-space: nowrap;
+  font: 700 10.5px/1.5 var(--font-dm-sans), system-ui, sans-serif; letter-spacing: .08em; color: #08080A;
+}
+

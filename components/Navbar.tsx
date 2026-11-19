@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import { useRouter, usePathname } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
-import { Menu, X, ArrowRight, MessageCircle, Zap } from "lucide-react"
+import { Menu, X, ArrowRight, MessageCircle } from "lucide-react"
 
 const WA_LINK =
   "https://wa.me/5543988585127?text=Ol%C3%A1%2C%20quero%20falar%20sobre%20um%20projeto"
@@ -74,15 +74,7 @@ export default function Navbar() {
             onClick={handleLogo}
             className="flex items-center gap-2.5 group cursor-pointer"
           >
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#3B6EF6] to-[#2FE0D0] flex items-center justify-center flex-shrink-0 shadow-[0_4px_16px_rgba(47,224,208,0.40)]">
-              <Zap className="w-4 h-4 text-[#071018]" strokeWidth={2.5} />
-            </div>
-            <span
-              className="text-[15px] font-semibold tracking-tight text-[#EEF1F8]"
-              style={{ fontFamily: "var(--font-space-grotesk)" }}
-            >
-              Garbato<span className="text-[#2FE0D0]"> Solution</span>
-            </span>
+            <span className="gs-logo"><i aria-hidden="true" />GARBATO SOLUTION<b>.</b></span>
           </button>
 
           {/* Desktop Nav */}
