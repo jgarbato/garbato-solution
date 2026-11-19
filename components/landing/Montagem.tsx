@@ -3,22 +3,33 @@
 import { useEffect } from "react"
 
 /*
- * Efeito "o site se monta": quando uma seção entra na tela, aparecem
- * pontinhos soltos, depois as molduras de rascunho de cada bloco (título,
- * texto, cartão, botão, imagem) e só então o conteúdo de verdade.
+ * Efeito "o site se monta": quando uma seção entra na tela, quatro cursores
+ * com nome voam até cada bloco, desenham a moldura de rascunho arrastando do
+ * canto, e o conteúdo aparece. Os títulos são "digitados", com o cursor
+ * acompanhando o texto.
  *
- * Não desenha nada por conta própria: lê os blocos que já existem na página
- * e anima por cima. Sem JavaScript, ou com "reduzir movimento" ligado no
- * aparelho, a página aparece inteira como sempre. Cada seção monta uma vez.
+ * Anima todo elemento marcado com data-b dentro de [data-montagem]. Não
+ * altera o conteúdo: só classes e estilos temporários, removidos no fim.
+ * Sem JavaScript, ou com "reduzir movimento" ligado no aparelho, a página
+ * aparece inteira. Cada seção monta uma vez. Estilo em noir.css ("montagem").
  *
- * Anima todo elemento marcado com data-b dentro de [data-montagem].
- * O estilo fica em noir.css, no trecho "montagem".
+ * A ideia vem do "Swarm", de Joel Califa. A organização em agentes com fila
+ * própria (cada cursor faz uma coisa por vez, os quatro em paralelo) segue o
+ * cursor-swarm de Nguyen Tuan Anh, licença MIT:
+ * https://github.com/anhnt256/cursor-swarm
  */
 
 const BLOCOS = "[data-b]"
-const PONTOS = 54
-const CLARO = "235,238,245"
-const AQUA = "47,224,208"
+const AGENTES = [
+  { nome: "ERP", cor: "#E3131E" },
+  { nome: "CRM", cor: "#2FE0D0" },
+  { nome: "IA", cor: "#FF6A2B" },
+  { nome: "API", cor: "#4C8DFF" },
+]
+const SETA =
+  '<svg width="18" height="20" viewBox="0 0 18 20" aria-hidden="true"><path d="M1.5 1.2 16 9.4l-6.5 1.7L6.3 18 1.5 1.2Z" fill="#fff" stroke="#08080A" stroke-width="1.2" stroke-linejoin="round"/></svg>'
+
+type Agente = { el: HTMLElement; x: number; y: number }
 
 export default function Montagem() {
   useEffect(() => {
@@ -30,13 +41,18 @@ export default function Montagem() {
       return
     }
 
-    const temporizadores: number[] = []
-    const quadros: number[] = []
+    let vivo = true
+    const temporizadores = new Set<number>()
+    const dormir = (ms: number) =>
+      new Promise<void>((ok) => {
+        const t = window.setTimeout(() => { temporizadores.delete(t); ok() }, ms)
+        temporizadores.add(t)
+      })
+
     const blocosDe = (sec: HTMLElement) => {
       const todos = Array.from(sec.querySelectorAll<HTMLElement>(BLOCOS))
       return todos.filter((el) => !todos.some((o) => o !== el && o.contains(el)))
     }
-
     const secoes = Array.from(raiz.querySelectorAll<HTMLElement>("section"))
     const mapa = new Map<HTMLElement, HTMLElement[]>()
     for (const sec of secoes) {
@@ -46,85 +62,109 @@ export default function Montagem() {
     }
     liberar()
 
-    function montar(sec: HTMLElement) {
+    function voar(a: Agente, x: number, y: number, teto = 420) {
+      const dist = Math.hypot(x - a.x, y - a.y)
+      const dura = Math.max(120, Math.min(teto, dist * 0.5))
+      a.x = x
+      a.y = y
+      a.el.style.transitionDuration = `${dura}ms`
+      a.el.style.transform = `translate(${x}px, ${y}px)`
+      return dormir(dura * 0.92)
+    }
+
+    // "Digita" um título: revela linha a linha com clip-path, o cursor no ponto da escrita.
+    async function digitar(a: Agente, el: HTMLElement, x: number, y: number, w: number, h: number) {
+      const altura = parseFloat(getComputedStyle(el).lineHeight) || h
+      const linhas = Math.max(1, Math.round(h / altura))
+      const passos = Math.max(8, Math.min(18, Math.round(w / 46)))
+      el.style.clipPath = "inset(0 100% 0 0)"
+      el.classList.add("mt-in")
+      a.el.style.transitionDuration = "40ms"
+      for (let l = 0; l < linhas && vivo; l++) {
+        const y0 = (l / linhas) * 100, y1 = ((l + 1) / linhas) * 100
+        for (let p = 1; p <= passos && vivo; p++) {
+          const px = (p / passos) * 100
+          el.style.clipPath = `polygon(0 0, 100% 0, 100% ${y0}%, ${px}% ${y0}%, ${px}% ${y1}%, 0 ${y1}%)`
+          a.x = x + (w * p) / passos
+          a.y = y + (h * (l + 0.55)) / linhas
+          a.el.style.transform = `translate(${a.x}px, ${a.y}px)`
+          await dormir(24)
+        }
+      }
+      el.style.clipPath = ""
+    }
+
+    async function construir(a: Agente, b: HTMLElement, sec: HTMLElement, camada: HTMLElement) {
+      const base = sec.getBoundingClientRect()
+      const r = b.getBoundingClientRect()
+      if (r.width < 4 || r.height < 4) { b.classList.add("mt-in"); return }
+      const x = r.left - base.left, y = r.top - base.top
+      const titulo = b.tagName === "H1" || b.tagName === "H2"
+
+      await voar(a, x - 6, y - 6)
+      if (!vivo) return
+      if (r.height < 44 && !titulo) {             // peça pequena: encosta e solta
+        b.classList.add("mt-in", "mt-pop")
+        await dormir(70)
+        return
+      }
+      const fio = document.createElement("div")   // moldura desenhada a partir do canto
+      fio.className = r.height > 64 ? "mt-fio mt-fio-g" : "mt-fio"
+      fio.style.cssText = `left:${x}px;top:${y}px;width:${r.width}px;height:${r.height}px;--cor:${a.el.dataset.cor}`
+      camada.insertBefore(fio, camada.firstChild)
+      void fio.offsetWidth
+      fio.classList.add("mt-abre")
+      await voar(a, x + r.width, y + r.height, 300)
+      if (!vivo) return
+      await dormir(90)
+      if (titulo) await digitar(a, b, x, y, r.width, r.height)
+      else b.classList.add("mt-in")
+      fio.classList.add("mt-some")
+      await dormir(60)
+    }
+
+    async function montar(sec: HTMLElement) {
       const blocos = mapa.get(sec) ?? []
       const base = sec.getBoundingClientRect()
-      const passo = Math.min(45, 520 / Math.max(blocos.length, 1))
       const camada = document.createElement("div")
       camada.className = "mt-camada"
       camada.setAttribute("aria-hidden", "true")
-
-      const alvos: [number, number][] = []
-      blocos.forEach((b, i) => {
-        const r = b.getBoundingClientRect()
-        const atraso = 260 + i * passo
-        if (r.width > 4 && r.height > 4) {
-          const x = r.left - base.left, y = r.top - base.top
-          const fio = document.createElement("div")
-          fio.className = r.height > 64 ? "mt-fio mt-fio-g" : "mt-fio"
-          fio.style.cssText =
-            `left:${x}px;top:${y}px;width:${r.width}px;height:${r.height}px;animation-delay:${atraso}ms;` +
-            `--dx:${Math.round(Math.random() * 120 - 60)}px;--dy:${Math.round(Math.random() * 80 - 40)}px`
-          camada.appendChild(fio)
-          alvos.push([x, y], [x + r.width, y], [x, y + r.height], [x + r.width, y + r.height])
-        }
-        temporizadores.push(window.setTimeout(() => b.classList.add("mt-in"), atraso + 620))
-      })
-
-      const fim = 260 + blocos.length * passo + 1500
-      const tela = document.createElement("canvas")
-      const dpr = Math.min(window.devicePixelRatio || 1, 1.5)
-      tela.width = Math.round(base.width * dpr)
-      tela.height = Math.round(base.height * dpr)
-      tela.style.cssText = "position:absolute;inset:0;width:100%;height:100%"
-      camada.appendChild(tela)
       sec.appendChild(camada)
 
-      // Pontinhos: nascem espalhados, vagam, e depois correm para os cantos das molduras.
-      const ctx = tela.getContext("2d")
-      const topo = Math.max(0, -base.top), baixo = Math.min(base.height, window.innerHeight - base.top)
-      const pts = Array.from({ length: alvos.length ? PONTOS : 0 }, (_, i) => {
-        const [ax, ay] = alvos[Math.floor(Math.random() * alvos.length)]
-        return {
-          x: Math.random() * base.width, y: topo + Math.random() * Math.max(baixo - topo, 120),
-          vx: Math.random() * 1.2 - 0.6, vy: Math.random() * 1.2 - 0.6, ax, ay, seta: i % 3 === 0, gira: Math.random() * 6.28,
-        }
+      // Os cursores entram pelas bordas da parte visível da seção.
+      const topo = Math.max(0, -base.top), fundo = Math.min(base.height, window.innerHeight - base.top)
+      const agentes: Agente[] = AGENTES.map((def, i) => {
+        const el = document.createElement("div")
+        el.className = "mt-cursor"
+        el.dataset.cor = def.cor
+        el.innerHTML = `${SETA}<span style="background:${def.cor}">${def.nome}</span>`
+        const x = i % 2 ? base.width + 30 : -70
+        const y = topo + ((fundo - topo) * (i < 2 ? 0.25 : 0.7))
+        el.style.transform = `translate(${x}px, ${y}px)`
+        camada.appendChild(el)
+        return { el, x, y }
       })
-      const inicio = performance.now()
-      const dura = Math.min(fim, 1700)
-      function pintar(agora: number) {
-        if (!ctx) return
-        const t = Math.min((agora - inicio) / dura, 1)
-        ctx.clearRect(0, 0, tela.width, tela.height)
-        const puxa = t < 0.3 ? 0 : Math.min((t - 0.3) / 0.45, 1)
-        const forca = puxa * puxa * (3 - 2 * puxa)
-        const alfa = t < 0.12 ? t / 0.12 : t > 0.72 ? Math.max(0, 1 - (t - 0.72) / 0.28) : 1
-        for (const p of pts) {
-          p.x += p.vx
-          p.y += p.vy
-          const x = p.x + (p.ax - p.x) * forca, y = p.y + (p.ay - p.y) * forca
-          if (p.seta) {
-            // uma em cada três é uma setinha, como cursores soltos pela tela
-            const a = p.gira + t * 1.5, r = 6 * dpr
-            ctx.fillStyle = `rgba(${CLARO},${0.9 * alfa})`
-            ctx.beginPath()
-            ctx.moveTo(x * dpr + Math.cos(a) * r, y * dpr + Math.sin(a) * r)
-            ctx.lineTo(x * dpr + Math.cos(a + 2.5) * r, y * dpr + Math.sin(a + 2.5) * r)
-            ctx.lineTo(x * dpr + Math.cos(a - 2.5) * r, y * dpr + Math.sin(a - 2.5) * r)
-            ctx.fill()
-          } else {
-            ctx.fillStyle = `rgba(${AQUA},${0.85 * alfa})`
-            ctx.fillRect(x * dpr - 1.5 * dpr, y * dpr - 1.5 * dpr, 3 * dpr, 3 * dpr)
-          }
-        }
-        if (t < 1) quadros.push(requestAnimationFrame(pintar))
-      }
-      quadros.push(requestAnimationFrame(pintar))
+      void camada.offsetWidth
+      camada.classList.add("mt-vai")
 
-      temporizadores.push(window.setTimeout(() => {
-        camada.remove()
-        blocos.forEach((b) => b.classList.remove("mt-b", "mt-in"))
-      }, fim + 700))
+      // Cada cursor tem a sua fila: nunca faz duas coisas ao mesmo tempo, mas os quatro trabalham juntos.
+      const filas = agentes.map(() => [] as HTMLElement[])
+      blocos.forEach((b, i) => filas[i % agentes.length].push(b))
+      const guarda = window.setTimeout(() => blocos.forEach((b) => b.classList.add("mt-in")), 9000)
+      temporizadores.add(guarda)
+      await Promise.all(agentes.map(async (a, i) => {
+        await dormir(i * 110)
+        for (const b of filas[i]) {
+          if (!vivo) return
+          await construir(a, b, sec, camada)
+        }
+        a.el.classList.add("mt-sai")
+      }))
+      window.clearTimeout(guarda)
+      if (!vivo) return
+      await dormir(650)
+      camada.remove()
+      blocos.forEach((b) => { b.classList.remove("mt-b", "mt-in", "mt-pop"); b.style.clipPath = "" })
     }
 
     // Monta quando o topo da seção passa do meio da tela, para a pessoa ver acontecer.
@@ -132,7 +172,7 @@ export default function Montagem() {
     const disparar = (sec: HTMLElement) => {
       if (!pendentes.delete(sec)) return
       olho.unobserve(sec)
-      montar(sec)
+      void montar(sec)
     }
     const olho = new IntersectionObserver((entradas) => {
       for (const e of entradas) if (e.isIntersecting) disparar(e.target as HTMLElement)
@@ -149,12 +189,15 @@ export default function Montagem() {
     window.addEventListener("scroll", noFim, { passive: true })
 
     return () => {
+      vivo = false
       olho.disconnect()
       window.removeEventListener("scroll", noFim)
       temporizadores.forEach((t) => window.clearTimeout(t))
-      quadros.forEach((q) => cancelAnimationFrame(q))
       raiz.querySelectorAll(".mt-camada").forEach((c) => c.remove())
-      raiz.querySelectorAll(".mt-b").forEach((b) => b.classList.remove("mt-b", "mt-in"))
+      raiz.querySelectorAll<HTMLElement>(".mt-b").forEach((b) => {
+        b.classList.remove("mt-b", "mt-in", "mt-pop")
+        b.style.clipPath = ""
+      })
     }
   }, [])
 
