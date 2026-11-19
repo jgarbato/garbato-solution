@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
-import { Space_Grotesk, DM_Sans } from "next/font/google"
+import { Space_Grotesk, DM_Sans, Anton } from "next/font/google"
+import { MontagemTitulos } from "@/components/landing/Montagem"
 import { SITE_URL, SITE_NAME, WHATSAPP_NUMBER } from "@/lib/constants"
 import "./globals.css"
 
@@ -9,6 +10,8 @@ const spaceGrotesk = Space_Grotesk({
   weight: ["400", "500", "600", "700"],
   display: "swap",
 })
+
+const anton = Anton({ variable: "--font-anton", subsets: ["latin"], weight: "400", display: "swap" })
 
 const dmSans = DM_Sans({
   variable: "--font-dm-sans",
@@ -136,7 +139,7 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
-      className={`${spaceGrotesk.variable} ${dmSans.variable}`}
+      className={`${spaceGrotesk.variable} ${dmSans.variable} ${anton.variable}`}
     >
       <head>
         <script
@@ -146,6 +149,7 @@ export default function RootLayout({
       </head>
       <body className="min-h-screen antialiased bg-[#060810] text-[#EEF1F8] overflow-x-hidden">
         {children}
+        <MontagemTitulos />
       </body>
     </html>
   )

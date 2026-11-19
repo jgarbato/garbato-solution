@@ -1,10 +1,9 @@
 import type { Metadata } from "next"
-import { Anton, Caveat } from "next/font/google"
+import { Caveat } from "next/font/google"
 import LandingNoir from "@/components/landing/LandingNoir"
 import Montagem from "@/components/landing/Montagem"
 import "@/components/landing/noir.css"
 
-const anton = Anton({ subsets: ["latin"], weight: "400", variable: "--font-anton", display: "swap" })
 const caveat = Caveat({ subsets: ["latin"], weight: ["600"], variable: "--font-caveat", display: "swap" })
 
 export const metadata: Metadata = {
@@ -16,7 +15,7 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <div className={`${anton.variable} ${caveat.variable} gs-noir mt-ssr`} data-montagem data-tema="marinho">
+    <div className={`${caveat.variable} gs-noir mt-ssr`} data-montagem data-tema="marinho">
       <noscript>
         <style>{".gs-noir.mt-ssr .n-hero [data-b] { opacity: 1 !important; animation: none !important; }"}</style>
       </noscript>

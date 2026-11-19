@@ -211,46 +211,7 @@ body:has(.gs-noir[data-tema="claro"]) { background: #F3F5F8 !important; }
 }
 
 /* ── montagem ────────────────────────────────────────────────────────
-   Efeito "o site se monta" (Montagem.tsx): cursores com nome desenham a
-   moldura de cada bloco e o conteúdo aparece. As classes mt-* só existem
-   enquanto a animação roda; depois são removidas e a página volta ao normal. */
-.gs-noir .mt-b { opacity: 0; }
-.gs-noir .mt-b.mt-in { opacity: 1; transition: opacity .32s ease; }
-.gs-noir .mt-b.mt-pop { animation: mt-pop .28s cubic-bezier(.2, 1.4, .4, 1) both; }
-@keyframes mt-pop { from { transform: scale(.8); } to { transform: none; } }
-
-.gs-noir .mt-camada { position: absolute; inset: 0; pointer-events: none; z-index: 30; overflow: hidden; }
-.gs-noir .mt-fio {
-  position: absolute; box-sizing: border-box; transform-origin: 0 0; transform: scale(0);
-  border: 1px solid var(--cor, #4C8DFF);
-  background-color: color-mix(in srgb, var(--cor, #4C8DFF) 9%, transparent);
-  transition: transform .3s cubic-bezier(.3, .8, .3, 1), opacity .45s ease;
-}
-.gs-noir .mt-fio.mt-abre { transform: none; }
-.gs-noir .mt-fio.mt-some { opacity: 0; }
-.gs-noir .mt-fio::before, .gs-noir .mt-fio::after {   /* alças nos cantos, como numa ferramenta de desenho */
-  content: ""; position: absolute; width: 7px; height: 7px; background: #fff; border: 1px solid var(--cor, #4C8DFF);
-}
-.gs-noir .mt-fio::before { left: -4px; top: -4px; }
-.gs-noir .mt-fio::after  { right: -4px; bottom: -4px; }
-.gs-noir .mt-fio-g {                 /* blocos altos ganham linhas de texto de rascunho */
-  background-image: repeating-linear-gradient(180deg, rgba(160, 175, 205, .22) 0 9px, transparent 9px 22px);
-  background-size: 62% calc(100% - 28px); background-position: 14px 14px; background-repeat: no-repeat;
-}
-
-.gs-noir .mt-cursor {
-  position: absolute; left: 0; top: 0; z-index: 2; opacity: 0; will-change: transform;
-  transition: transform .3s cubic-bezier(.4, .1, .2, 1), opacity .35s ease;
-  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, .6));
-}
-.gs-noir .mt-vai .mt-cursor { opacity: 1; }
-.gs-noir .mt-vai .mt-cursor.mt-sai { opacity: 0; }
-.gs-noir .mt-cursor svg { display: block; }
-.gs-noir .mt-cursor span {
-  position: absolute; left: 14px; top: 16px; padding: 2px 7px; border-radius: 3px; white-space: nowrap;
-  font: 700 10.5px/1.5 var(--font-dm-sans), system-ui, sans-serif; letter-spacing: .08em; color: #08080A;
-}
-
+   O estilo dos cursores e das molduras fica em app/globals.css (vale para o site todo). */
 /* Antes do JavaScript carregar, o topo fica escondido para não piscar
    (aparece → some → monta). Se o JavaScript não rodar, volta sozinho em 4s. */
 .gs-noir.mt-ssr .n-hero [data-b] { opacity: 0; animation: mt-socorro .4s 4s forwards; }

@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect } from "react"
+import { usePathname } from "next/navigation"
 
 /*
  * Efeito "o site se monta": quando uma seção entra na tela, quatro cursores
@@ -8,10 +9,16 @@ import { useEffect } from "react"
  * canto, e o conteúdo aparece. Os títulos são "digitados", com o cursor
  * acompanhando o texto.
  *
- * Anima todo elemento marcado com data-b dentro de [data-montagem]. Não
- * altera o conteúdo: só classes e estilos temporários, removidos no fim.
+ * Dois modos:
+ *  - "blocos" (página inicial): anima todo elemento marcado com data-b
+ *    dentro de [data-montagem]. É o <Montagem /> padrão.
+ *  - "titulos" (resto do site): dois cursores digitam os títulos h1/h2 de
+ *    cada seção. É o <MontagemTitulos />, montado no layout raiz. Título que
+ *    já está na tela quando a página abre fica como está, para não piscar.
+ *
+ * Não altera o conteúdo: só classes e estilos temporários, removidos no fim.
  * Sem JavaScript, ou com "reduzir movimento" ligado no aparelho, a página
- * aparece inteira. Cada seção monta uma vez. Estilo em noir.css ("montagem").
+ * aparece inteira. Cada seção monta uma vez. Estilo em globals.css ("montagem").
  *
  * A ideia vem do "Swarm", de Joel Califa. A organização em agentes com fila
  * própria (cada cursor faz uma coisa por vez, os quatro em paralelo) segue o
@@ -31,14 +38,13 @@ const SETA =
 
 type Agente = { el: HTMLElement; x: number; y: number }
 
-export default function Montagem() {
-  useEffect(() => {
-    const raiz = document.querySelector<HTMLElement>("[data-montagem]")
-    if (!raiz) return
+type Modo = "blocos" | "titulos"
+
+function ligar(raiz: HTMLElement, modo: Modo): () => void {
     const liberar = () => raiz.classList.remove("mt-ssr")
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) {
       liberar()
-      return
+      return () => {}
     }
 
     let vivo = true
@@ -49,17 +55,29 @@ export default function Montagem() {
         temporizadores.add(t)
       })
 
+    let secoes = Array.from(raiz.querySelectorAll<HTMLElement>("section"))
+    if (!secoes.length) secoes = [raiz.querySelector<HTMLElement>("main") ?? raiz]
     const blocosDe = (sec: HTMLElement) => {
+      if (modo === "titulos") {
+        // só títulos da própria seção, e só os que ainda não apareceram na tela
+        return Array.from(sec.querySelectorAll<HTMLElement>("h1, h2")).filter(
+          (el) => (el.closest("section") ?? sec) === sec && el.getBoundingClientRect().top > window.innerHeight)
+      }
       const todos = Array.from(sec.querySelectorAll<HTMLElement>(BLOCOS))
       return todos.filter((el) => !todos.some((o) => o !== el && o.contains(el)))
     }
-    const secoes = Array.from(raiz.querySelectorAll<HTMLElement>("section"))
     const mapa = new Map<HTMLElement, HTMLElement[]>()
+    const reposicionadas: HTMLElement[] = []
     for (const sec of secoes) {
       const blocos = blocosDe(sec)
       blocos.forEach((b) => b.classList.add("mt-b"))
       mapa.set(sec, blocos)
+      if (blocos.length && getComputedStyle(sec).position === "static") {   // a camada dos cursores precisa de uma âncora
+        sec.style.position = "relative"
+        reposicionadas.push(sec)
+      }
     }
+    secoes = secoes.filter((s) => mapa.get(s)!.length)
     liberar()
 
     function voar(a: Agente, x: number, y: number, teto = 420) {
@@ -133,7 +151,7 @@ export default function Montagem() {
 
       // Os cursores entram pelas bordas da parte visível da seção.
       const topo = Math.max(0, -base.top), fundo = Math.min(base.height, window.innerHeight - base.top)
-      const agentes: Agente[] = AGENTES.map((def, i) => {
+      const agentes: Agente[] = AGENTES.slice(0, modo === "titulos" ? 2 : 4).map((def, i) => {
         const el = document.createElement("div")
         el.className = "mt-cursor"
         el.dataset.cor = def.cor
@@ -198,8 +216,25 @@ export default function Montagem() {
         b.classList.remove("mt-b", "mt-in", "mt-pop")
         b.style.clipPath = ""
       })
+      reposicionadas.forEach((s) => { s.style.position = "" })
     }
-  }, [])
+}
 
+/** Página inicial: monta todos os blocos marcados com data-b. */
+export default function Montagem() {
+  useEffect(() => {
+    const raiz = document.querySelector<HTMLElement>("[data-montagem]")
+    return raiz ? ligar(raiz, "blocos") : undefined
+  }, [])
+  return null
+}
+
+/** Resto do site (layout raiz): cursores digitam os títulos. Não faz nada onde a página já tem a montagem completa. */
+export function MontagemTitulos() {
+  const caminho = usePathname()
+  useEffect(() => {
+    if (document.querySelector("[data-montagem]")) return
+    return ligar(document.body, "titulos")
+  }, [caminho])
   return null
 }

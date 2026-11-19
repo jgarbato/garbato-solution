@@ -1,6 +1,6 @@
 "use client"
 
-import { Zap, Mail, Globe } from "lucide-react"
+import { Mail, Globe } from "lucide-react"
 
 const NAV_LINKS = [
   { label: "Soluções", href: "#solucoes" },
@@ -39,15 +39,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="lg:col-span-2">
             <div className="flex items-center gap-2.5 mb-4">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#3B6EF6] to-[#2FE0D0] flex items-center justify-center shadow-[0_4px_14px_rgba(59,130,246,0.25)]">
-                <Zap className="w-4 h-4 text-white" strokeWidth={2.5} />
-              </div>
-              <span
-                className="text-[15px] font-semibold text-[#EEF1F8]"
-                style={{ fontFamily: "var(--font-space-grotesk)" }}
-              >
-                Garbato<span className="text-[#2FE0D0]"> Solution</span>
-              </span>
+              <span className="gs-logo"><i aria-hidden="true" />GARBATO SOLUTION<b>.</b></span>
             </div>
 
             <p className="text-[#AFB6CC] text-[14px] leading-relaxed max-w-xs mb-6">
