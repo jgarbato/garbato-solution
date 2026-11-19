@@ -11,17 +11,18 @@ import { useEffect } from "react"
  * e anima por cima. Sem JavaScript, ou com "reduzir movimento" ligado no
  * aparelho, a página aparece inteira como sempre. Cada seção monta uma vez.
  *
- * O estilo fica em landing.css, no trecho "montagem".
+ * Anima todo elemento marcado com data-b dentro de [data-montagem].
+ * O estilo fica em noir.css, no trecho "montagem".
  */
 
-const BLOCOS = ".eyebrow, h1, h2, .lead, p, .btn, .card, .hero-img, .gal-main, .gal-thumb, .chip, .faq-item"
-const PONTOS = 46
-const AZUL = "59,110,246"
-const TINTA = "22,35,58"
+const BLOCOS = "[data-b]"
+const PONTOS = 54
+const CLARO = "235,238,245"
+const AQUA = "47,224,208"
 
 export default function Montagem() {
   useEffect(() => {
-    const raiz = document.querySelector<HTMLElement>(".gs-light")
+    const raiz = document.querySelector<HTMLElement>("[data-montagem]")
     if (!raiz) return
     const liberar = () => raiz.classList.remove("mt-ssr")
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) {
@@ -41,7 +42,6 @@ export default function Montagem() {
     for (const sec of secoes) {
       const blocos = blocosDe(sec)
       blocos.forEach((b) => b.classList.add("mt-b"))
-      sec.classList.add("mt-sec")
       mapa.set(sec, blocos)
     }
     liberar()
@@ -87,7 +87,7 @@ export default function Montagem() {
         const [ax, ay] = alvos[Math.floor(Math.random() * alvos.length)]
         return {
           x: Math.random() * base.width, y: topo + Math.random() * Math.max(baixo - topo, 120),
-          vx: Math.random() * 1.2 - 0.6, vy: Math.random() * 1.2 - 0.6, ax, ay, azul: i % 3 === 0,
+          vx: Math.random() * 1.2 - 0.6, vy: Math.random() * 1.2 - 0.6, ax, ay, seta: i % 3 === 0, gira: Math.random() * 6.28,
         }
       })
       const inicio = performance.now()
@@ -103,8 +103,19 @@ export default function Montagem() {
           p.x += p.vx
           p.y += p.vy
           const x = p.x + (p.ax - p.x) * forca, y = p.y + (p.ay - p.y) * forca
-          ctx.fillStyle = `rgba(${p.azul ? AZUL : TINTA},${(p.azul ? 0.9 : 0.55) * alfa})`
-          ctx.fillRect(x * dpr - 1.5 * dpr, y * dpr - 1.5 * dpr, 3 * dpr, 3 * dpr)
+          if (p.seta) {
+            // uma em cada três é uma setinha, como cursores soltos pela tela
+            const a = p.gira + t * 1.5, r = 6 * dpr
+            ctx.fillStyle = `rgba(${CLARO},${0.9 * alfa})`
+            ctx.beginPath()
+            ctx.moveTo(x * dpr + Math.cos(a) * r, y * dpr + Math.sin(a) * r)
+            ctx.lineTo(x * dpr + Math.cos(a + 2.5) * r, y * dpr + Math.sin(a + 2.5) * r)
+            ctx.lineTo(x * dpr + Math.cos(a - 2.5) * r, y * dpr + Math.sin(a - 2.5) * r)
+            ctx.fill()
+          } else {
+            ctx.fillStyle = `rgba(${AQUA},${0.85 * alfa})`
+            ctx.fillRect(x * dpr - 1.5 * dpr, y * dpr - 1.5 * dpr, 3 * dpr, 3 * dpr)
+          }
         }
         if (t < 1) quadros.push(requestAnimationFrame(pintar))
       }
@@ -112,7 +123,6 @@ export default function Montagem() {
 
       temporizadores.push(window.setTimeout(() => {
         camada.remove()
-        sec.classList.remove("mt-sec")
         blocos.forEach((b) => b.classList.remove("mt-b", "mt-in"))
       }, fim + 700))
     }
@@ -145,7 +155,6 @@ export default function Montagem() {
       quadros.forEach((q) => cancelAnimationFrame(q))
       raiz.querySelectorAll(".mt-camada").forEach((c) => c.remove())
       raiz.querySelectorAll(".mt-b").forEach((b) => b.classList.remove("mt-b", "mt-in"))
-      raiz.querySelectorAll(".mt-sec").forEach((s) => s.classList.remove("mt-sec"))
     }
   }, [])
 
