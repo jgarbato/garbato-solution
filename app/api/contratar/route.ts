@@ -1,12 +1,24 @@
 import { NextResponse } from "next/server"
-import { eq } from "drizzle-orm"
+import { and, count, eq, gt } from "drizzle-orm"
 import { db } from "@/lib/db"
 import { customers, subscriptions, payments } from "@/lib/db/schema"
 import { asaas, getAsaasEnv, type AsaasBillingType } from "@/lib/asaas"
 import { getPlan, getProduct, isProductSlug, type Periodo } from "@/lib/products/registry"
+import { validarCadastro } from "@/lib/validacao"
+import { dentroDoLimite, ipDoCliente } from "@/lib/limite"
 
 export const runtime = "nodejs"
 export const dynamic = "force-dynamic"
+
+// Limites contra abuso. A rota é pública e cada chamada cria cliente e
+// assinatura no Asaas, então precisa de teto por origem, por cliente e geral.
+const MAX_POR_IP = 5 // tentativas por IP a cada 10 minutos (por instância)
+const JANELA_IP_MS = 10 * 60 * 1000
+const MAX_PENDENTES_POR_CLIENTE = 3 // assinaturas não pagas do mesmo documento em 24 h
+const MAX_GERAL_POR_HORA = 40 // assinaturas criadas no site inteiro por hora
+const MAX_CORPO_BYTES = 10_000
+
+const MUITAS_TENTATIVAS = "Muitas tentativas. Aguarde alguns minutos e tente de novo."
 
 const METODO_TO_BILLING_TYPE: Record<string, AsaasBillingType> = {
   pix: "PIX",
@@ -24,7 +36,7 @@ type ContratarBody = {
     cpfCnpj: string
     email: string
     telefone: string
-    tipoPessoa: "pf" | "pj"
+    tipoPessoa?: "pf" | "pj"
     cep?: string
     rua?: string
     numero?: string
@@ -45,10 +57,29 @@ function nextDueDateISO(daysAhead: number) {
 }
 
 export async function POST(req: Request) {
+  // ── Barreiras antes de qualquer trabalho ───────────────────────────────────
+
+  if (!dentroDoLimite(`contratar:${ipDoCliente(req)}`, MAX_POR_IP, JANELA_IP_MS)) {
+    return NextResponse.json({ error: MUITAS_TENTATIVAS }, { status: 429 })
+  }
+
+  let bruto: string
+  try {
+    bruto = await req.text()
+  } catch {
+    return NextResponse.json({ error: "JSON inválido" }, { status: 400 })
+  }
+  if (bruto.length > MAX_CORPO_BYTES) {
+    return NextResponse.json({ error: "requisição grande demais" }, { status: 413 })
+  }
+
   let body: ContratarBody
   try {
-    body = await req.json()
+    body = JSON.parse(bruto)
   } catch {
+    return NextResponse.json({ error: "JSON inválido" }, { status: 400 })
+  }
+  if (!body || typeof body !== "object") {
     return NextResponse.json({ error: "JSON inválido" }, { status: 400 })
   }
 
@@ -66,9 +97,22 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "método de pagamento inválido" }, { status: 400 })
   }
   const periodo: Periodo = body.periodo === "anual" ? "anual" : "mensal"
-  const c = body.cadastro
-  if (!c?.nome || !c?.email || !c?.cpfCnpj) {
-    return NextResponse.json({ error: "cadastro incompleto" }, { status: 400 })
+  const validacao = validarCadastro(body.cadastro)
+  if (!validacao.ok) {
+    return NextResponse.json({ error: validacao.erro }, { status: 400 })
+  }
+  // Daqui em diante só se usam os dados já conferidos e normalizados.
+  const c = validacao.dados
+
+  // Teto geral: protege a conta do Asaas mesmo que o abuso venha de muitos IPs.
+  const umaHoraAtras = new Date(Date.now() - 60 * 60 * 1000)
+  const [geral] = await db
+    .select({ total: count() })
+    .from(subscriptions)
+    .where(gt(subscriptions.createdAt, umaHoraAtras))
+  if ((geral?.total ?? 0) >= MAX_GERAL_POR_HORA) {
+    console.warn("[contratar] teto geral por hora atingido", { total: geral?.total })
+    return NextResponse.json({ error: MUITAS_TENTATIVAS }, { status: 429 })
   }
 
   const product = getProduct(body.sistema)
@@ -80,10 +124,7 @@ export async function POST(req: Request) {
 
   // ── 1. Customer no Asaas (reusa se já existir o cpfCnpj) ───────────────────
 
-  const cpfCnpjDigits = onlyDigits(c.cpfCnpj)
-  if (cpfCnpjDigits.length !== 11 && cpfCnpjDigits.length !== 14) {
-    return NextResponse.json({ error: "CPF/CNPJ inválido" }, { status: 400 })
-  }
+  const cpfCnpjDigits = c.cpfCnpj
 
   let asaasCustomerId: string
   let customerRowId: number
@@ -93,6 +134,43 @@ export async function POST(req: Request) {
   })
 
   if (existing) {
+    // Documento já cadastrado: só quem informa o mesmo e-mail do cadastro pode
+    // abrir nova assinatura nele. Sem isso, qualquer pessoa que soubesse o CPF
+    // de um cliente geraria cobranças no nome dele.
+    if (existing.email.trim().toLowerCase() !== c.email) {
+      console.warn("[contratar] documento já cadastrado com outro e-mail", {
+        customerId: existing.id,
+      })
+      return NextResponse.json(
+        {
+          error:
+            "Este documento já tem cadastro com outro e-mail. Use o e-mail do cadastro ou fale com a gente.",
+        },
+        { status: 409 },
+      )
+    }
+
+    const umDiaAtras = new Date(Date.now() - 24 * 60 * 60 * 1000)
+    const [pendentes] = await db
+      .select({ total: count() })
+      .from(subscriptions)
+      .where(
+        and(
+          eq(subscriptions.customerId, existing.id),
+          eq(subscriptions.status, "PENDING"),
+          gt(subscriptions.createdAt, umDiaAtras),
+        ),
+      )
+    if ((pendentes?.total ?? 0) >= MAX_PENDENTES_POR_CLIENTE) {
+      return NextResponse.json(
+        {
+          error:
+            "Já existem cobranças em aberto para este documento. Pague uma delas ou fale com a gente.",
+        },
+        { status: 429 },
+      )
+    }
+
     asaasCustomerId = existing.asaasCustomerId
     customerRowId = existing.id
   } else {
